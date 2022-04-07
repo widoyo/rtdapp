@@ -1,0 +1,131 @@
+{ "type": "FeatureCollection",
+  "features": [
+      {
+          "type": "Feature",
+          "properties": {
+              "type": "jembatan",
+              "nama": "Bendung Logung",
+              "jarak": "Km 3+786",
+              "desa": "Tanjung Rejo",
+              "kecamatan": "Jekulo"
+          },
+          "geometry": {
+              "type": "Point",
+              "coordinates": []
+          }
+      },
+      {
+          "type": "Feature",
+          "properties": {
+              "type": "jembatan",
+              "nama": "Jembatan Klaling",
+              "jarak": "Km 4+308",
+              "desa": "Tanjung Rejo",
+              "kecamatan": "Jekulo"
+          },
+          "geometry": {
+              "type": "Point",
+              "coordinates": []
+          }
+      }
+      {
+          "type": "Feature",
+          "properties": {
+              "type": "jembatan",
+              "nama": "Jembatan Patihan",
+              "jarak": "Km 6+850",
+              "desa": "Tanjung Rejo",
+              "kecamatan": "Jekulo"
+          },
+          "geometry": {
+              "type": "Point",
+              "coordinates": []
+          }
+      }
+      {
+          "type": "Feature",
+          "properties": {
+              "type": "jembatan",
+              "nama": "Jembatan Karang",
+              "jarak": "Km 7+410",
+              "desa": "Jekulo",
+              "kecamatan": "Jekulo"
+          },
+          "geometry": {
+              "type": "Point",
+              "coordinates": []
+          }
+      }
+      {
+          "type": "Feature",
+          "properties": {
+              "type": "jembatan",
+              "nama": "Jembatan Jekulo",
+              "jarak": "Km 8+107",
+              "desa": "Jekulo",
+              "kecamatan": "Jekulo"
+          },
+          "geometry": {
+              "type": "Point",
+              "coordinates": []
+          }
+      }
+      {
+          "type": "Feature",
+          "properties": {
+              "type": "jembatan",
+              "nama": "Jembatan Sadang 1",
+              "jarak": "Km 9+460",
+              "desa": "Sadang",
+              "kecamatan": "Jekulo"
+          },
+          "geometry": {
+              "type": "Point",
+              "coordinates": []
+          }
+      }
+      {
+          "type": "Feature",
+          "properties": {
+              "type": "jembatan",
+              "nama": "Jembatan Sadang 2",
+              "jarak": "Km 10+0",
+              "desa": "Sadang",
+              "kecamatan": "Jekulo"
+          },
+          "geometry": {
+              "type": "Point",
+              "coordinates": []
+          }
+      }
+      {
+          "type": "Feature",
+          "properties": {
+              "type": "jembatan",
+              "nama": "Jembatan Sadang 3",
+              "jarak": "Km 10+375",
+              "desa": "Sadang",
+              "kecamatan": "Jekulo"
+          },
+          "geometry": {
+              "type": "Point",
+              "coordinates": []
+          }
+      },
+      {
+          "type": "Feature",
+          "properties": {
+              "type": "jembatan",
+              "nama": "Jembatan Langenharjo",
+              "jarak": "Km 30+0",
+              "desa": "Langenharjo",
+              "kecamatan": "Margorejo"
+          },
+          "geometry": {
+              "type": "Point",
+              "coordinates": []
+          }
+      }
+
+  ]
+}

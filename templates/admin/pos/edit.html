@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{ pos.nama }}</li>
+        </ol>
+      </nav>
+      <h1 class="pt-2 pb-3">{{ pos.nama }}</h1>
+      {% for message in get_flashed_messages() %}
+      <div class="flash">{{ message }}</div>
+    {% endfor %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-5">
+{{ form.render }}
+    <div class="col-2"></div>
+  </div>
+</div>
+{% endblock %}

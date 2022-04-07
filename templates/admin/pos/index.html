@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Pos Hidrologi</li>
+        </ol>
+      </nav>
+      <h1>Pos Hidrologi <span class="fw-lighter">({{ poses|length }})</span> <a href="#form-add-pos" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="form-add-pos" class="btn btn-outline-secondary btn-sm ms-5">Tambah</a></h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10">
+      {% for message in get_flashed_messages() %}
+      <div class="flash">{{ message }}</div>
+    {% endfor %}
+    {% for e in form.errors %}
+    {{ e }}
+    {% endfor %}
+
+    <form id="form-add-pos" class="collapse" action="/admin/pos" method="POST">
+        <div class="mb-3">
+          <label for="nama" class="form-label">Nama Pos</label>
+          <input type="text" name="nama" id="nama" class="form-control" aria-describedby="namaHelp">
+          <div id="namaHelp" class="form-text">Maksimum 50 karakter, unik, gunakan nama Desa</div>
+        </div>
+        <div class="mb-3">
+          Tipe Pos
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="tipe" id="tipePCH" value="1">
+            <label class="form-check-label" for="roleUpb">
+              Pos Curah Hujan
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="tipe" id="tipePDA" value="2" checked>
+            <label class="form-check-label" for="tipePDA">
+              Pos Duga Air
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="tipe" id="tipeKlimatologi" value="3">
+            <label class="form-check-label" for="tipeKlimatologi">
+              Pos Klimatologi
+            </label>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="elevasi" class="form-label">Elevasi</label>
+          <input type="text" name="elevasi" id="elevasi" class="form-control" aria-describedby="elevasiHelp">
+          <div id="elevasiHelp" class="form-text">Ketinggian terhadap Muka Air Laut (meter).</div>
+        </div>
+        <div class="mb-3">
+          <label for="lonlat" class="form-label">Koordinat (Longitute, Latitude)</label>
+          <input type="text" name="lonlat" id="lonlat" class="form-control" aria-describedby="lonlatHelp">
+          <div id="lonlatHelp" class="form-text">Koordinat pada bumi (dalam desimal).</div>
+        </div>
+        <div class="mb-3 mt-5">
+          <input type="submit" class="btn btn-primary" value="Simpan">
+          <a href="#form-add-pos" class="btn btn-default">Batal</a>
+        </div>
+      </form>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Tipe</th>
+            <th>Elevasi (mdpl)</th>
+            <th>Koordinat</th>
+            <th>SH</th>
+            <th>SK</th>
+            <th>SM</th>
+          </tr>
+        </thead>
+        {% for u in poses %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td><a href="#" id="nama" data-type="text" title="nama" data-pk="{{ u.id }}" data-url="/api/pos" data-title="Nama Pos">{{ u.nama }}</a></td>
+          <td>{% if u.tipe == 1 %}<span class="badge rounded-pill bg-success">PCH</span>{% elif u.tipe == 2 %}<span class="badge rounded-pill bg-danger">PDA</span>{% else %}<span class="badge rounded-pill bg-primary">Klimatologi</span>{% endif %}</td>
+          <td class="text-end">+{{ u.elevasi }}</td>
+          <td>{{ u.lonlat }}</td>
+          <td class="text-end"></td>
+          <td class="text-end"></td>
+          <td class="text-end"></td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>
+{% endblock %}

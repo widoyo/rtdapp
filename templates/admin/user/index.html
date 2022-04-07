@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
+          <li class="breadcrumb-item active" aria-current="page">User</li>
+        </ol>
+      </nav>
+      <h1>User <a href="#form-add-user" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="form-add-user" class="btn btn-sm btn-outline-secondary ms-5">Tambah</a></h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10">
+      <div class="row">
+        <div class="col-sm-6">
+          <form id="form-add-user" class="collapse my-5" action="/admin/users" method="POST">
+            <h3>Tambah User</h3>
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" name="username" id="username" class="form-control" aria-describedby="usernameHelp">
+              <div id="usernameHelp" class="form-text">satu kata, maksimum 25 karakter, unik, tanpa spasi atau tanda baca</div>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="text" name="password" id="password" class="form-control" aria-describedby="passwordHelp">
+              <div id="passwordHelp" class="form-text">Yang mudah diingat.</div>
+            </div>
+            <div class="mb-3">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="role" value="1" id="roleUpb">
+                <label class="form-check-label" for="roleUpb">
+                  Petugas Kantor (UPB)
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="role" value="2" id="rolePetugas" checked>
+                <label class="form-check-label" for="rolePetugas">
+                  Petugas Lapangan
+                </label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="pos" class="form-label">Pos</label>
+              {{ form.pos(class_='form-select') }}
+            </div>
+            <div class="mb-3 pt-4">
+              <input type="submit" class="btn btn-primary" value="Simpan">
+              <a href="#" class="btn btn-default">Batal</a>
+            </div>
+          </form>    
+        </div>
+        <div class="col-sm-6"></div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Pos Pengamatan</th>
+            <th></th>
+          </tr>
+        </thead>
+        {% for u in users %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ u.username }}</td>
+          <td>{{ u.role }}</td>
+          <td>{{ u.pos.nama }}</td>
+          <td><a href="{{ url_for('admin.user_edit', id=u.id) }}">Edit</a></td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>
+{% endblock %}

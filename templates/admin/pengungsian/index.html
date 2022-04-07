@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Pengungsian <span class="fw-lighter">({{ poses|length }})</span> <a href="#form-add-pengungsian" class="btn btn-outline-secondary btn-sm" >Tambah</a></h1>
+    </div>
+    </div>
+  <div class="row">
+    <div class="col-10">
+      <form id="form-add-pengungsian" action="." method="POST" style="display: none">
+        <div class="mb-3">
+          <label for="nama" class="form-label">Nama Tempat</label>
+          <input type="text" name="nama" id="nama" class="form-control" aria-describedby="namaHelp">
+          <div id="namaHelp" class="form-text">Maksimum 50 karakter, unik, gunakan nama tempat, misalnya SD Negeri ...</div>
+        </div>
+        <div class="mb-3">
+          <label for="desa" class="form-label">Desa</label>
+          <input type="text" name="desa" id="desa" class="form-control" aria-describedby="desaHelp">
+          <div id="desaHelp" class="form-text">Nama Desa / Kelurahan.</div>
+        </div>
+        <div class="mb-3">
+          <label for="kecamatan" class="form-label">Kecamatan</label>
+          <input type="text" name="kecamatan" id="kecamatan" class="form-control" aria-describedby="kecamatanHelp">
+          <div id="kecamatanHelp" class="form-text">Nama Kecamatan.</div>
+        </div>
+        <div class="mb-3">
+          <label for="kabupaten" class="form-label">Kabupaten</label>
+          <input type="text" name="kabupaten" id="kabupaten" class="form-control" aria-describedby="kabupatenHelp">
+          <div id="kabupatenHelp" class="form-text">Nama Kabupaten.</div>
+        </div>
+        <div class="mb-3">
+          <label for="elevasi" class="form-label">Elevasi</label>
+          <input type="text" name="elevasi" id="elevasi" class="form-control" aria-describedby="elevasiHelp">
+          <div id="elevasiHelp" class="form-text">Ketinggian terhadap Muka Air Laut (meter).</div>
+        </div>
+        <div class="mb-3">
+          <label for="lonlat" class="form-label">Koordinat (Longitute, Latitude)</label>
+          <input type="text" name="lonlat" id="lonlat" class="form-control" aria-describedby="lonlatHelp">
+          <div id="lonlatHelp" class="form-text">Koordinat pada bumi (dalam desimal).</div>
+        </div>
+        <div class="mb-3">
+          <input type="submit" class="btn btn-primary" value="Simpan">
+          <a href="#" class="btn btn-default">Batal</a>
+        </div>
+      </form>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Desa, Kecamatan, Kabupaten</th>
+            <th>Elevasi</th>
+            <th>Koordinat</th>
+          </tr>
+        </thead>
+        {% for u in poses %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ u.nama }}</td>
+          <td>{{ u.desa }}, {{ u.kecamatan }}, {{ u.kabupaten }}</td>
+          <td class="text-end">+{{ u.elevasi }}</td>
+          <td>{{ u.lonlat }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>
+{% endblock %}

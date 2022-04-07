@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+      <div class="container">
+      <div class="row my-5 flex-sm-row-reverse">
+        <div class="col text-center p-4"><h1 class="display-4 fw-bold mb-4">EWS Bendungan Logung</h1>
+          <p class="lead mb-4">Early Warning System Bendungan Logung di <b>Kabupaten Kudus</b>, Jawa Tengah, <br>berdasarkan dokumen <a href="#rtd">Rencana Tindak Darurat Juli 2017</a></p>
+        </div>
+      </div>
+
+    </div>
+    <div class="container">
+      <p>TMA Waduk: +{{ tma_logung.0.tma }} MDPL <span id="sampling"></span> <i id="tma_trend" class="bi bi-triangle-fill text-success go-down"></i></p>
+    </div>
+    <div class="w-100 my-0">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="1" d="M0,32L40,80C80,128,160,224,240,234.7C320,245,400,171,480,149.3C560,128,640,160,720,149.3C800,139,880,85,960,96C1040,107,1120,181,1200,176C1280,171,1360,85,1400,42.7L1440,0L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path></svg>    </div>
+    <div class="container mt-5">
+      <div class="row mb-5">
+        <div id="rtd" class="col text-center">
+          <h1 class="fw-bold pt-4">Rencana Tindak Darurat</h1>
+          <p>Dokumen Juli 2017</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title mb-4">Tentang Bendungan Logung</h5>
+              <p class="card-text">Terletak di desa Tanjungrejo, kec. Jekulo, kab. Kudus, provinsi Jawa Tengah.</p>
+              <p class="card-text">Volume Tampungan Normal 20,15 Juta M<sup>3</sup>. Elevasi puncak bendungan +94 MDPL (Meter diatas permukaan air laut).</p>  
+            </div>
+            
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title mb-4">Klasifikasi Darurat</h5>
+              <p class="card-text"><b>Kondisi abnormal</b></p>
+            </div>
+          </div>
+          <h4></h4>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title mb-4">Pengungsian</h5>
+              <p class="card-text"></p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title mb-4">Penanggung Jawab</h5>
+              <p class="card-text"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+{% block js_foot %}
+<script src="/static/js/dayjs.min.js"></script>
+<script src="/static/js/relativeTime.js"></script>
+<script src="/static/js/id.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      dayjs.locale('id');
+      dayjs.extend(window.dayjs_plugin_relativeTime);
+    });
+</script>
+{% endblock %}

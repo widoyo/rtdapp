@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{ pos.nama }}</li>
+        </ol>
+      </nav>
+      <h1 class="pt-2 pb-3">{{ pos.nama }}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-5">
+      {% for message in get_flashed_messages() %}
+      <div class="flash">{{ message }}</div>
+    {% endfor %}
+
+      <h2>Data Manual <a href="#form-add-manual" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="form-add-manual" class="btn btn-outline-secondary btn-sm ms-3">Tambah</a></h2>
+      <p><i>Data pembacaan oleh Petugas</i></p>
+      <form id="form-add-manual" class="collapse my-3 p-3 border border-secondary rounded bg-light" action="" method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.pos_id }}
+        <h2>Tambah Data Manual</h2>
+        <div class="mb-3">
+          <fieldset disabled>
+          <label for="nama" class="form-label">Pos Hidrologi</label>
+          <input type="text" class="form-control" value="{{ pos.nama }}"> 
+        </fieldset>
+        </div>
+        <div class="row mb-3">
+          <div class="col">
+            <label for="tanggal" class="form-label">Tanggal</label>
+          <input type="text" name="tanggal" id="tanggal" class="form-control" aria-describedby="tanggalHelp">
+          <div id="tanggalHelp" class="form-text">Waktu data</div>
+          </div>
+          <div class="col">
+            <label for="" class="form-label"> Jam</label>
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+              <input type="radio" class="btn-check" name="jam" id="btnradio1" autocomplete="off" value="07" checked>
+              <label class="btn btn-outline-secondary" for="btnradio1">07</label>
+            
+              <input type="radio" class="btn-check" name="jam" id="btnradio2" value="12" autocomplete="off">
+              <label class="btn btn-outline-secondary" for="btnradio2">12</label>
+            
+              <input type="radio" class="btn-check" name="jam" id="btnradio3" value="18" autocomplete="off">
+              <label class="btn btn-outline-secondary" for="btnradio3">18</label>
+            </div>
+<!--            <label for="jam" class="form-label">Jam</label>
+          <div class="form-check">
+            <input type="radio" name="jam" class="form-check-input" id="jam7" value="07">
+            <label for="" class="form-check-label">07</label>
+          </div>
+          <div class="form-check">
+            <input type="radio" name="jam" class="form-check-input" id="jam12" value="12">
+            <label for="" class="form-check-label">12</label>
+          </div>
+          <div class="form-check">
+            <input type="radio" name="jam" class="form-check-input" id="jam18" value="18">
+            <label for="" class="form-check-label">18</label>
+          </div>-->
+        </div>
+        </div>
+        <div class="mb-3">
+          <label for="tma" class="form-label">TMA (Meter)</label>
+          <input type="text" name="tma" id="tma" class="form-control text-end" aria-describedby="tmaHelp">
+          <div id="tmaHelp" class="form-text">Tinggi Muka Air (min 84, max 97)</div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Kirim">
+        <a href="#form-add-manual" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="form-add-manual" class="btn btn-outline-secondary">Batal</a>
+      </form>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Tanggal</th>
+            <th>Jam</th>
+            <th>Curah Hujan</th>
+            <th>TMA</th>
+            <th>Volume</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for m in pos.manuals %}
+          <tr>
+            <td>{{ m.sampling.date() }}</td>
+            <td>{{ m.sampling.time() }}</td>
+            <td>{{ m.curahhujan }}</td>
+            <td>{{ m.tma }}</td>
+            <td>{{ m.volume }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-5">
+      <h2>Data Telemetri</h2>
+      <p><i>Data dari logger (sensor)</i></p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Tanggal</th>
+            <th>Jam</th>
+            <th>Curah Hujan</th>
+            <th>TMA</th>
+            <th>Volume</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>
+{% endblock %}

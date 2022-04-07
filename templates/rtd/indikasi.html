@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <div class="row mb-5">
+    <div class="col">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="/rtd">RTD</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Deteksi Keadaan Darurat</li>
+        </ol>
+      </nav>
+      <h1>Deteksi Keadaan Darurat</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <h3 class="fw-light mb-5">Keadaan Sekitar Bendungan</h3>
+      <dl class="row">
+        <dt class="col-sm-4">Cuaca Buruk atau Hujan badai</dt>
+        <dd class="col-sm-8">Hujan badai dapat mengakibatkan keluaran air waduk yang tidak terkendali.</dd>
+        <dt class="col-sm-4">Angin Puting Beliung</dt>
+        <dd class="col-sm-8">Angin puting beliung yang bertiup di bendungan dapat menimbulkan kerusakan pada  bendungan.</dd>
+        <dt class="col-sm-4">Gempa bumi</dt>
+        <dd class="col-sm-8">Gempa bumi dapat menimbulkan kerusakan bendungan berupa : amblesan, pergeseran, retakan, longsoran, dan lain-lain. <b>PERHATIAN</b> <i>Kerusakan yang terjadi sering tidak langsung nampak secara visual.</i></dd>
+        <dt class="col-sm-4">Sabotase</dt>
+        <dd class="col-sm-8">Apabila ada ancaman pengrusakan harus segera dilaporkan ke kepolisian.</dd>
+      </dl>
+    </div>
+    <div class="col-sm-4">
+      <h3 class="fw-light mb-5">Indikasi Kegagalan Bendungan</h3>
+      <p class="lead">Kepala Unit Pengelola bendungan yang dirangkap oleh Kepala Bidang Operasi dan Pemeliharaan Balai Besar Wilayah Sungai Pemali Juana bertanggung jawab atas pemeriksaan rutin dan identifikasi kondisi yang dapat menyebabkan kegagalan bendungan.</p>
+      <dl class="row">
+        <dt class="col-sm-4">Rembesan</dt>
+        <dd class="col-sm-8">Rembesan yang  berlebihan atau rembesan yang tidak terkendali dapat menimbulkan terjadinya erosi internal dan aliran buluh (piping)</dd>
+        <dt class="col-sm-4">Longsoran pada Tubuh bendungan atau pondasi</dt>
+        <dd class="col-sm-8">Biasanya diawali dengan munculnya retakan atau penggelembungan pada lereng tubuh bendungan</dd>
+        <dt class="col-sm-4">Kegagalan Struktural</dt>
+        <dd class="col-sm-8">runtuhnya/ambruknya salah satu bagian utama bangunan pelimpah atau pintu pelimpah dapat berakibat kehilangan air waduk.</dd>
+        <dt class="col-sm-4">Luapan / Over topping</dt>
+        <dd class="col-sm-8">Peluapan pada bendungan urugan akan menimbulkan erosi pada puncak bendungan, sulit dihentikan.</dd>
+      </dl>
+    </div>
+    <div class="col-sm-4">
+      <h3 class="fw-light mb-5">Evaluasi dan Klasifikasi Darurat</h3>
+      <p class="lead">Diawali dengan adanya penyimpangan (anomali) perilaku bendungan yang terdeteksi dari bacaan instrumentasi atau dari pemeriksaan visual bendungan. Kondisi ini biasa disebut sebagai <b>kondisi abnormal</b>.</p>
+      <dl class="row">
+        <dt class="col-sm-4">Waspada</dt>
+        <dd class="col-sm-8"></dd>
+        <dt class="col-sm-4">Siaga</dt>
+        <dd class="col-sm-8"></dd>
+        <dt class="col-sm-4">Awas</dt>
+        <dd class="col-sm-8"></dd>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="text-end"><a href="/rtd/tanggungjawab" class="link-primary">Tanggung Jawab  <i class="bi bi-arrow-right"></i></a></div>
+  </div>
+</div>
+{% endblock %}
