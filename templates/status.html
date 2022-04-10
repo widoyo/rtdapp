@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <div class="row mb-5">
+    <div class="col">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Status</li>
+        </ol>
+      </nav>
+      <h1>Riwayat Warning</h1>
+      <div class="row">
+        <div class="col">
+          
+        </div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Waktu Perubahan</th>
+            <th>Indikasi</th>
+            <th>Uraian Keadaan</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>06 April 2022 13:05</td>
+            <td>Rembesan</td>
+            <td>Rembesan naik sejak 3 hari lalu</td>
+            <td><span class="badge bg-warning">Abnormal</span></td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+    </div>
+</div>
+{% endblock %}

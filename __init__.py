@@ -1,18 +1,23 @@
 import os
 
-from flask import Flask, render_template, flash, request, send_from_directory, jsonify
+from flask import Flask, render_template, flash, request, send_from_directory, jsonify, current_app
 from flask_login import LoginManager, current_user
 from wtforms import form, fields, validators
 from playhouse.shortcuts import model_to_dict
-from .models import Pos, Manual
+from telegram import Bot
+
+from .models import Pos, Manual, SIAGA_LOGUNG
 from .api.error import error_response as api_error_response
 from config import Config
 
+def send_telegram(msg):
+    bot = Bot(current_app.config.get('BBWSPJBOT_TOKEN'))
+    bot.sendMessage('@widoyoph', msg)
+    
 
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
-    print('DATABASE_NAME: ', app.config.get('DATABASE_NAME'))
 
     app.config.from_mapping(DATABASE='sqlite:///' + os.path.join(app.instance_path, app.config.get('DATABASE_NAME')))
 
@@ -47,7 +52,11 @@ def create_app(config_class=Config):
         except:
             return None
             
-
+    @app.route('/aplikasi')
+    def tentang_aplikasi():
+        return render_template('tentang_aplikasi.html')
+    
+    
     @app.route('/favicon.ico')
     def favicon():
         print(app.root_path)
@@ -65,12 +74,16 @@ def create_app(config_class=Config):
         return render_template('tv_show.html', pchs=pchs, pdas=pdas)
     
     
+    @app.route('/status')
+    def status():
+        return render_template('status.html')
+    
+    
     @app.route('/')
     def home():
         pda_logung = Pos.get_by_id(1)
         tma_manual = pda_logung.manuals.order_by(Manual.sampling.desc()).limit(2)
-        return render_template('index.html', tma_logung=tma_manual)
-
+        return render_template('index.html', tma_logung=tma_manual, SIAGA_LOGUNG=SIAGA_LOGUNG)
 
     def wants_json_response():
         return request.accept_mimetypes['application/json'] >= \

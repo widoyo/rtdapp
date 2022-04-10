@@ -1,15 +1,87 @@
 {% extends 'base.html' %}
+{% block extra_head %}
+<style>
+  #global_status
+</style>
+{% endblock %}
 {% block content %}
-      <div class="container">
-      <div class="row my-5 flex-sm-row-reverse">
+    <div class="container">
+      <div class="row my-3 flex-sm-row-reverse">
         <div class="col text-center p-4"><h1 class="display-4 fw-bold mb-4">EWS Bendungan Logung</h1>
-          <p class="lead mb-4">Early Warning System Bendungan Logung di <b>Kabupaten Kudus</b>, Jawa Tengah, <br>berdasarkan dokumen <a href="#rtd">Rencana Tindak Darurat Juli 2017</a></p>
+          <p class="lead mb-4">Bendungan Logung di <b>Kabupaten Kudus</b>, Jawa Tengah, <!--<br>berdasarkan dokumen --><br><a href="#rtd">Rencana Tindak Darurat Juli 2017</a></p>
         </div>
       </div>
-
     </div>
     <div class="container">
-      <p>TMA Waduk: +{{ tma_logung.0.tma }} MDPL <span id="sampling"></span> <i id="tma_trend" class="bi bi-triangle-fill text-success go-down"></i></p>
+      <div class="row text-center mb-2">
+        <div class="col">
+          <h1 id="global_status" class="display-4 fw-bold text-success">Aman</h1>
+          <p class="text-muted">Status <span id="sampling_global_status" data-timestamp-global-status=1548381600 data-sampling-global-status={{ sampling_global_status }}></span></p>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+          <p>TMA Waduk: +{{ tma_logung.0.tma }} MDPL <span id="sampling" data-sampling={{tma_logung.0.sampling}}></span> <i id="tma_trend" class="bi bi-triangle-fill text-success go-down"></i></p>
+        </div>
+        <div class="col">
+          <ol class="list-group list-group-numbered">
+  <li class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">Over Topping / Peluapan</div>
+    </div>
+    <span class="badge bg-success">Aman</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">Rembesan</div>
+    </div>
+    <span class="badge bg-success">Aman</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">Didih Pasir</div>
+    </div>
+    <span class="badge bg-success">Aman</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">Longsoran</div>
+    </div>
+    <span class="badge bg-success">Aman</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">Lubang Benam</div>
+    </div>
+    <span class="badge bg-success">Aman</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">Retakan Tubuh Bendungan</div>
+    </div>
+    <span class="badge bg-success">Aman</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">Penurunan / Settlemen</div>
+    </div>
+    <span class="badge bg-success">Aman</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">Retakan Struktur Beton</div>
+    </div>
+    <span class="badge bg-success">Aman</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">Akibat Gempa Bumi</div>
+    </div>
+    <span class="badge bg-success">Aman</span>
+  </li>
+</ol>
+        </div>
+      </div>
     </div>
     <div class="w-100 my-0">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="1" d="M0,32L40,80C80,128,160,224,240,234.7C320,245,400,171,480,149.3C560,128,640,160,720,149.3C800,139,880,85,960,96C1040,107,1120,181,1200,176C1280,171,1360,85,1400,42.7L1440,0L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path></svg>    </div>

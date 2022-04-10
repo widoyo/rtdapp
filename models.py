@@ -6,6 +6,13 @@ from playhouse.flask_utils import FlaskDB
 
 db = FlaskDB()
 
+SIAGA_LOGUNG = {
+    'puncak': 94,
+    'awas': 93.75,
+    'siaga': 92.75,
+    'spillway': 88.5
+}
+
 class Pos(db.Model):
     nama = pw.CharField(unique=True, max_length=50)
     tipe = pw.IntegerField(default=1) # 1 PCH, 2 PDA, 3 Klimat */
