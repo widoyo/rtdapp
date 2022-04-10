@@ -1,5 +1,5 @@
 import os
-
+import datetime
 from flask import Flask, render_template, flash, request, send_from_directory, jsonify, current_app
 from flask_login import LoginManager, current_user
 from wtforms import form, fields, validators
@@ -51,7 +51,19 @@ def create_app(config_class=Config):
             return User.get_by_id(user_id)
         except:
             return None
+
+    @app.before_request
+    def before_request():
+        if current_user.is_authenticated:
+            current_user.last_seen = datetime.datetime.utcnow()
+            current_user.save()
             
+         
+    @app.context_processor
+    def inject_today_date():
+        return {'today_date': datetime.datetime.today()}
+    
+    
     @app.route('/aplikasi')
     def tentang_aplikasi():
         return render_template('tentang_aplikasi.html')

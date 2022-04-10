@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired
 
 PosForm = model_form(Pos, exclude=('cdate', 'mdate', 'ch_t', 'tma_t', 'trend_tma', 'sampling_tma', 'tma_trend'))
 #print(hasattr(PosForm, 'extra_filters'))
-UserForm = model_form(User, exclude=('cdate', 'mdate'))
+UserForm = model_form(User, exclude=('cdate', 'mdate', 'last_seen'))
 
 class ManualForm(FlaskForm):
     pos_id = HiddenField('Pos Hidrologi', validators=[DataRequired()])

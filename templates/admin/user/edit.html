@@ -12,10 +12,36 @@
         </ol>
       </nav>
       <h1>{{ user.username }}</h1>
-      {{ form.username }}
-      {{ form.role }}
-      {{ form.pos }}
-    </div>
+      <form id="form-add-user" class="my-5" action="/admin/user/{{user.id}}/edit" method="POST">
+        <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" name="username" id="username" value="{{user.username}}" class="form-control" aria-describedby="usernameHelp">
+        <div id="usernameHelp" class="form-text">satu kata, maksimum 25 karakter, unik, tanpa spasi atau tanda baca</div>
+      </div>
+      <div class="mb-3">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="role" value="1" id="roleUpb"{% if user.role == 1 %}checked{% endif %}>
+          <label class="form-check-label" for="roleUpb">
+            Petugas Kantor (UPB)
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="role" value="2" id="rolePetugas" {% if user.role == 2 %}checked{% endif %}>
+          <label class="form-check-label" for="rolePetugas">
+            Petugas Lapangan
+          </label>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="pos" class="form-label">Pos</label>
+        {{ form.pos(class_='form-select') }}
+      </div>
+      <div class="mb-3 pt-4">
+        <input type="submit" class="btn btn-primary" value="Simpan">
+        <a href="#" class="btn btn-default">Batal</a>
+      </div>
+    </form>    
+</div>
   </div>
   <div class="row">
   </div>

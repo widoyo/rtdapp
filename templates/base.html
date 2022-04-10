@@ -27,9 +27,9 @@
     {% block extra_head %}{% endblock %}
   </head>
   <body>
-    <header class="bg-primary text-white mb-4">
+    <header class="text-white mb-4" style="background-color: #232368;">
       <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #232368">
           <div class="container">
             <a class="navbar-brand" href="#">EWS Bendungan Logung</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,13 +88,18 @@
                 </li>
               {% else %}
                 <li class="nav-item">
-                  <a class="nav-link btn btn-outline-secondary py-1" href="/login">Login</a>
+                  <a class="nav-link btn btn-outline-light py-1" href="/login">Login</a>
                 </li>
                 {% endif %}
               </ul>
             </div>
           </div>
         </nav>        
+      </div>
+      <div class="container-fluid" style="background-color: #fb0;">
+        <div class="row">
+          <div class="col" style="height: 6px;">&nbsp;</div>
+        </div>
       </div>
     </header>
     <div class="content">
@@ -155,7 +160,7 @@
       document.addEventListener("DOMContentLoaded", function() {
         // Init Pjax instance
         pjax = new Pjax({
-          selectors: ["title", ".content"],
+          selectors: ["title", "header", ".content"],
           cacheBust: true
         });
         let topbutton = document.getElementById('btn-back-to-top');

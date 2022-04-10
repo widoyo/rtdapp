@@ -28,8 +28,10 @@
       </div>
       <div class="col-md-10 mx-auto col-lg-5">
 				{% for message in get_flashed_messages() %}
+        {% if message %}
 				<div class="flash">{{ message }}</div>
-			{% endfor %}
+        {% endif %}
+        {% endfor %}
         <form method="POST" action="/login" class="p-4 p-md-5 border rounded-3 bg-light">
           {{ form.hidden_tag() }}
 					<div class="form-floating mb-3">

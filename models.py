@@ -42,6 +42,7 @@ class User(UserMixin, db.Model):
     pos = pw.ForeignKeyField(Pos, null=True)
     cdate = pw.DateTimeField(default=datetime.datetime.now)
     mdate = pw.DateTimeField(null=True)
+    last_seen = pw.DateTimeField(null=True)
 
     def set_password(self, password):
         self.password = generate_password_hash(password)

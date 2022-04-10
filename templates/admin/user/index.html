@@ -17,7 +17,7 @@
     <div class="col-10">
       <div class="row">
         <div class="col-sm-6">
-          <form id="form-add-user" class="collapse my-5" action="/admin/users" method="POST">
+          <form id="form-add-user" class="collapse my-5" action="/admin/user" method="POST">
             <h3>Tambah User</h3>
             <div class="mb-3">
               <label for="username" class="form-label">Username</label>
@@ -60,18 +60,20 @@
           <tr>
             <th>No</th>
             <th>Username</th>
-            <th>Role</th>
             <th>Pos Pengamatan</th>
+            <th>Login terakhir</th>
             <th></th>
           </tr>
         </thead>
         {% for u in users %}
         <tr>
           <td>{{ loop.index }}</td>
-          <td>{{ u.username }}</td>
-          <td>{{ u.role }}</td>
+          <td>{{ u.username }} <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+            <span class="visually-hidden">New alerts</span>
+          </span></td>
           <td>{{ u.pos.nama }}</td>
-          <td><a href="{{ url_for('admin.user_edit', id=u.id) }}">Edit</a></td>
+          <td>{{ u.last_seen }}</td>
+          <td><a href="{{ url_for('admin.user_edit', id=u.id) }}" class="me-4">Edit</a> <a href="{{ url_for('admin.user_setpassword', id=u.id) }}">Atur Password</a></td>
         </tr>
         {% endfor %}
       </table>
