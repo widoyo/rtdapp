@@ -2,7 +2,7 @@
 {% block content %}
 <div class="container">
   <div class="row">
-    <div class="col">
+    <div class="col-sm-6">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -12,9 +12,13 @@
       </nav>
       <h1 class="pt-2 pb-3">{{ pos.nama }}</h1>
     </div>
+    <div class="col-sm-6">
+      &nbsp;<br><br>
+      <span class="text-center display-6"><a href="?month={{ prev_month }}"><i class="bi bi-caret-left-square pe-4"></i></a> {{ month.strftime('%b %Y') }} <a href="?month={{ next_month }}"><i class="bi bi-caret-right-square ps-4"></i></a></span>
+    </div>
   </div>
-  <div class="row">
-    <div class="col-sm-5">
+  <div class="row pt-4">
+    <div class="col-sm-6">
       {% for message in get_flashed_messages() %}
       <div class="flash">{{ message }}</div>
     {% endfor %}
@@ -49,19 +53,6 @@
               <input type="radio" class="btn-check" name="jam" id="btnradio3" value="18" autocomplete="off">
               <label class="btn btn-outline-secondary" for="btnradio3">18</label>
             </div>
-<!--            <label for="jam" class="form-label">Jam</label>
-          <div class="form-check">
-            <input type="radio" name="jam" class="form-check-input" id="jam7" value="07">
-            <label for="" class="form-check-label">07</label>
-          </div>
-          <div class="form-check">
-            <input type="radio" name="jam" class="form-check-input" id="jam12" value="12">
-            <label for="" class="form-check-label">12</label>
-          </div>
-          <div class="form-check">
-            <input type="radio" name="jam" class="form-check-input" id="jam18" value="18">
-            <label for="" class="form-check-label">18</label>
-          </div>-->
         </div>
         </div>
         <div class="mb-3">
@@ -83,7 +74,7 @@
           </tr>
         </thead>
         <tbody>
-          {% for m in pos.manuals %}
+          {% for m in manual_bulan_ini %}
           <tr>
             <td>{{ m.sampling.date() }}</td>
             <td>{{ m.sampling.time() }}</td>
@@ -91,11 +82,15 @@
             <td>{{ m.tma }}</td>
             <td>{{ m.volume }}</td>
           </tr>
+          {% else %}
+          <tr>
+            <td colspan="5" class="h-100 text-center px-5 text-muted"><i class="bi bi-cart-x display-6"></i><br><i>belum ada data</i></td>
+          </tr>
           {% endfor %}
         </tbody>
       </table>
     </div>
-    <div class="col-sm-5">
+    <div class="col-sm-6">
       <h2>Data Telemetri</h2>
       <p><i>Data dari logger (sensor)</i></p>
       <table class="table">
@@ -110,7 +105,6 @@
         </thead>
       </table>
     </div>
-    <div class="col-2"></div>
   </div>
 </div>
 {% endblock %}

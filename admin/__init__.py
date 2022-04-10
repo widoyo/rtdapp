@@ -24,9 +24,20 @@ def edit_pos(id):
     
 @bp.route('/pos/<int:id>', methods=['GET', 'POST'])
 def show_pos(id):
+    month = request.args.get('month', datetime.datetime.today().strftime('%Y/%m'))
+    if '-' in month:
+        month = month.replace('-', '/')
+    try:
+        t = datetime.datetime.strptime(month, '%Y/%m')
+    except:
+        t = datetime.datetime.today()
+    prev_month = t - datetime.timedelta(days=2)
+    next_month = t + datetime.timedelta(days=33)
     pos = Pos.get_by_id(id)
     manual_obj = Manual(pos=pos)
-    print(manual_obj.pos)
+    manual_bulan_ini = Manual.select().where((Manual.pos == pos) 
+                                             & (Manual.sampling.year==t.year)
+                                             & (Manual.sampling.month==t.month)).order_by(Manual.sampling.desc())
     if request.method == 'POST':
         form = ManualForm(request.form, obj=manual_obj)
         if form.validate():
@@ -40,7 +51,10 @@ def show_pos(id):
             flash(form.errors)
     else:
         form = ManualForm(obj=manual_obj)
-    return render_template('/admin/pos/show.html', pos=pos, form=form)
+    return render_template('/admin/pos/show.html', pos=pos, 
+                           form=form, month=t, 
+                           prev_month=prev_month.strftime('%Y/%m'), next_month=next_month.strftime('%Y/%m'),
+                           manual_bulan_ini=manual_bulan_ini)
 
 
 @bp.route('/pos', methods=['GET', 'POST'])
