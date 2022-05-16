@@ -121,3 +121,36 @@ class Personil(db.Model):
 
     def __unicode__(self):
         return self.nama
+    
+    
+KONDISI_SIAGA = ((0, 'Normal'), (1, 'Abnormal'), (2, 'Waspada'), 
+                 (3, 'Siaga'), (4, 'Awas'))
+KATEGORI_SIAGA = (
+    (1, 'Peluapan / Over Topping'),
+    (2, 'Rembesan / Piping'),
+    (3, 'Didih Pasir'),
+    (4, 'Lubang Benam'),
+    (5, 'Retakan pada Tubuh Bendungan'),
+    (6, 'Penurunan / Settlement'),
+    (7, 'Longsoran pada Tubuh Bendungan'),
+    (8, 'Retakan pada Struktur Beton'),
+    (9, 'Akibat Gempa Bumi'))
+
+class IndikatorSiaga(db.Model):
+    kategori = pw.IntegerField()
+    obyek_pantau = pw.CharField()
+    hasil_pantau = pw.CharField()
+    kondisi = pw.IntegerField(default=0) # 0 Normal, 1: Abnormal, 2:Waspada, 3: Siaga, 4: Awas
+    pemberitahuan = pw.CharField()
+    tindakan = pw.CharField()
+    bahanalat = pw.CharField()
+    pencatatan = pw.CharField()
+    penanggungjawab = pw.CharField()
+    
+    
+class StatusLog(db.Model):
+    tanggal = pw.DateField()
+    kategori = pw.IntegerField()
+    kondisi = pw.IntegerField()
+    catatan = pw.CharField()
+    user = pw.CharField()

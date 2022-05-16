@@ -1,20 +1,25 @@
 import os
 import datetime
-from flask import Flask, render_template, flash, request, send_from_directory, jsonify, current_app
+from flask import Flask, g, render_template, flash, request, abort
+from flask import send_from_directory, jsonify, current_app
 from flask_login import LoginManager, current_user
 from wtforms import form, fields, validators
 from playhouse.shortcuts import model_to_dict
+from peewee import fn
 from telegram import Bot
 
-from .models import Pos, Manual, SIAGA_LOGUNG
+from .models import Pos, Manual, SIAGA_LOGUNG, StatusLog, KATEGORI_SIAGA, KONDISI_SIAGA
 from .api.error import error_response as api_error_response
 from config import Config
 
-def send_telegram(msg):
-    bot = Bot(current_app.config.get('BBWSPJBOT_TOKEN'))
-    bot.sendMessage('@widoyoph', msg)
-    
 
+def send_telegram_ewschannel(msg):
+    send_telegram('@ewsbbwspj', msg)
+    
+def send_telegram(to, msg):
+    bot = Bot(current_app.config.get('BBWSPJBOT_TOKEN'))
+    bot.sendMessage(to, msg)
+    
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
@@ -43,7 +48,7 @@ def create_app(config_class=Config):
 
     login_manager = LoginManager()
     login_manager.init_app(app)
-    login_manager.login_view = 'login'
+    login_manager.login_view = 'auth.login'
 
     @login_manager.user_loader
     def load_user(user_id):
@@ -63,7 +68,12 @@ def create_app(config_class=Config):
     def inject_today_date():
         return {'today_date': datetime.datetime.today()}
     
+
+    @app.route('/petunjuk')
+    def petunjuk_penggunaan():
+        return render_template('user_manual.html')
     
+
     @app.route('/aplikasi')
     def tentang_aplikasi():
         return render_template('tentang_aplikasi.html')
@@ -88,14 +98,21 @@ def create_app(config_class=Config):
     
     @app.route('/status')
     def status():
-        return render_template('status.html')
+        sts = StatusLog.select().order_by(StatusLog.tanggal.desc())
+        sts = [{'tanggal': s.tanggal, 'kategori': dict(KATEGORI_SIAGA)[s.kategori],
+                'kondisi': dict(KONDISI_SIAGA)[s.kondisi],
+                'catatan': s.catatan} for s in sts]
+        return render_template('status.html', statuslog=sts)
     
     
     @app.route('/')
     def home():
         pda_logung = Pos.get_by_id(1)
         tma_manual = pda_logung.manuals.order_by(Manual.sampling.desc()).limit(2)
-        return render_template('index.html', tma_logung=tma_manual, SIAGA_LOGUNG=SIAGA_LOGUNG)
+        status_siaga = StatusLog.select(fn.Max(StatusLog.tanggal).alias('tanggal'),
+                                        StatusLog.kategori, StatusLog.kondisi).group_by(StatusLog.kategori)
+        status_siaga = [{'tanggal': s.tanggal, 'kategori': dict(KATEGORI_SIAGA)[s.kategori], 'kondisi': dict(KONDISI_SIAGA)[s.kondisi]} for s in status_siaga]
+        return render_template('index.html', tma_logung=tma_manual, SIAGA_LOGUNG=SIAGA_LOGUNG, status_siaga=status_siaga)
 
     def wants_json_response():
         return request.accept_mimetypes['application/json'] >= \
@@ -108,6 +125,11 @@ def create_app(config_class=Config):
             return api_error_response(404)
         return render_template('404.html'), 404
 
+    @app.errorhandler(403)
+    def forbidden_error(error):
+        if wants_json_response():
+            return api_error_response(403)
+        return render_template('403.html'), 403
 
     @app.errorhandler(500)
     def internal_error(error):

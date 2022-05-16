@@ -9,7 +9,7 @@
           <li class="breadcrumb-item active" aria-current="page">Status</li>
         </ol>
       </nav>
-      <h1>Riwayat Warning</h1>
+      <h1>Riwayat Siaga</h1>
       <div class="row">
         <div class="col">
           
@@ -26,17 +26,35 @@
           </tr>
         </thead>
         <tbody>
+          {% for s in statuslog %}
           <tr>
-            <td>1</td>
-            <td>06 April 2022 13:05</td>
-            <td>Rembesan</td>
-            <td>Rembesan naik sejak 3 hari lalu</td>
-            <td><span class="badge bg-warning">Abnormal</span></td>
+            <td>{{ loop.index }}</td>
+            <td>{{ s.tanggal }}</td>
+            <td>{{ s.kategori }}</td>
+            <td>{{ s.catatan }}</td>
+            <td><span class="badge kondisi">{{ s.kondisi }}</span></td>
           </tr>
+          {% else %}
+          <tr>
+            <td colspan="5">Kosong</td>
+          </tr>
+          {% endfor %}
         </tbody>
 
       </table>
     </div>
     </div>
 </div>
+{% endblock %}
+{% block js_foot %}
+<script>
+document.addEventListener('pjax:success', function() {
+  console.log('pjax:success')
+  var colors = {'no': 'bg-success', 'ab': 'bg-secondary', 'wa': 'bg-warning', 'si': 'bg-danger', 'aw': 'bg-danger'}
+    var kondisi = document.getElementsByClassName('kondisi');
+    for (var i=0; i < kondisi.length; i++) {
+      kondisi[i].classList.add(colors[kondisi[i].innerText.substring(0,2).toLowerCase()])
+    }
+}, false);
+</script>
 {% endblock %}

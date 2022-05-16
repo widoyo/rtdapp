@@ -1,6 +1,9 @@
-from .models import Pos, User, Manual
+import datetime
+from .models import Pos, User, Manual, KONDISI_SIAGA, KATEGORI_SIAGA
 from flask_wtf import FlaskForm
-from wtforms import HiddenField, RadioField, SubmitField, FloatField, DateField
+from wtforms import HiddenField, RadioField, SubmitField, FloatField
+from wtforms import DateField, StringField, SelectField
+from wtforms.widgets import TextArea
 from wtfpeewee.orm import model_form
 from wtforms.validators import DataRequired
 
@@ -14,4 +17,12 @@ class ManualForm(FlaskForm):
     jam = RadioField('Jam', choices=[('07', '07'), ('12', '12'), ('18', '18')])
     tma = FloatField('TMA')
     curahhujan = FloatField('Curah Hujan')
+    submit = SubmitField('Simpan')
+    
+class SiagaForm(FlaskForm):
+    tanggal = DateField('Tanggal Perubahan', default=datetime.date.today)
+    kategori = SelectField('Indikator', choices=KATEGORI_SIAGA)
+    kondisi = SelectField('Kondisi Sekarang', choices=KONDISI_SIAGA)
+    catatan = StringField('Catatan', widget=TextArea())
+    user = HiddenField('user')
     submit = SubmitField('Simpan')

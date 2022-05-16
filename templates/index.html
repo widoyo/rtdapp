@@ -8,7 +8,7 @@
     <div class="container">
       <div class="row my-3 flex-sm-row-reverse">
         <div class="col text-center p-4"><h1 class="display-4 fw-bold mb-4">EWS Bendungan Logung</h1>
-          <p class="lead mb-4">Bendungan Logung di <b>Kabupaten Kudus</b>, Jawa Tengah, <!--<br>berdasarkan dokumen --><br><a href="#rtd">Rencana Tindak Darurat Juli 2017</a></p>
+          <p class="lead mb-4">Bendungan Logung di <b>Kabupaten Kudus</b>, Jawa Tengah, <!--<br>berdasarkan dokumen <br><a href="#rtd">Rencana Tindak Darurat Juli 2017</a>--></p>
         </div>
       </div>
     </div>
@@ -21,65 +21,21 @@
       </div>
       <div class="row mb-3">
         <div class="col">
-          <p>TMA Waduk: +{{ tma_logung.0.tma }} MDPL <span id="sampling" data-sampling={{tma_logung.0.sampling}}></span> <i id="tma_trend" class="bi bi-triangle-fill text-success go-down"></i></p>
+        <h2>Kondisi Tampungan</h2>
+          <p>TMA Waduk: +{{ tma_logung.0.tma }} MDPL <span id="sampling" data-sampling={{tma_logung.0.sampling}}></span> <i id="tma_trend" class="bi bi-triangle-fill text-success go-down"></i>, Volume Tampungan: ? M<sup>3</sup></p>
+          <p>Muka Air Normal: +89,5 m</p>
         </div>
         <div class="col">
           <ol class="list-group list-group-numbered">
-  <li class="list-group-item d-flex justify-content-between align-items-start">
-    <div class="ms-2 me-auto">
-      <div class="fw-bold">Over Topping / Peluapan</div>
-    </div>
-    <span class="badge bg-success">Aman</span>
-  </li>
-  <li class="list-group-item d-flex justify-content-between align-items-start">
-    <div class="ms-2 me-auto">
-      <div class="fw-bold">Rembesan</div>
-    </div>
-    <span class="badge bg-success">Aman</span>
-  </li>
-  <li class="list-group-item d-flex justify-content-between align-items-start">
-    <div class="ms-2 me-auto">
-      <div class="fw-bold">Didih Pasir</div>
-    </div>
-    <span class="badge bg-success">Aman</span>
-  </li>
-  <li class="list-group-item d-flex justify-content-between align-items-start">
-    <div class="ms-2 me-auto">
-      <div class="fw-bold">Longsoran</div>
-    </div>
-    <span class="badge bg-success">Aman</span>
-  </li>
-  <li class="list-group-item d-flex justify-content-between align-items-start">
-    <div class="ms-2 me-auto">
-      <div class="fw-bold">Lubang Benam</div>
-    </div>
-    <span class="badge bg-success">Aman</span>
-  </li>
-  <li class="list-group-item d-flex justify-content-between align-items-start">
-    <div class="ms-2 me-auto">
-      <div class="fw-bold">Retakan Tubuh Bendungan</div>
-    </div>
-    <span class="badge bg-success">Aman</span>
-  </li>
-  <li class="list-group-item d-flex justify-content-between align-items-start">
-    <div class="ms-2 me-auto">
-      <div class="fw-bold">Penurunan / Settlemen</div>
-    </div>
-    <span class="badge bg-success">Aman</span>
-  </li>
-  <li class="list-group-item d-flex justify-content-between align-items-start">
-    <div class="ms-2 me-auto">
-      <div class="fw-bold">Retakan Struktur Beton</div>
-    </div>
-    <span class="badge bg-success">Aman</span>
-  </li>
-  <li class="list-group-item d-flex justify-content-between align-items-start">
-    <div class="ms-2 me-auto">
-      <div class="fw-bold">Akibat Gempa Bumi</div>
-    </div>
-    <span class="badge bg-success">Aman</span>
-  </li>
-</ol>
+        {% for s in status_siaga %}
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">{{ s.kategori }}</div>
+        </div>
+          <span class="badge kondisi">{{ s.kondisi }}</span>
+        </li>
+        {% endfor %}
+      </ol>
         </div>
       </div>
     </div>
@@ -140,5 +96,12 @@
       dayjs.locale('id');
       dayjs.extend(window.dayjs_plugin_relativeTime);
     });
+    document.addEventListener('pjax:success', function() {
+      var colors = {'no': 'bg-success', 'ab': 'bg-secondary', 'wa': 'bg-warning', 'si': 'bg-danger', 'aw': 'bg-danger'}
+      var kondisi = document.getElementsByClassName('kondisi');
+      for (var i=0; i < kondisi.length; i++) {
+        kondisi[i].classList.add(colors[kondisi[i].innerText.substring(0,2).toLowerCase()])
+      }
+  }, false);
 </script>
 {% endblock %}

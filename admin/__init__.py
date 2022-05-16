@@ -1,13 +1,20 @@
 import datetime
-from flask import Blueprint, render_template, flash, request, redirect, url_for
-from ..models import User, Pos, Pengungsian, Manual
-from ..forms import PosForm, UserForm, ManualForm
+from functools import wraps
+from flask import Blueprint, render_template, flash, request, redirect, url_for, abort
+from flask_login import login_required, current_user
+from peewee import fn
+from ..models import StatusLog, User, Pos, Pengungsian, Manual, KATEGORI_SIAGA, KONDISI_SIAGA
+from ..forms import PosForm, UserForm, ManualForm, SiagaForm
 
 bp = Blueprint('admin', __name__, url_prefix='/admin')
 
+def admin_only():
+    if current_user.role != 1:
+        abort(403)
 
 @bp.route('/pos/<int:id>/edit', methods=['GET', 'POST'])
 def edit_pos(id):
+    admin_only()
     pos = Pos.get_by_id(id)
     if request.method == 'POST':
         form = PosForm(request.form, obj=pos)
@@ -46,7 +53,7 @@ def show_pos(id):
             manual_obj.sampling = datetime.datetime.combine(form.tanggal.data, jam)
             manual_obj.save()
             flash("Sukses menambah data Manual")
-            return redirect('/admin/pos/1')
+            return redirect('/admin/pos/{}'.format(pos.id))
         else:
             flash(form.errors)
     else:
@@ -59,6 +66,7 @@ def show_pos(id):
 
 @bp.route('/pos', methods=['GET', 'POST'])
 def pos():
+    admin_only()
     pos_baru = Pos()
     if request.method == 'POST':
         form = PosForm(request.form, obj=pos_baru)
@@ -72,11 +80,24 @@ def pos():
         form = PosForm()
     return render_template('/admin/pos/index.html', poses=Pos.select(), form=form)
 
-
-@bp.route('/')
+@bp.route('/', methods=['GET', 'POST'])
+@login_required
 def index():
-    print('admin')
-    return render_template('/admin/index.html')
+    admin_only()
+    status_baru = StatusLog(**{'user': current_user.username})
+    if request.method == 'POST':
+        form = SiagaForm(request.form, obj=status_baru)
+        if form.validate():
+            form.populate_obj(status_baru)
+            status_baru.save()
+            flash('Sukses ')
+            return redirect(url_for('admin'))
+    else:
+        form = SiagaForm(**{'user': current_user.username})
+    status_siaga = StatusLog.select(fn.Max(StatusLog.tanggal).alias('tanggal'),
+                                    StatusLog.kategori, StatusLog.kondisi).group_by(StatusLog.kategori)
+    status_siaga = [{'tanggal': s.tanggal, 'kategori': dict(KATEGORI_SIAGA)[s.kategori], 'kondisi': dict(KONDISI_SIAGA)[s.kondisi]} for s in status_siaga]
+    return render_template('/admin/index.html', siaga_form=form, status_siaga=status_siaga)
 
 import rtdapp.admin.users
 import rtdapp.admin.pengungsian

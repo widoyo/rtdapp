@@ -71,18 +71,22 @@
                 <ul class="navbar-nav">
                 {% if current_user.is_authenticated %}
                 <li class="nav-item dropdown">
-                  <a href="#" class="nav-link dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">{{ current_user.username }}</a>
+                  <a href="#" class="nav-link dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Data</a>
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
                     {% if current_user.role == 1 %}
+                    <li><a href="/admin" class="dropdown-item navlink">Admin</a></li>
+                    <li class="dropdown-divider"></li>
                     <li><a href="/admin/user" class="dropdown-item navlink">User</a></li>
                     <li><a href="/admin/pos" class="dropdown-item navlink">Pos Hidrologi</a></li>
                     <li><a href="/admin/pengungsian" class="dropdown-item navlink">Pos Pengungsian</a></li>
                     {% elif current_user.role == 2 %}
                     <li><a href="/admin/pos/{{ current_user.pos_id }}" class="dropdown-item navlink">Data Hidrologi</a></li>
                     {% endif %}
-                    <li>
-                      <hr class="dropdown-divider">
-                    </li>
+                  </ul>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">{{ current_user.username }}</a>
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
                     <li><a href="/logout" class="dropdown-item navlink">Logout</a></li>   
                   </ul>
                 </li>
@@ -112,17 +116,17 @@
 </button>
 <div class="container-fluid bg-light border-top py-5 my-5">
 <div class="container">
-<footer class="row row-cols-5">
-  <div class="col">
+<footer class="row">
+  <div class="col-sm-3">
     <img src="/static/img/pupr.png" alt="PUPR" class="mb-3" style="width:90px;">
     <p class="text-muted">© 2021 BBWS Pemali Juana</p>
   </div>
 
-  <div class="col">
+  <div class="col-sm-2">
 
   </div>
 
-  <div class="col">
+  <div class="col-sm-3">
     <h5>Rencana Tindak Darurat</h5>
     <ul class="nav flex-column pt-3">
       <li class="nav-item mb-2"><a href="/rtd/about" class="nav-link p-0 text-muted">Tentang Bendungan Logung</a></li>
@@ -132,7 +136,7 @@
     </ul>
   </div>
 
-  <div class="col">
+  <div class="col-sm-2">
     <h5>Peta</h5>
     <ul class="nav flex-column pt-3">
       <li class="nav-item mb-2"><a href="/map?show=bendungan" class="nav-link p-0 text-muted">Bendungan Logung</a></li>
@@ -140,11 +144,11 @@
       <li class="nav-item mb-2"><a href="/map?show=pos" class="nav-link p-0 text-muted">Pos Hidrologi</a></li>
     </ul>
   </div>
-  <div class="col">
+  <div class="col-sm-2">
     <h5>Tentang Aplikasi</h5>
     <ul class="nav flex-column pt-3">
       <li class="nav-item mb-2"><a href="/aplikasi" class="nav-link p-0 text-muted">Software</a></li>
-      <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Roadmap</a></li>
+      <li class="nav-item mb-2"><a href="/petunjuk" class="nav-link p-0 text-muted">Petunjuk Penggunaan / User Manual</a></li>
     </ul>
   </div>
 </footer>

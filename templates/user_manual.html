@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Petunjuk Penggunaan</li>
+        </ol>
+      </nav>
+      <h1>Petunjuk Penggunaan</h1>
+      <p class="">User Manual</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      
+      <h2>Isi Informasi</h2>
+      <hr>
+      <dl class="row">
+        <dt class="col-sm-5">Ringkasan RTD</dt>
+        <dd class="col-sm-7"><p>Sebagai referensi bagi petugas dan siapapun yang terlibat dalam Tindak Darurat Bendungan Logung.</p><p>Dapat diakses <a href="/rtd/about">di sini</a></p></dd>
+        <dt class="col-sm-5">Pencatatan Status Bendungan Logung</dt>
+        <dd class="col-sm-7"><p>Status Bendungan Logung diinformasikan melalui fasilitas ini. Petugas UPB yang dapat melakukan perubahan status</p>
+        <p>Informasi ini tampil pada halaman <a href="/">Home</a> dan <a href="/status">Status</a></p></dd>
+        <dt class="col-sm-5">Data-data Hidrologi</dt>
+        <dd class="col-sm-7">Seperti Tinggi Muka Air waduk, curah hujan yang berpotensi airnya masuk ke tampungan Bendungan Logung</dd>
+      </dl>
+    </div>
+    <div class="col-sm-6">
+      <h2>Menu</h2>
+      <hr>
+      <dl class="row">
+        <dt class="col-sm-5">
+          Home
+        </dt>
+        <dd class="col-sm-7">Ringakasan informasi penting yang perlu segera diketahui</dd>
+        <dt class="col-sm-5">Status</dt>
+        <dd class="col-sm-7">Riwayat perubahan status dari indikator</dd>
+        <dt class="col-sm-5">Rencana Tindak Darurat</dt>
+        <dd class="col-sm-7">Ringkasan dari dokumen RTD, sebagai referensi untuk semua pihak yang terlibat</dd>
+        <dt class="col-sm-5">Peta</dt>
+        <dd class="col-sm-7">Menampilkan Peta untuk </dd>
+      </dl>
+    </div>
+  </div>
+</div>
+{% endblock %}
