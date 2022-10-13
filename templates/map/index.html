@@ -80,13 +80,14 @@
         });
         p.appendChild(ol);
         cText.append(p);
-        ol = document.createElement('ol');
-        ol.classList.add('list-unstyled');
+        ol = document.createElement('div');
+        //ol.classList.add('');
         clayer.forEach((e, i, a) => {
-          const li = document.createElement('li');
-          li.innerHTML = `<i class='bi bi-eye me-2'></i> ${e[0]}`;
-          li.classList.add('mt-2');
-          li.style.cursor = 'pointer';
+          const li = document.createElement('div');
+          li.innerHTML = `<input class="form-check-input" type="radio" name="model-genangan" id="id_${e[0]}" value="${e[0]}">
+          <label class="form-check-label" for="id_${e[0]}">${e[0]}</label>`;
+          li.classList.add('form-check');
+          //li.style.cursor = 'pointer';
           li.addEventListener('click', (ev) => {
             // show/hide layer
             console.log(e[1])
@@ -116,6 +117,9 @@
           },
         });
 
+        map.data.loadGeoJson(
+    "http://localhost:3003/static/map/break.geojson"
+  );
         let wadukLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/logung.kml', {preserveViewport: true,map: map});
 //      let siagaLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/siaga.kml', {preserveViewport: true,map: map});
 //      let awasLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/awas.kml', {preserveViewport: true,map: map});
