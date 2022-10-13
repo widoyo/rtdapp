@@ -66,7 +66,7 @@ def create_app(config_class=Config):
          
     @app.context_processor
     def inject_today_date():
-        return {'today_date': datetime.datetime.today()}
+        return {'today_date': datetime.date.today()}
     
 
     @app.route('/petunjuk')

@@ -7,6 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <style>
       #map {
         height: 100%;
@@ -23,92 +24,116 @@
   <body>
     <header class="bg-dark text-white">
       <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <div class="container">
-            <a class="navbar-brand" href="#">EWS Bendungan Logung</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-              <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                <li class="nav-item px-2">
-                  <a class="nav-link" aria-current="page" href="/">Home</a>
-                </li>
-                <li class="nav-item dropdown px-2">
-                  <a class="nav-link dropdown-toggle" role="button" id="dropdownRtdMenuLink" href="#" data-bs-toggle="dropdown" aria-expanded="false">Rencana Tindak Darurat</a>
-                  <ul class="dropdown-menu" araia-labelledby="dropdownRtdMenuLink">
-                    <li><a class="dropdown-item navlink" href="/rtd/about">Tentang Bendungan Logung</a>
-                    </li>
-                    <li><a class="dropdown-item navlink" href="/rtd/indikasi">Indikasi Darurat</a>
-                    </li>
-                    <li><a class="dropdown-item navlink" href="/rtd/tanggungjawab">Tanggung Jawab</a>
-                    </li>
-                    <li><a class="dropdown-item navlink" href="/rtd/arusinformasi">Arus Informasi</a>
-                    </li>
-
-                  </ul>
-                </li>
-                <li class="nav-item dropdown px-2">
-                  <a class="nav-link dropdown-toggle" role="button" id="dropdownMapMenuLink" href="#" data-bs-toggle="dropdown" aria-expanded="false">Peta</a>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMapMenuLink">
-                    <li><a href="/map?show=bendungan" class="dropdown-item navlink">Bendungan Logung</a></li>
-                    <li><a href="/map?show=genangan" class="dropdown-item navlink">Genangan</a></li>
-                    <li><a href="/map?show=pengungsian" class="dropdown-item navlink">Evakuasi</a></li>
-                    <li><a href="/map?show=hidrologi" class="dropdown-item navlink">Pos Hidrologi</a></li>
-                  </ul>
-                </li>
-                <li class="nav-item px-2">
-                  <a class="nav-link" href="/tv">TV</a>
-                </li>
-                </ul>
-                <ul class="navbar-nav">
-                {% if current_user.is_authenticated %}
-                <li class="nav-item dropdown">
-                  <a href="#" class="nav-link dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">{{ current_user.username }}</a>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    {% if current_user.role == 2 %}
-                    <li><a href="/admin/pos/{{ current_user.pos_id }}" class="dropdown-item navlink">Data Hidrologi</a></li>
-                    {% else %}
-                    <li><a href="/admin/users" class="dropdown-item navlink">User</a></li>
-                    {% endif %}
-                    <li>
-                      <hr class="dropdown-divider">
-                    </li>
-                    <li><a href="/logout" class="dropdown-item navlink">Logout</a></li>   
-                  </ul>
-                </li>
-              {% else %}
-                <li class="nav-item">
-                  <a class="nav-link btn btn-outline-secondary py-1" href="/login">Login</a>
-                </li>
-                {% endif %}
-              </ul>
-            </div>
-          </div>
-        </nav>        
+        {% include '_nav.html' %}
       </div>
     </header>
     <div class="w-100 h-100" id="map">hello</div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key={{GMAP_KEY}}&callback=initMap&v=weekly"
-      async
-    ></script>
     <script>
       let map;
 
+      const clayer = [
+          ['Siap', 'siaga'],
+          ['Siaga', 'awas'],
+          ['Awas', 'puncak'],
+          ['break', 'break']
+        ];
+
+      const td_util = [
+        ['Pos Pengungsian', 'a'],
+        ['Jembatan', 'b']
+      ];
+
+      // Tambah genangan break
+      // tambah usulan alat untuk EWS Spillway limpas
+      /*
+
+      */
+      //const mylayers = {siaga: 'Siap', 'Siaga', 'Awas'}
+      function WarningControl(controlDiv, map) {
+        const cUI = document.createElement('div');
+        cUI.style.backgroundColor = "#fefefe";
+        cUI.style.marginRight = '8px';
+        cUI.style.padding = "12px";
+        cUI.title = "Silakan pilih";
+        controlDiv.appendChild(cUI);
+
+        const cText = document.createElement('div');
+        cText.style.color = "#666";
+        cText.style.fontFamily = 'Roboto, Arial, sans-serif';
+        cText.style.fontSize = '16px';
+
+        let p = document.createElement('p');
+        p.innerHTML = `<b>Tindak Darurat</p>`;
+        let ol = document.createElement('ol');
+        ol.classList.add('list-unstyled');
+
+        td_util.forEach((e, i, a) => {
+          let li = document.createElement('li');
+          li.innerHTML = `<i class='bi bi-eye me-2'></i> ${e[0]}`;
+          li.classList.add('mt-2');
+          li.style.cursor = 'pointer';
+          li.addEventListener('click', (ev) => {
+            console.log(e[1]);
+          });
+          ol.appendChild(li);
+        });
+        p.appendChild(ol);
+        cText.append(p);
+        ol = document.createElement('ol');
+        ol.classList.add('list-unstyled');
+        clayer.forEach((e, i, a) => {
+          const li = document.createElement('li');
+          li.innerHTML = `<i class='bi bi-eye me-2'></i> ${e[0]}`;
+          li.classList.add('mt-2');
+          li.style.cursor = 'pointer';
+          li.addEventListener('click', (ev) => {
+            // show/hide layer
+            console.log(e[1])
+          });
+          ol.appendChild(li);
+        });
+
+        //cText.innerHTML = "<div><b>Pos</b><span id='ly_pos_pengungsian'><i class='bi bi-eye'></i></span>  Pengungsian\
+        //  </div><br>\
+        //<div><b>Model Genangan</b><br><ol class='list-unstyled'><li id='ly_siaga' class='mt-2'><i class='bi bi-eye'></i> Awas</li><li id='ly_awas' class='mt-2'><i class='bi bi-eye'></i> Siaga</li><li id='ly_puncak' class='mt-2'><i class='bi bi-eye-slash'></i> Siap</li></ol></div>";
+        p = document.createElement('p');
+        p.innerHTML = `<b>Model Genangan</b>`;
+        cText.appendChild(p);
+        cText.appendChild(ol);
+        cUI.appendChild(cText);
+        //cUI.addEventListener('click', (e) => { console.log(e.target)});
+      }
       function initMap() {
         map = new google.maps.Map(document.getElementById("map"), {
           center: { lat: -6.7569811, lng: 110.921794 }, 
           zoom: 11,
           mapTypeControl: true,
+          //mapTypeId: 'terrain',
           mapTypeControlOptions: {
             style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
             position: google.maps.ControlPosition.TOP_RIGHT,
           },
         });
+
+        let wadukLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/logung.kml', {preserveViewport: true,map: map});
+//      let siagaLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/siaga.kml', {preserveViewport: true,map: map});
+//      let awasLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/awas.kml', {preserveViewport: true,map: map});
+//      let puncakLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/puncak.kml', {preserveViewport: true,map: map});
+
+
+        const mcdiv = document.createElement('div');
+
+        WarningControl(mcdiv, map);
+        //const ly_pengungsian = document.getElementById('ly_pos_pengungsian');
+        //ly_pengungsian.addEventListener('click', ()=>{console.log('clicked')});
+        map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(mcdiv);
       }
     </script>
-  </body>
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key={{GMAP_KEY}}&callback=initMap&v=weekly"
+    async
+  ></script>
+</body>
   </html>
   

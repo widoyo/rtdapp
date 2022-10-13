@@ -48,7 +48,7 @@
         </div>
         <div class="mb-3">
           <input type="submit" class="btn btn-primary" value="Simpan">
-          <a href="#" class="btn btn-default">Batal</a>
+          <a href="javascript:history.back();" class="btn btn-default">Batal</a>
         </div>
       </form>
       <table class="table">
@@ -64,10 +64,10 @@
         {% for u in poses %}
         <tr>
           <td>{{ loop.index }}</td>
-          <td>{{ u.nama }}</td>
-          <td>{{ u.desa }}, {{ u.kecamatan }}, {{ u.kabupaten }}</td>
-          <td class="text-end">+{{ u.elevasi }}</td>
-          <td>{{ u.lonlat }}</td>
+          <td><span class="editable" data-obj="pengungsian" data-name="nama" data-pk={{ u.id }}>{{ u.nama }}</span></td>
+          <td><span class="editable" data-obj="pengungsian" data-name="desa" data-pk={{ u.id }}>{{ u.desa }}</span>, <span class="editable" data-obj="pengungsian" data-name="kecamatan" data-pk={{ u.id }}>{{ u.kecamatan }}</span>, <span class="editable" data-obj="pengungsian" data-name="kabupaten" data-pk={{ u.id }}>{{ u.kabupaten }}</span></td>
+          <td class="text-end">+<span class="editable" data-obj="pengungsian" data-name="elevasi" data-pk={{ u.id }}>{{ u.elevasi }}</span></td>
+          <td><span class="editable" data-obj="pengungsian" data-name="lonlat" data-pk={{ u.id }}>{{ u.lonlat }}</span></td>
         </tr>
         {% endfor %}
       </table>
@@ -75,4 +75,29 @@
     <div class="col-2"></div>
   </div>
 </div>
+{% endblock %}
+{% block extra_head %}
+<style>
+  .editable {
+    cursor: pointer;
+    text-decoration: underline dotted gray;
+  }
+</style>
+{% endblock %}
+{% block js_foot %}
+<script src="/static/js/dark-editable.js"></script>
+<script>
+const editable = document.querySelectorAll('.editable')
+let i = 0;
+for (i=0; i < editable.length; i++) {
+  new DarkEditable(editable[i], {
+    url: '/api/update',
+    success: (resp, newVal) => {
+      if (resp.status == 'error') {
+        return resp.msg
+      }
+    }
+  })
+}
+</script>
 {% endblock %}

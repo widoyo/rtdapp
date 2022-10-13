@@ -48,7 +48,7 @@
 {% endblock %}
 {% block js_foot %}
 <script>
-document.addEventListener('pjax:success', function() {
+document.addEventListener('DOMContentLoaded', function() {
   console.log('pjax:success')
   var colors = {'no': 'bg-success', 'ab': 'bg-secondary', 'wa': 'bg-warning', 'si': 'bg-danger', 'aw': 'bg-danger'}
     var kondisi = document.getElementsByClassName('kondisi');

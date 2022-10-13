@@ -29,76 +29,7 @@
   <body>
     <header class="text-white mb-4" style="background-color: #232368;">
       <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #232368">
-          <div class="container">
-            <a class="navbar-brand" href="#">EWS Bendungan Logung</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-              <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                <li class="nav-item px-2">
-                  <a class="nav-link" aria-current="page" href="/">Home</a>
-                </li>
-                <li class="nav-item px-2">
-                  <a class="nav-link" aria-current="page" href="/status">Status</a>
-                </li>
-                <li class="nav-item dropdown px-2">
-                  <a class="nav-link dropdown-toggle" role="button" id="dropdownRtdMenuLink" href="#" data-bs-toggle="dropdown" aria-expanded="false">Rencana Tindak Darurat</a>
-                  <ul class="dropdown-menu" araia-labelledby="dropdownRtdMenuLink">
-                    <li><a class="dropdown-item navlink" href="/rtd/about">Tentang Bendungan Logung</a>
-                    </li>
-                    <li><a class="dropdown-item navlink" href="/rtd/indikasi">Deteksi Darurat</a>
-                    </li>
-                    <li><a class="dropdown-item navlink" href="/rtd/tanggungjawab">Tanggung Jawab</a>
-                    </li>
-                    <li><a class="dropdown-item navlink" href="/rtd/arusinformasi">Arus Informasi</a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-item dropdown px-2">
-                  <a class="nav-link dropdown-toggle" role="button" id="dropdownMapMenuLink" href="#" data-bs-toggle="dropdown" aria-expanded="false">Peta</a>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMapMenuLink">
-                    <li><a href="/map?show=bendungan" class="dropdown-item navlink">Bendungan Logung</a></li>
-                    <li><a href="/map?show=pengungsian" class="dropdown-item navlink">Evakuasi</a></li>
-                    <li><a href="/map?show=hidrologi" class="dropdown-item navlink">Pos Hidrologi</a></li>
-                  </ul>
-                </li>
-                <li class="nav-item px-2">
-                  <a class="nav-link" href="/tv">TV</a>
-                </li>
-                </ul>
-                <ul class="navbar-nav">
-                {% if current_user.is_authenticated %}
-                <li class="nav-item dropdown">
-                  <a href="#" class="nav-link dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Data</a>
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                    {% if current_user.role == 1 %}
-                    <li><a href="/admin" class="dropdown-item navlink">Admin</a></li>
-                    <li class="dropdown-divider"></li>
-                    <li><a href="/admin/user" class="dropdown-item navlink">User</a></li>
-                    <li><a href="/admin/pos" class="dropdown-item navlink">Pos Hidrologi</a></li>
-                    <li><a href="/admin/pengungsian" class="dropdown-item navlink">Pos Pengungsian</a></li>
-                    {% elif current_user.role == 2 %}
-                    <li><a href="/admin/pos/{{ current_user.pos_id }}" class="dropdown-item navlink">Data Hidrologi</a></li>
-                    {% endif %}
-                  </ul>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">{{ current_user.username }}</a>
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                    <li><a href="/logout" class="dropdown-item navlink">Logout</a></li>   
-                  </ul>
-                </li>
-              {% else %}
-                <li class="nav-item">
-                  <a class="nav-link btn btn-outline-light py-1" href="/login">Login</a>
-                </li>
-                {% endif %}
-              </ul>
-            </div>
-          </div>
-        </nav>        
+{% include '_nav.html' %}
       </div>
       <div class="container-fluid" style="background-color: #fb0;">
         <div class="row">
@@ -159,14 +90,19 @@
     <!-- Optional JavaScript; choose one of the two! -->
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="/static/js/pjax.min.js"></script>
+    <!--<script src="/static/js/pjax.min.js"></script>-->
     <script>
       document.addEventListener("DOMContentLoaded", function() {
         // Init Pjax instance
+        /*
         pjax = new Pjax({
           selectors: ["title", "header", ".content"],
           cacheBust: true
         });
+        document.addEventListener('pjax:error', function(e) {
+          console.log(e.options);
+        });
+        */
         let topbutton = document.getElementById('btn-back-to-top');
 
         window.onscroll = function () {

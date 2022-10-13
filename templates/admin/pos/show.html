@@ -56,9 +56,20 @@
         </div>
         </div>
         <div class="mb-3">
+          {{ pos.tipe }}
+          <label for="ch" class="form-label">Curah Hujan (mm)</label>
+          <input type="text" name="ch" id="ch" class="form-control text-end" aria-describedby="chHelp">
+          <div id="chHelp" class="form-text">Curah hujan sehari lalu, dalam milimeter</div>
+        </div>
+        <div class="mb-3">
           <label for="tma" class="form-label">TMA (Meter)</label>
           <input type="text" name="tma" id="tma" class="form-control text-end" aria-describedby="tmaHelp">
           <div id="tmaHelp" class="form-text">Tinggi Muka Air (min 84, max 97)</div>
+        </div>
+        <div class="mb-3">
+          <label for="vol" class="form-label">Volume (Juta M<sup>3</sup>)</label>
+          <input type="text" name="vol" id="vol" class="form-control text-end" aria-describedby="volHelp">
+          <div id="volHelp" class="form-text">Volume Air pada tampungan</div>
         </div>
         <input type="submit" class="btn btn-primary" value="Kirim">
         <a href="#form-add-manual" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="form-add-manual" class="btn btn-outline-secondary">Batal</a>
@@ -66,11 +77,11 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Tanggal</th>
-            <th>Jam</th>
-            <th>Curah Hujan</th>
-            <th>TMA</th>
-            <th>Volume</th>
+            <th class="align-top">Tanggal</th>
+            <th class="align-top">Jam</th>
+            <th>Curah Hujan<br><span class="text-muted fw-light">mm</span></th>
+            <th>TMA<br><span class="text-muted fw-light">mdpl</span></th>
+            <th>Volume<br><span class="text-muted fw-light">Juta Meter<sup>3</sup></span></th>
           </tr>
         </thead>
         <tbody>
@@ -78,9 +89,9 @@
           <tr>
             <td>{{ m.sampling.date() }}</td>
             <td>{{ m.sampling.time() }}</td>
-            <td>{{ m.curahhujan }}</td>
-            <td>{{ m.tma }}</td>
-            <td>{{ m.volume }}</td>
+            <td class="text-end row-ch">{{ m.ch }}</td>
+            <td class="text-end row-tma">{{ m.tma }}</td>
+            <td class="text-end row-vol">{{ m.vol }}</td>
           </tr>
           {% else %}
           <tr>

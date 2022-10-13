@@ -22,7 +22,7 @@
       <div class="row mb-3">
         <div class="col">
         <h2>Kondisi Tampungan</h2>
-          <p>TMA Waduk: +{{ tma_logung.0.tma }} MDPL <span id="sampling" data-sampling={{tma_logung.0.sampling}}></span> <i id="tma_trend" class="bi bi-triangle-fill text-success go-down"></i>, Volume Tampungan: ? M<sup>3</sup></p>
+          <p>TMA Waduk: +{{ tma_logung.0.tma }} MDPL <span id="sampling" data-sampling={{tma_logung.0.sampling}}></span> <i id="tma_trend" class="bi bi-triangle-fill text-success go-down"></i>, <!--Volume Tampungan: ? M<sup>3</sup>--></p>
           <p>Muka Air Normal: +89,5 m</p>
         </div>
         <div class="col">
@@ -39,8 +39,15 @@
         </div>
       </div>
     </div>
-    <div class="w-100 my-0">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="1" d="M0,32L40,80C80,128,160,224,240,234.7C320,245,400,171,480,149.3C560,128,640,160,720,149.3C800,139,880,85,960,96C1040,107,1120,181,1200,176C1280,171,1360,85,1400,42.7L1440,0L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path></svg>    </div>
+    <div class="w-100 my-0 bg-image h-100 text-center text-light" style="background-image: url(/static/img/logung_view_1.jpeg);background-repeat: no-repeat;background-size: cover;">
+    <h1 class="py-5 my-5">&nbsp;</h1>
+    <h1 class="py-5 my-5">Bendungan Logung</h1>
+    <h1 class="py-5 my-5">&nbsp;</h1>
+    <h1 class="py-5 my-5">&nbsp;</h1>
+    <h1 class="py-5 my-5">&nbsp;</h1>
+    <h1 class="py-5 my-5">&nbsp;</h1>
+    <h1 class="py-5 my-5">&nbsp;</h1>
+    </div>
     <div class="container mt-5">
       <div class="row mb-5">
         <div id="rtd" class="col text-center">
@@ -62,8 +69,8 @@
         <div class="col">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title mb-4">Klasifikasi Darurat</h5>
-              <p class="card-text"><b>Kondisi abnormal</b></p>
+              <h5 class="card-title mb-4">Indikasi Masalah pada Bendungan</h5>
+              <p class="card-text">Untuk mengetahui problem sesungguhnya, perlu dilakukan investigasi dan evaluasi keamanan bendungan.</p>
             </div>
           </div>
           <h4></h4>
@@ -95,13 +102,13 @@
     document.addEventListener("DOMContentLoaded", function() {
       dayjs.locale('id');
       dayjs.extend(window.dayjs_plugin_relativeTime);
-    });
-    document.addEventListener('pjax:success', function() {
       var colors = {'no': 'bg-success', 'ab': 'bg-secondary', 'wa': 'bg-warning', 'si': 'bg-danger', 'aw': 'bg-danger'}
       var kondisi = document.getElementsByClassName('kondisi');
       for (var i=0; i < kondisi.length; i++) {
         kondisi[i].classList.add(colors[kondisi[i].innerText.substring(0,2).toLowerCase()])
       }
+    });
+    document.addEventListener('pjax:success', function() {
   }, false);
 </script>
 {% endblock %}

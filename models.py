@@ -8,9 +8,9 @@ db = FlaskDB()
 
 SIAGA_LOGUNG = {
     'puncak': 94,
-    'awas': 93.75,
-    'siaga': 92.75,
-    'spillway': 88.5
+    'awas': 93.75, # merah
+    'siaga': 92.75, # Kuning
+    'spillway': 88.5 # Hijau
 }
 
 class Pos(db.Model):
@@ -25,6 +25,7 @@ class Pos(db.Model):
     sh = pw.FloatField(null=True)
     sk = pw.FloatField(null=True)
     sm = pw.FloatField(null=True)
+    is_aktif = pw.BooleanField(default=False)
     cdate = pw.DateTimeField(default=datetime.datetime.now)
     mdate = pw.DateTimeField(null=True)
 
@@ -149,8 +150,11 @@ class IndikatorSiaga(db.Model):
     
     
 class StatusLog(db.Model):
-    tanggal = pw.DateField()
+    tanggal = pw.DateTimeField()
     kategori = pw.IntegerField()
     kondisi = pw.IntegerField()
     catatan = pw.CharField()
     user = pw.CharField()
+    cdate = pw.DateTimeField(default=datetime.datetime.now)
+    mdate = pw.DateTimeField(null=True)
+    

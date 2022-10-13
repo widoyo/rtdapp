@@ -91,11 +91,13 @@ def index():
             form.populate_obj(status_baru)
             status_baru.save()
             flash('Sukses ')
-            return redirect(url_for('admin'))
+            return redirect('/admin')
+        else:
+            flash(form.errors)
     else:
         form = SiagaForm(**{'user': current_user.username})
     status_siaga = StatusLog.select(fn.Max(StatusLog.tanggal).alias('tanggal'),
-                                    StatusLog.kategori, StatusLog.kondisi).group_by(StatusLog.kategori)
+                                    StatusLog.kategori, StatusLog.kondisi).group_by(StatusLog.kategori).order_by(StatusLog.id.desc())
     status_siaga = [{'tanggal': s.tanggal, 'kategori': dict(KATEGORI_SIAGA)[s.kategori], 'kondisi': dict(KONDISI_SIAGA)[s.kondisi]} for s in status_siaga]
     return render_template('/admin/index.html', siaga_form=form, status_siaga=status_siaga)
 
