@@ -1,9 +1,16 @@
-from flask import Blueprint, request
-
-from rtdapp.models import db
+from flask import Blueprint, request, jsonify
+from peewee import fn
+from rtdapp.models import db, StatusLog, KATEGORI_SIAGA, KONDISI_SIAGA
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 
+
+@bp.route('status')
+def status():
+    status_siaga = StatusLog.select(fn.Max(StatusLog.tanggal).alias('tanggal'),
+                                    StatusLog.kategori, StatusLog.kondisi).group_by(StatusLog.kategori).order_by(StatusLog.kondisi.desc()).limit(1)
+    status_siaga = [{'tanggal': s.tanggal, 'kategori': dict(KATEGORI_SIAGA)[s.kategori], 'kondisi': dict(KONDISI_SIAGA)[s.kondisi]} for s in status_siaga]
+    return jsonify(status_siaga)
 
 @bp.route('update', methods=['POST'])
 def update():

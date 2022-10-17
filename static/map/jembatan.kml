@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="jembatan" id="jembatan">
+	<SimpleField name="type" type="string"></SimpleField>
+	<SimpleField name="nama" type="string"></SimpleField>
+	<SimpleField name="jarak" type="string"></SimpleField>
+	<SimpleField name="desa" type="string"></SimpleField>
+	<SimpleField name="kecamatan" type="string"></SimpleField>
+</Schema>
+<Folder><name>jembatan</name>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#jembatan">
+		<SimpleData name="type">jembatan</SimpleData>
+		<SimpleData name="nama">Bendung Logung</SimpleData>
+		<SimpleData name="jarak">Km 3+786</SimpleData>
+		<SimpleData name="desa">Tanjung Rejo</SimpleData>
+		<SimpleData name="kecamatan">Jekulo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>110.9189533,-6.7804257</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#jembatan">
+		<SimpleData name="type">jembatan</SimpleData>
+		<SimpleData name="nama">Jembatan Klaling</SimpleData>
+		<SimpleData name="jarak">Km 4+308</SimpleData>
+		<SimpleData name="desa">Tanjung Rejo</SimpleData>
+		<SimpleData name="kecamatan">Jekulo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>110.91564389814,-6.78392163602294</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#jembatan">
+		<SimpleData name="type">jembatan</SimpleData>
+		<SimpleData name="nama">Jembatan Patihan</SimpleData>
+		<SimpleData name="jarak">Km 6+850</SimpleData>
+		<SimpleData name="desa">Tanjung Rejo</SimpleData>
+		<SimpleData name="kecamatan">Jekulo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>110.914954886781,-6.78560359382198</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#jembatan">
+		<SimpleData name="type">jembatan</SimpleData>
+		<SimpleData name="nama">Jembatan Karang</SimpleData>
+		<SimpleData name="jarak">Km 7+410</SimpleData>
+		<SimpleData name="desa">Jekulo</SimpleData>
+		<SimpleData name="kecamatan">Jekulo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>110.915485999479,-6.83436355723097</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#jembatan">
+		<SimpleData name="type">jembatan</SimpleData>
+		<SimpleData name="nama">Jembatan Jekulo</SimpleData>
+		<SimpleData name="jarak">Km 8+107</SimpleData>
+		<SimpleData name="desa">Jekulo</SimpleData>
+		<SimpleData name="kecamatan">Jekulo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>110.914796988119,-6.8364444040121</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#jembatan">
+		<SimpleData name="type">jembatan</SimpleData>
+		<SimpleData name="nama">Jembatan Sadang 1</SimpleData>
+		<SimpleData name="jarak">Km 9+460</SimpleData>
+		<SimpleData name="desa">Sadang</SimpleData>
+		<SimpleData name="kecamatan">Jekulo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>110.914731355408,-6.84628870308587</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#jembatan">
+		<SimpleData name="type">jembatan</SimpleData>
+		<SimpleData name="nama">Jembatan Sadang 2</SimpleData>
+		<SimpleData name="jarak">Km 10+0</SimpleData>
+		<SimpleData name="desa">Sadang</SimpleData>
+		<SimpleData name="kecamatan">Jekulo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>110.916104646323,-6.84929265186672</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#jembatan">
+		<SimpleData name="type">jembatan</SimpleData>
+		<SimpleData name="nama">Jembatan Sadang 3</SimpleData>
+		<SimpleData name="jarak">Km 10+375</SimpleData>
+		<SimpleData name="desa">Sadang</SimpleData>
+		<SimpleData name="kecamatan">Jekulo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>110.915836425441,-6.84935656546507</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#jembatan">
+		<SimpleData name="type">jembatan</SimpleData>
+		<SimpleData name="nama">Jembatan Langenharjo</SimpleData>
+		<SimpleData name="jarak">Km 30+0</SimpleData>
+		<SimpleData name="desa">Langenharjo</SimpleData>
+		<SimpleData name="kecamatan">Margorejo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>111.034613195014,-6.7838076047287</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>

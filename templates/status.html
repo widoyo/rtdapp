@@ -20,7 +20,7 @@
           <tr>
             <th>No</th>
             <th>Waktu Perubahan</th>
-            <th>Indikasi</th>
+            <th colspan="2">Indikasi / Parameter</th>
             <th>Uraian Keadaan</th>
             <th>Status</th>
           </tr>
@@ -30,7 +30,8 @@
           <tr>
             <td>{{ loop.index }}</td>
             <td>{{ s.tanggal }}</td>
-            <td>{{ s.kategori }}</td>
+            <td><span class="indikasi indikasi-{{ s.kategori_id }} me-1">{{ s.kategori_id }}</span></td>
+            <td>{{ s.kategori|upper }}</td>
             <td>{{ s.catatan }}</td>
             <td><span class="badge kondisi">{{ s.kondisi }}</span></td>
           </tr>
@@ -45,6 +46,43 @@
     </div>
     </div>
 </div>
+{% endblock %}
+{% block extra_head %}
+<style>
+  .indikasi-1 {
+    background: #9ec5fe;
+  }
+  .indikasi-2 {
+    background: #c29ffa;
+  }
+  .indikasi-3 {
+    background: #c5b3e6; 
+  }
+  .indikasi-4 {
+    background: #efadce;
+  }
+  .indikasi-5 {
+    background: #f1aeb5;
+  }
+  .indikasi-6 {
+    background: #fecba1;
+  }
+  .indikasi-7 {
+    background: #ffe69c;
+  }
+  .indikasi-8 {
+    background: #a3cfbb;
+  }
+  .indikasi-9 {
+    background: #a6e9d5;
+  }
+  .indikasi {
+    padding: 6px 14px;
+    border-radius: 25px;
+    font-size: 24px;
+    /*color: #666;*/
+  }
+</style>
 {% endblock %}
 {% block js_foot %}
 <script>

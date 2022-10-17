@@ -15,8 +15,8 @@
     <div class="container">
       <div class="row text-center mb-2">
         <div class="col">
-          <h1 id="global_status" class="display-4 fw-bold text-success">Aman</h1>
-          <p class="text-muted">Status <span id="sampling_global_status" data-timestamp-global-status=1548381600 data-sampling-global-status={{ sampling_global_status }}></span></p>
+          <h1 id="global_status" class="display-4 fw-bold main-kondisi text-success">{{ status_.kondisi }}</h1>
+          <h4 class="text-muted fw-light">Parameter <b>{{ status_.kategori }}</b> <span id="sampling_global_status" data-timestamp-global-status=0 data-sampling-global-status="">{{ status_.tanggal }}</span></h4>
         </div>
       </div>
       <div class="row mb-3">
@@ -26,14 +26,18 @@
           <p>Muka Air Normal: +89,5 m</p>
         </div>
         <div class="col">
+        <p class="text-end"><i class="bi bi-list-ul"></i> <a href="/status">Riwayat Status</a></p>
           <ol class="list-group list-group-numbered">
         {% for s in status_siaga %}
+        {% if s.tanggal %}
         <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
           <div class="fw-bold">{{ s.kategori }}</div>
         </div>
+          <span class="me-3 tgl-status" title="{{ s.tanggal }}">{{ s.tanggal }}</span>          
           <span class="badge kondisi">{{ s.kondisi }}</span>
         </li>
+        {% endif %}
         {% endfor %}
       </ol>
         </div>
@@ -99,13 +103,25 @@
     document.addEventListener("DOMContentLoaded", function() {
       dayjs.locale('id');
       dayjs.extend(window.dayjs_plugin_relativeTime);
+      let s = document.getElementById('sampling_global_status');
+      let d = dayjs(s.innerHTML);
+      s.innerHTML = d.fromNow();
+
+      let ts = document.getElementsByClassName('tgl-status');
+      for (let i = 0; i < ts.length; i++) {
+        if (ts[i].innerHTML != 'None') {
+          let d = dayjs(ts[i].innerHTML);
+          ts[i].innerHTML = d.fromNow();
+        }
+      }
       var colors = {'no': 'bg-success', 'ab': 'bg-secondary', 'wa': 'bg-warning', 'si': 'bg-danger', 'aw': 'bg-danger'}
+      var tcolors = {'no': 'text-success', 'ab': 'text-secondary', 'wa': 'text-warning', 'si': 'text-danger', 'aw': 'text-danger'}
       var kondisi = document.getElementsByClassName('kondisi');
       for (var i=0; i < kondisi.length; i++) {
         kondisi[i].classList.add(colors[kondisi[i].innerText.substring(0,2).toLowerCase()])
       }
+      var kondisi = document.getElementsByClassName('main-kondisi')[0];
+      kondisi.classList.add(tcolors[kondisi.innerText.substring(0,2).toLowerCase()])
     });
-    document.addEventListener('pjax:success', function() {
-  }, false);
 </script>
 {% endblock %}

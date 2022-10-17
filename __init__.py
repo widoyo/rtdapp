@@ -100,6 +100,7 @@ def create_app(config_class=Config):
     def status():
         sts = StatusLog.select().order_by(StatusLog.tanggal.desc())
         sts = [{'tanggal': s.tanggal, 'kategori': dict(KATEGORI_SIAGA)[s.kategori],
+                'kategori_id': s.kategori,
                 'kondisi': dict(KONDISI_SIAGA)[s.kondisi],
                 'catatan': s.catatan} for s in sts]
         return render_template('status.html', statuslog=sts)
@@ -110,9 +111,12 @@ def create_app(config_class=Config):
         pda_logung = Pos.get_by_id(1)
         tma_manual = pda_logung.manuals.order_by(Manual.sampling.desc()).limit(2)
         status_siaga = StatusLog.select(fn.Max(StatusLog.tanggal).alias('tanggal'),
-                                        StatusLog.kategori, StatusLog.kondisi).group_by(StatusLog.kategori)
+                                        StatusLog.kategori, StatusLog.kondisi).group_by(StatusLog.kategori).order_by(StatusLog.tanggal.desc())
         status_siaga = [{'tanggal': s.tanggal, 'kategori': dict(KATEGORI_SIAGA)[s.kategori], 'kondisi': dict(KONDISI_SIAGA)[s.kondisi]} for s in status_siaga]
-        return render_template('index.html', tma_logung=tma_manual, SIAGA_LOGUNG=SIAGA_LOGUNG, status_siaga=status_siaga)
+        status_ = StatusLog.select(fn.Max(StatusLog.tanggal).alias('tanggal'),
+                                        StatusLog.kategori, StatusLog.kondisi).group_by(StatusLog.kategori).order_by(StatusLog.kondisi.desc()).limit(1)
+        status_ = [{'tanggal': s.tanggal, 'kategori': dict(KATEGORI_SIAGA)[s.kategori], 'kondisi': dict(KONDISI_SIAGA)[s.kondisi]} for s in status_]
+        return render_template('index.html', tma_logung=tma_manual, SIAGA_LOGUNG=SIAGA_LOGUNG, status_siaga=status_siaga, status_=status_[0])
 
     def wants_json_response():
         return request.accept_mimetypes['application/json'] >= \
