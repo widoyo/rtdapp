@@ -30,13 +30,13 @@
     <div class="w-100 h-100" id="map">hello</div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script>
-      let map;
+      let map, wadukLayer, siagaLayer, puncakLayer, awasLayer, breakLayer;
 
       const clayer = [
-          ['Siap', 'siaga'],
-          ['Siaga', 'awas'],
-          ['Awas', 'puncak'],
-          ['break', 'break']
+          ['Siap (+88.5mdpl)', 'siaga'],
+          ['Siaga (+92.75mdpl)', 'puncak'],
+          ['Awas (+93.75mdpl)', 'awas'],
+          ['Dam Break', 'break']
         ];
 
       const td_util = [
@@ -89,8 +89,12 @@
           li.classList.add('form-check');
           //li.style.cursor = 'pointer';
           li.addEventListener('click', (ev) => {
-            // show/hide layer
-            console.log(e[1])
+            // hide layer
+            siagaLayer.setMap(null);
+            awasLayer.setMap(null);
+            puncakLayer.setMap(null);
+            breakLayer.setMap(null);
+            eval(`${e[1]}Layer`).setMap(map);
           });
           ol.appendChild(li);
         });
@@ -117,14 +121,14 @@
           },
         });
 
-        map.data.loadGeoJson(
-    "http://localhost:3003/static/map/break.geojson"
-  );
-        let wadukLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/logung.kml', {preserveViewport: true,map: map});
-//      let siagaLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/siaga.kml', {preserveViewport: true,map: map});
-//      let awasLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/awas.kml', {preserveViewport: true,map: map});
-//      let puncakLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/puncak.kml', {preserveViewport: true,map: map});
-
+        //map.data.loadGeoJson(
+    //"http://localhost:3003/static/map/break.geojson"
+  //);
+      wadukLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/logung.kml', {preserveViewport: true,map: map});
+      siagaLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/siaga.kml', {preserveViewport: true,map: null});
+      awasLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/awas.kml', {preserveViewport: true,map: null});
+      puncakLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/puncak.kml', {preserveViewport: true,map: null});
+      breakLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/break.kml', {preserveViewport: true,map: null});
 
         const mcdiv = document.createElement('div');
 
