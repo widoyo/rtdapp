@@ -16,7 +16,8 @@ class ManualForm(FlaskForm):
     tanggal = DateField('Tanggal', validators=[DataRequired()])
     jam = RadioField('Jam', choices=[('07', '07'), ('12', '12'), ('18', '18')])
     tma = FloatField('TMA')
-    curahhujan = FloatField('Curah Hujan')
+    ch = FloatField('Curah Hujan')
+    vol = FloatField()
     submit = SubmitField('Simpan')
     
 class SiagaForm(FlaskForm):

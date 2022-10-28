@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.0">
+    <Document>
+        <Placemark>
+            <name>Madrasah Ibtidiyah, SD 4 Ngembal Kulon</name>
+            <description>Ngembal Kulon, Jati, Kudus</description>
+            <Point>
+                <coordinates>-6.808698153,110.8805122,0.</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>SDN 5 Jepang, Kantor Kecamatan Mejobo</name>
+            <description>Jepang, Mejobo, Kudus</description>
+            <Point>
+                <coordinates>-6.826092876,110.8701759,0.</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>SDN 1 Jepang Pakis, Masjid Sabilul Muttaqin</name>
+            <description>Jepang Pakis , Mejobo , Kudus</description>
+            <Point>
+                <coordinates>-6.826481409,110.8612676,0.</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>SDN 1 Payaman, TK Pertiwi, Kantor Desa Payaman</name>
+            <description>Gulang, Mejobo, Kudus</description>
+            <Point>
+                <coordinates>-6.8363865,110.8682203,0.</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>SDN 4 Karangrowo, TK Karangrowo, Tanah Kosong</name>
+            <description>Payaman, Mejobo, Kudus</description>
+            <Point>
+                <coordinates>-6.865265745,110.8669989,0.</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>Masjid Cengkalsewu, Madrasah Cengkalsewu,Balai desa Cengkalsewu</name>
+            <description>Cengkalsewu, Sukolilo, Pati</description>
+            <Point>
+                <coordinates>-6.908728997,110.9621931,0.</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>Lapangan, Masjid Jami, RTQ Madin Miftahul Ulum</name>
+            <description>Gondoharum, Jekulo, Kudus</description>
+            <Point>
+                <coordinates>-6.802040658,110.9572051,0.</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>SDN 2 Gondoharum, MTs NU Ihyaul Ulum</name>
+            <description>Gondoharum, Jekulo, Kudus</description>
+            <Point>
+                <coordinates>-6.803465718,110.9623488,0.</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>SDN 03 Jambean Kidul, SDN 02 Jambean Kidul, Lapangan, Kantor Desa</name>
+            <description>Jambean Kidul, Margorejo, Pati</description>
+            <Point>
+                <coordinates>-6.80673671,110.9829715,0.</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>Lapangan, Kantor Desa Jimbaran</name>
+            <description>Jimbaran, Margorejo, Pati</description>
+            <Point>
+                <coordinates>-6.794954486,110.9925729,0.</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>SD 2 Ngemplak, Lapangan, SD 1Jetiskapuan</name>
+            <description>Jetiskapuan, Jati, Kudus</description>
+            <Point>
+                <coordinates>-6.852019585,110.83565,0.</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>SDN 1 Honggosoko, TK Honggosoko</name>
+            <description>Honggosoko, Jekulo, Kudus</description>
+            <Point>
+                <coordinates>-6.779298437,110.8910641,0.</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>SDN 3 Tanjungrejo</name>
+            <description>Tanjungrejo, Jekulo, Kudus</description>
+            <Point>
+                <coordinates>-6.764390349,110.9143863,0.</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>Lapangan</name>
+            <description>Tanjungrejo, Jekulo, Kudus</description>
+            <Point>
+                <coordinates>-6.780513172,110.9106331,0.</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>SDN 01 Klaling</name>
+            <description>Klaling, Jekulo , Kudus</description>
+            <Point>
+                <coordinates>-6.786263779,110.9224433,0.</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>SDN Mintobasuki 02, Kantor Mintobasuki, Masjid</name>
+            <description>Mintobasuki, Gabus, Pati</description>
+            <Point>
+                <coordinates>-6.772576506,111.0629733,0.</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>Tanah Lapang</name>
+            <description>Mustokaharjo, Gabus, Pati</description>
+            <Point>
+                <coordinates>-6.763050483,111.0513613,0.</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>Kantor Desan Babalan</name>
+            <description>Babalan, Gabus, Pati</description>
+            <Point>
+                <coordinates>-6.795989457,111.0468782,0.</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>Madrasah Misftahul Falah</name>
+            <description>Talun, Kayen, Pati</description>
+            <Point>
+                <coordinates>-6.861887337,110.9865296,0.</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>Sekolah Sirotul Huda</name>
+            <description>Wuwur, Gabus, Pati</description>
+            <Point>
+                <coordinates>-6.840161159,110.9963663,0.</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>Lapangan Bola, Kantor Desa Langenrejo, SDN 1 dan SDN 2 Langenrejo</name>
+            <description>Langenrejo, Margorejo, Pati</description>
+            <Point>
+                <coordinates>-6.778390396,111.0352809,0.</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>SDN 1 Penambuhan, Kantor Desa Penambuhan, Lapangan</name>
+            <description>Penambuhan, Margorejo, Pati</description>
+            <Point>
+                <coordinates>-6.783616059,111.0200897,0.</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>SMK Taruna Bangsa, SD Plosom Iang 02</name>
+            <description>Pantirejo, Gabus , Pati</description>
+            <Point>
+                <coordinates>-6.816202048,111.0209244,0.</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>Kampus STAIN</name>
+            <description>Ngembalrejo, Bae , Kudus</description>
+            <Point>
+                <coordinates>-6.804867555,110.8785597,0.</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark>
+            <name>Tanah Lapang, Lapangan Bola, SD 3 Terban</name>
+            <description>Terban, Jekulo, Kudus</description>
+            <Point>
+                <coordinates>-6.79266571,110.9395088,0.</coordinates>
+            </Point>
+        </Placemark>
+    </Document>
+</kml>

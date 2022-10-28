@@ -30,7 +30,7 @@
     <div class="w-100 h-100" id="map">hello</div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script>
-      let map, wadukLayer, siagaLayer, puncakLayer, awasLayer, breakLayer;
+      let map, wadukLayer, siagaLayer, puncakLayer, awasLayer, breakLayer, pengungsianLayer, jembatanLayer;
 
       const clayer = [
           ['Siap (+88.5mdpl)', 'siaga'],
@@ -40,8 +40,8 @@
         ];
 
       const td_util = [
-        ['Pos Pengungsian', 'a'],
-        ['Jembatan', 'b']
+        ['Pos Pengungsian', 'pengungsian'],
+        ['Jembatan', 'jembatan']
       ];
 
       // Tambah genangan break
@@ -111,8 +111,8 @@
       }
       function initMap() {
         map = new google.maps.Map(document.getElementById("map"), {
-          center: { lat: -6.7569811, lng: 110.921794 }, 
-          zoom: 11,
+          center: { lat: -6.7969811, lng: 110.921794 }, 
+          zoom: 12,
           mapTypeControl: true,
           //mapTypeId: 'terrain',
           mapTypeControlOptions: {
@@ -129,6 +129,12 @@
       awasLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/awas.kml', {preserveViewport: true,map: null});
       puncakLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/puncak.kml', {preserveViewport: true,map: null});
       breakLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/break.kml', {preserveViewport: true,map: null});
+      pengungsianLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/pengungsian.kml', {preserveViewport: true,map: map});
+      //jembatanLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/jembatan.kml', {preserveViewport: true,map: map});
+
+    //  jembatanLayer.addEventListener('click', (e) => {
+
+    //  });
 
         const mcdiv = document.createElement('div');
 
