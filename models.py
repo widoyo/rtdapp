@@ -101,6 +101,8 @@ class Pengungsian(db.Model):
     kecamatan = pw.CharField(null=True)
     kabupaten = pw.CharField(null=True)
     elevasi = pw.IntegerField(null=True)
+    kapasitas_tampung = pw.IntegerField(null=True)
+    fasilitas = pw.CharField(null=True)
     lonlat = pw.CharField(null=True)
     cdate = pw.DateTimeField(default=datetime.datetime.now)
     mdate = pw.DateTimeField(null=True)

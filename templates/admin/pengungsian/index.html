@@ -37,6 +37,16 @@
           <div id="kabupatenHelp" class="form-text">Nama Kabupaten.</div>
         </div>
         <div class="mb-3">
+          <label for="kapasitas" class="form-label">Kapasitas</label>
+          <input type="text" name="kapasitas" id="kapasitas" class="form-control" aria-describedby="kapasitasHelp">
+          <div id="kapasitasHelp" class="form-text">Kapasitas tampung</div>
+        </div>
+        <div class="mb-3">
+          <label for="fasilitas" class="form-label">Fasilitas</label>
+          <input type="text" name="fasilitas" id="fasilitas" class="form-control" aria-describedby="fasilitasHelp">
+          <div id="fasilitasHelp" class="form-text">Fasilitas yang tersedia</div>
+        </div>
+        <div class="mb-3">
           <label for="elevasi" class="form-label">Elevasi</label>
           <input type="text" name="elevasi" id="elevasi" class="form-control" aria-describedby="elevasiHelp">
           <div id="elevasiHelp" class="form-text">Ketinggian terhadap Muka Air Laut (meter).</div>
@@ -57,6 +67,8 @@
             <th>No</th>
             <th>Nama</th>
             <th>Desa, Kecamatan, Kabupaten</th>
+            <th>Kapasitas</th>
+            <th>Fasilitas</th>
             <th>Elevasi</th>
             <th>Koordinat</th>
           </tr>
@@ -66,6 +78,8 @@
           <td>{{ loop.index }}</td>
           <td><span class="editable" data-obj="pengungsian" data-name="nama" data-pk={{ u.id }}>{{ u.nama }}</span></td>
           <td><span class="editable" data-obj="pengungsian" data-name="desa" data-pk={{ u.id }}>{{ u.desa }}</span>, <span class="editable" data-obj="pengungsian" data-name="kecamatan" data-pk={{ u.id }}>{{ u.kecamatan }}</span>, <span class="editable" data-obj="pengungsian" data-name="kabupaten" data-pk={{ u.id }}>{{ u.kabupaten }}</span></td>
+          <td><span class="editable" data-obj="pengungsian" data-name="kapasitas_tampung" data-pk={{ u.id }}>{{ u.kapasitas_tampung }}</span></td>
+          <td><span class="editable" data-obj="pengungsian" data-name="fasilitas" data-pk={{ u.id }}>{{ u.fasilitas }}</span></td>
           <td class="text-end">+<span class="editable" data-obj="pengungsian" data-name="elevasi" data-pk={{ u.id }}>{{ u.elevasi }}</span></td>
           <td><span class="editable" data-obj="pengungsian" data-name="lonlat" data-pk={{ u.id }}>{{ u.lonlat }}</span></td>
         </tr>
