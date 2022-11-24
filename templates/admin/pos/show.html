@@ -55,22 +55,27 @@
             </div>
         </div>
         </div>
+        {% if pos.tipe == 1 or pos.id == 1 %}
         <div class="mb-3">
-          {{ pos.tipe }}
           <label for="ch" class="form-label">Curah Hujan (mm)</label>
-          <input type="text" name="ch" id="ch" class="form-control text-end" aria-describedby="chHelp">
+          <input type="number" name="ch" id="ch" value="0" class="form-control text-end" aria-describedby="chHelp">
           <div id="chHelp" class="form-text">Curah hujan sehari lalu, dalam milimeter</div>
         </div>
+        {% endif %}
+        {% if pos.tipe == 2 %}
         <div class="mb-3">
           <label for="tma" class="form-label">TMA (Meter)</label>
-          <input type="text" name="tma" id="tma" class="form-control text-end" aria-describedby="tmaHelp">
-          <div id="tmaHelp" class="form-text">Tinggi Muka Air (min 84, max 97)</div>
+          <input type="number" step="0.1" name="tma" id="tma" class="form-control text-end" aria-describedby="tmaHelp">
+          <div id="tmaHelp" class="form-text">Tinggi Muka Air Logung (min 84, max 93.75)</div>
         </div>
+        {% endif %}
+        {% if pos.id == 1 %}
         <div class="mb-3">
-          <label for="vol" class="form-label">Volume (Juta M<sup>3</sup>)</label>
-          <input type="text" name="vol" id="vol" class="form-control text-end" aria-describedby="volHelp">
+          <label for="vol" class="form-label">Volume (Juta M<sup>3</sup>) <a href="javascript:">(hitung volume)</a></label>
+          <input type="text" readonly name="vol" id="vol" class="form-control text-end" aria-describedby="volHelp">
           <div id="volHelp" class="form-text">Volume Air pada tampungan</div>
         </div>
+        {% endif %}
         <input type="submit" class="btn btn-primary" value="Kirim">
         <a href="#form-add-manual" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="form-add-manual" class="btn btn-outline-secondary">Batal</a>
       </form>
@@ -81,7 +86,7 @@
             <th class="align-top">Jam</th>
             <th>Curah Hujan<br><span class="text-muted fw-light">mm</span></th>
             <th>TMA<br><span class="text-muted fw-light">mdpl</span></th>
-            <th>Volume<br><span class="text-muted fw-light">Juta Meter<sup>3</sup></span></th>
+            {% if pos.id == 1 %}<th>Volume<br><span class="text-muted fw-light">Juta Meter<sup>3</sup></span></th>{% endif %}
           </tr>
         </thead>
         <tbody>
@@ -91,7 +96,7 @@
             <td>{{ m.sampling.time() }}</td>
             <td class="text-end row-ch">{{ m.ch }}</td>
             <td class="text-end row-tma">{{ m.tma }}</td>
-            <td class="text-end row-vol">{{ m.vol }}</td>
+            {% if pos.id == 1 %}<td class="text-end row-vol">{{ m.vol }}</td>{% endif %}
           </tr>
           {% else %}
           <tr>
@@ -119,3 +124,29 @@
   </div>
 </div>
 {% endblock %}
+{% if current_user.pos.id == 1 %}
+{% block js_foot %}
+<script>
+  let e = document.getElementById('tma');
+  e.addEventListener('change', (e) => {
+    if (isNaN(e.target.value)) {
+      alert('Nilai TMA harus angka');
+      e.focus();
+    }
+    let vol = volume(e.target.value);
+    console.log('TMA: ', e.target.value);
+    console.log('VOL: ', vol);
+    let ev = document.getElementById('vol');
+    ev.value = vol;
+  });
+  const volume = (tma) => {
+    return -1.23784705416647 * Math.pow(tma, 0) + 0.148652766294826 * tma - 0.00340120100025765 * Math.pow(tma, 2) - 0.0000188399794393122 * Math.pow(tma, 3) + 0.000000769023798990446 * Math.pow(tma, 4);
+  };
+  // dari excel, SHEET '2019' : =-1.23784705416647*C11^0+0.148652766294826*C11-0.00340120100025765*C11^2-0.0000188399794393122*C11^3+0.000000769023798990446*C11^4
+  // 1.23784705416647*C11^0 \
+  //   +0.148652766294826*C11-0.00340120100025765*C11^2
+  //   -0.0000188399794393122*C11^3
+  //   +0.000000769023798990446*C11^4
+</script>
+{% endblock %}
+{% endif %}

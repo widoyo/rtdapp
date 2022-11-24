@@ -15,18 +15,25 @@
     <div class="container">
       <div class="row text-center mb-2">
         <div class="col">
-          <h1 id="global_status" class="display-4 fw-bold main-kondisi text-success">{{ status_.kondisi }}</h1>
-          <h4 class="text-muted fw-light">Parameter <b>{{ status_.kategori }}</b> <span id="sampling_global_status" data-timestamp-global-status=0 data-sampling-global-status="">{{ status_.tanggal }}</span></h4>
         </div>
       </div>
       <div class="row mb-3">
-        <div class="col">
-        <h2>Kondisi Tampungan</h2>
-          <p>TMA Waduk: +{{ tma_logung.0.tma }} MDPL <span id="sampling" data-sampling={{tma_logung.0.sampling}}></span> <i id="tma_trend" class="bi bi-triangle-fill text-success go-down"></i>, <!--Volume Tampungan: ? M<sup>3</sup>--></p>
-          <p>Muka Air Normal: +89,5 m</p>
+        <div class="col text-center">
+        <p>Tinggi Muka Air (TMA) Waduk</p>
+        <h1 class="display-4 fw-bold text-success">+{{ tma_logung.0.tma }} MDPL</h1>
+          <h4 class="text-muted fw-light">TMA Normal: +88.5mdpl, Siaga: +92.75mdpl, Awas: +93.75mdpl</h4>
         </div>
+        <div class="col text-center">
+        <p>Status Bendungan</p>
+          <h1 id="global_status" class="display-4 fw-bold main-kondisi text-success">{{ status_.kondisi }}</h1>
+          <h4 class="text-muted fw-light">Parameter <b>{{ status_.kategori }}</b></h4>
+          <div class="mb-4" id="sampling_global_status" data-timestamp-global-status=0 data-sampling-global-status="">{{ status_.tanggal }}</div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col"><div id="chart-containe"></div></div>
         <div class="col">
-        <p class="text-end"><i class="bi bi-list-ul"></i> <a href="/status">Riwayat Status</a></p>
+          <p class="text-end"><i class="bi bi-list-ul"></i> <a href="/status">Riwayat Status</a></p>
           <ol class="list-group list-group-numbered">
         {% for s in status_siaga %}
         {% if s.tanggal %}
@@ -39,7 +46,8 @@
         </li>
         {% endif %}
         {% endfor %}
-      </ol>
+        </ol>
+        </div>
         </div>
       </div>
     </div>
@@ -99,6 +107,26 @@
 <script src="/static/js/dayjs.min.js"></script>
 <script src="/static/js/relativeTime.js"></script>
 <script src="/static/js/id.js"></script>
+<script type="module">
+        import Chart from 'https://code.highcharts.com/es-modules/Core/Chart/Chart.js';
+        import LineSeries from 'https://code.highcharts.com/es-modules/Series/Line/LineSeries.js';
+        // Example to create a simple line chart in a div#container:
+        new Chart('chart-container', { 
+
+          series: [
+            { data: [{% for t in tma_logung %}{{ t.tma }},{% endfor %}] }
+          ], 
+          yAxis: {
+            plotLines: [{
+              color: 'red',
+              width: 2,
+              value: 97,
+              zIndex: 5
+            }
+            ]
+          }
+        });
+    </script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
       dayjs.locale('id');

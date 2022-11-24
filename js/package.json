@@ -1,0 +1,15 @@
+{
+  "name": "rtdapp",
+  "version": "1.0.0",
+  "description": "Javascript bundler, start with highcharts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Widoyo",
+  "license": "ISC",
+  "dependencies": {
+    "d": "^1.0.1",
+    "vite": "^3.2.2"
+  }
+}

@@ -109,7 +109,7 @@ def create_app(config_class=Config):
     @app.route('/')
     def home():
         pda_logung = Pos.get_by_id(1)
-        tma_manual = pda_logung.manuals.order_by(Manual.sampling.desc()).limit(2)
+        tma_manual = pda_logung.manuals.order_by(Manual.sampling.desc()).limit(30)
         status_siaga = StatusLog.select(fn.Max(StatusLog.tanggal).alias('tanggal'),
                                         StatusLog.kategori, StatusLog.kondisi).group_by(StatusLog.kategori).order_by(StatusLog.tanggal.desc())
         status_siaga = [{'tanggal': s.tanggal, 'kategori': dict(KATEGORI_SIAGA)[s.kategori], 'kondisi': dict(KONDISI_SIAGA)[s.kondisi]} for s in status_siaga]
