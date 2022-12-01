@@ -10,57 +10,83 @@
           <li class="breadcrumb-item active" aria-current="page">Pos Pengungsian</li>
         </ol>
       </nav>
-      <h1>Pengungsian <span class="fw-lighter">({{ poses|length }})</span> <a href="#form-add-pengungsian" class="btn btn-outline-secondary btn-sm" >Tambah</a></h1>
+      <h1>Pengungsian <span class="fw-lighter">({{ poses|length }})</span> <a href="#form-add-pengungsian" class="btn btn-outline-secondary btn-sm" data-bs-toggle="collapse" aria-controls="form-add-pengungsian">Tambah</a></h1>
     </div>
     </div>
   <div class="row">
-    <div class="col-10">
-      <form id="form-add-pengungsian" action="." method="POST" style="display: none">
+    <div class="col-6">
+      <form id="form-add-pengungsian" action="/admin/pengungsian" method="POST" class="collapse">
+        {{ form.hidden_tag() }}
         <div class="mb-3">
           <label for="nama" class="form-label">Nama Tempat</label>
           <input type="text" name="nama" id="nama" class="form-control" aria-describedby="namaHelp">
           <div id="namaHelp" class="form-text">Maksimum 50 karakter, unik, gunakan nama tempat, misalnya SD Negeri ...</div>
         </div>
+        <div class="row">
+          <div class="col">
         <div class="mb-3">
           <label for="desa" class="form-label">Desa</label>
           <input type="text" name="desa" id="desa" class="form-control" aria-describedby="desaHelp">
           <div id="desaHelp" class="form-text">Nama Desa / Kelurahan.</div>
         </div>
+        </div>
+        <div class="col">
         <div class="mb-3">
           <label for="kecamatan" class="form-label">Kecamatan</label>
           <input type="text" name="kecamatan" id="kecamatan" class="form-control" aria-describedby="kecamatanHelp">
           <div id="kecamatanHelp" class="form-text">Nama Kecamatan.</div>
         </div>
+      </div>
+        <div class="col">
         <div class="mb-3">
           <label for="kabupaten" class="form-label">Kabupaten</label>
           <input type="text" name="kabupaten" id="kabupaten" class="form-control" aria-describedby="kabupatenHelp">
           <div id="kabupatenHelp" class="form-text">Nama Kabupaten.</div>
         </div>
-        <div class="mb-3">
+      </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+      <div class="mb-3">
           <label for="kapasitas" class="form-label">Kapasitas</label>
           <input type="text" name="kapasitas" id="kapasitas" class="form-control" aria-describedby="kapasitasHelp">
           <div id="kapasitasHelp" class="form-text">Kapasitas tampung</div>
         </div>
+        </div>
+        <div class="col-8">
         <div class="mb-3">
           <label for="fasilitas" class="form-label">Fasilitas</label>
           <input type="text" name="fasilitas" id="fasilitas" class="form-control" aria-describedby="fasilitasHelp">
           <div id="fasilitasHelp" class="form-text">Fasilitas yang tersedia</div>
         </div>
-        <div class="mb-3">
+        </div>
+        </div>
+        <div class="row">
+          <div class="col">
+          <div class="mb-3">
           <label for="elevasi" class="form-label">Elevasi</label>
           <input type="text" name="elevasi" id="elevasi" class="form-control" aria-describedby="elevasiHelp">
           <div id="elevasiHelp" class="form-text">Ketinggian terhadap Muka Air Laut (meter).</div>
-        </div>
+          </div>
+          </div>
+          <div class="col">
         <div class="mb-3">
           <label for="lonlat" class="form-label">Koordinat (Longitute, Latitude)</label>
           <input type="text" name="lonlat" id="lonlat" class="form-control" aria-describedby="lonlatHelp">
           <div id="lonlatHelp" class="form-text">Koordinat pada bumi (dalam desimal).</div>
         </div>
+      </div>
+        </div>
         <div class="mb-3">
-          <input type="submit" class="btn btn-primary" value="Simpan">
-          <a href="javascript:history.back();" class="btn btn-default">Batal</a>
+          <input type="submit" id="submit" disabled class="btn btn-primary" value="Simpan">
+          <a href="#form-add-pengungsian" class="btn btn-default" data-bs-toggle="collapse">Batal</a>
         </div>
       </form>
+      </div>
+      <div class="col-6"></div>
+      </div>
+      <div class="row">
+        <div class="col-10">      
       <table class="table">
         <thead>
           <tr>
@@ -76,12 +102,12 @@
         {% for u in poses %}
         <tr>
           <td>{{ loop.index }}</td>
-          <td><span class="editable" data-obj="pengungsian" data-name="nama" data-pk={{ u.id }}>{{ u.nama }}</span></td>
-          <td><span class="editable" data-obj="pengungsian" data-name="desa" data-pk={{ u.id }}>{{ u.desa }}</span>, <span class="editable" data-obj="pengungsian" data-name="kecamatan" data-pk={{ u.id }}>{{ u.kecamatan }}</span>, <span class="editable" data-obj="pengungsian" data-name="kabupaten" data-pk={{ u.id }}>{{ u.kabupaten }}</span></td>
-          <td><span class="editable" data-obj="pengungsian" data-name="kapasitas_tampung" data-pk={{ u.id }}>{{ u.kapasitas_tampung }}</span></td>
-          <td><span class="editable" data-obj="pengungsian" data-name="fasilitas" data-pk={{ u.id }}>{{ u.fasilitas }}</span></td>
-          <td class="text-end">+<span class="editable" data-obj="pengungsian" data-name="elevasi" data-pk={{ u.id }}>{{ u.elevasi }}</span></td>
-          <td><span class="editable" data-obj="pengungsian" data-name="lonlat" data-pk={{ u.id }}>{{ u.lonlat }}</span></td>
+          <td><span class="editable" data-obj="pengungsian" data-name="nama" data-pk={{ u.id }} data-title="Nama">{{ u.nama }}</span></td>
+          <td><span class="editable" data-obj="pengungsian" data-name="desa" data-pk={{ u.id }} data-title="Desa">{{ u.desa }}</span>, <span class="editable" data-obj="pengungsian" data-name="kecamatan" data-pk={{ u.id }} data-title="Kecamatan">{{ u.kecamatan }}</span>, <span class="editable" data-obj="pengungsian" data-name="kabupaten" data-pk={{ u.id }} data-title="Kabupaten">{{ u.kabupaten }}</span></td>
+          <td><span class="editable" data-obj="pengungsian" data-name="kapasitas_tampung" data-pk={{ u.id }} data-title="Kapasitas tampung orang">{{ u.kapasitas_tampung }}</span></td>
+          <td><span class="editable" data-obj="pengungsian" data-name="fasilitas" data-pk={{ u.id }} data-title="Fasilitas umum: toilet, dapur">{{ u.fasilitas }}</span></td>
+          <td class="text-end">+<span class="editable" data-obj="pengungsian" data-name="elevasi" data-pk={{ u.id }} data-title="Elevasi (MDPL)">{{ u.elevasi }}</span></td>
+          <td><span class="editable" data-obj="pengungsian" data-name="lonlat" data-pk={{ u.id }} data-title="Latitude Longitude">{{ u.lonlat }}</span></td>
         </tr>
         {% endfor %}
       </table>
@@ -106,6 +132,7 @@ let i = 0;
 for (i=0; i < editable.length; i++) {
   new DarkEditable(editable[i], {
     url: '/api/update',
+    emptytext: '-',
     success: (resp, newVal) => {
       if (resp.status == 'error') {
         return resp.msg
@@ -113,5 +140,15 @@ for (i=0; i < editable.length; i++) {
     }
   })
 }
+  document.getElementById('nama').addEventListener('input', (e) => {
+    if (e.target.value.length < 4) {
+      document.getElementById('submit').disabled = true;
+    } else {
+      document.getElementById('submit').disabled = false;
+    }
+//    document.getElementById('username1').value = e.target.value.replace(/^[0-9a-zA-Z]/g, '')
+    console.log(e.target.value);
+  });
+
 </script>
 {% endblock %}

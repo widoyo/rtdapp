@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, flash, request, redirect, url_for
+from .models import KV
 
 bp = Blueprint('rtd', __name__, url_prefix='/rtd')
 
@@ -24,4 +25,5 @@ def tanggungjawab():
 
 @bp.route('/arusinformasi')
 def arusinformasi():
-    return render_template('rtd/arusinformasi.html')
+    ai = KV.get(KV.k=='img_arus_informasi')
+    return render_template('rtd/arusinformasi.html', img_arus_informasi=ai.v)

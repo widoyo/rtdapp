@@ -1,10 +1,15 @@
-import datetime
+import datetime, os
 from functools import wraps
-from flask import Blueprint, render_template, flash, request, redirect, url_for, abort
-from flask_login import login_required, current_user
-from peewee import fn
-from ..models import StatusLog, User, Pos, Pengungsian, Manual, KATEGORI_SIAGA, KONDISI_SIAGA
-from ..forms import PosForm, UserForm, ManualForm, SiagaForm
+
+from werkzeug.utils import secure_filename
+from flask import (Blueprint, abort, flash, redirect, render_template, request,
+                   url_for, current_app)
+from flask_login import current_user, login_required
+from peewee import fn, DoesNotExist
+
+from ..forms import ManualForm, PosForm, SiagaForm, ArusInformasiForm
+from ..models import (KATEGORI_SIAGA, KONDISI_SIAGA, Manual, Pengungsian, Pos,
+                      StatusLog, KV)
 
 bp = Blueprint('admin', __name__, url_prefix='/admin')
 
@@ -12,6 +17,28 @@ def admin_only():
     if current_user.role != 1:
         abort(403)
 
+@bp.route('/arusinfo', methods=['POST'])
+def update_arusinfo():
+    form = ArusInformasiForm()
+    if form.validate_on_submit():
+        f = form.img_arus_informasi.data
+        fname = secure_filename(f.filename)
+        try:
+            ai = KV.get(KV.k=='img_arus_informasi')
+            old_fname = os.path.join(current_app.root_path, 'static/img', ai.v)
+            if os.path.exists(old_fname):
+                os.remove(old_fname)
+            ai.v = fname
+            ai.save()
+            f.save(os.path.join(current_app.root_path, 'static/img', fname))
+            flash('Sukses update Arus Informasi')
+            
+        except DoesNotExist:
+            ai = None
+    print(form.errors)
+    return redirect('/admin')
+    
+    
 @bp.route('/pos/<int:id>/edit', methods=['GET', 'POST'])
 def edit_pos(id):
     admin_only()
@@ -85,6 +112,7 @@ def pos():
 def index():
     admin_only()
     status_baru = StatusLog(**{'user': current_user.username})
+    arusinfo_form = ArusInformasiForm()
     if request.method == 'POST':
         form = SiagaForm(request.form, obj=status_baru)
         if form.validate():
@@ -99,7 +127,7 @@ def index():
     status_siaga = StatusLog.select(fn.Max(StatusLog.tanggal).alias('tanggal'),
                                     StatusLog.kategori, StatusLog.kondisi).group_by(StatusLog.kategori).order_by(StatusLog.id.desc())
     status_siaga = [{'tanggal': s.tanggal, 'kategori': dict(KATEGORI_SIAGA)[s.kategori], 'kondisi': dict(KONDISI_SIAGA)[s.kondisi]} for s in status_siaga]
-    return render_template('/admin/index.html', siaga_form=form, status_siaga=status_siaga)
+    return render_template('/admin/index.html', siaga_form=form, status_siaga=status_siaga, arusinfo_form=arusinfo_form)
 
-import rtdapp.admin.users
 import rtdapp.admin.pengungsian
+import rtdapp.admin.users

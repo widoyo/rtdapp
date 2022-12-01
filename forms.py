@@ -1,7 +1,8 @@
 import datetime
 from .models import Pos, User, Manual, KONDISI_SIAGA, KATEGORI_SIAGA
 from flask_wtf import FlaskForm
-from wtforms import HiddenField, RadioField, SubmitField, FloatField
+from flask_wtf.file import FileField, FileAllowed, FileRequired
+from wtforms import HiddenField, RadioField, SubmitField, FloatField, IntegerField
 from wtforms import DateField, DateTimeField, StringField, SelectField
 from wtforms.widgets import TextArea
 from wtfpeewee.orm import model_form
@@ -11,6 +12,22 @@ PosForm = model_form(Pos, exclude=('cdate', 'mdate', 'ch_t', 'tma_t', 'trend_tma
 #print(hasattr(PosForm, 'extra_filters'))
 UserForm = model_form(User, exclude=('cdate', 'mdate', 'last_seen'))
 
+class ArusInformasiForm(FlaskForm):
+    img_arus_informasi = FileField('img_arus_informasi', validators=[
+        FileRequired(),
+        FileAllowed(['jpg', 'png', 'gif'], 'File Gambar')
+    ])
+class PengungsianForm(FlaskForm):
+    nama = StringField()
+    desa = StringField(default='')
+    kecamatan = StringField(default='')
+    kabupaten = StringField(default='')
+    kapasitas_tampung = IntegerField(default=0)
+    fasilitas = StringField(default='')
+    elevasi = IntegerField(default=0)
+    lonlat = StringField(default='')
+    
+    
 class ManualForm(FlaskForm):
     pos_id = HiddenField('Pos Hidrologi', validators=[DataRequired()])
     tanggal = DateField('Tanggal', validators=[DataRequired()])

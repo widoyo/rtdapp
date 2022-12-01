@@ -1,8 +1,9 @@
 import datetime
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin
+
 import peewee as pw
+from flask_login import UserMixin
 from playhouse.flask_utils import FlaskDB
+from werkzeug.security import check_password_hash, generate_password_hash
 
 db = FlaskDB()
 
@@ -13,6 +14,12 @@ SIAGA_LOGUNG = {
     'spillway': 88.5 # Hijau
 }
 
+class KV(db.Model):
+    k = pw.CharField(unique=True)
+    v = pw.CharField(null=True)
+    cdate = pw.DateTimeField(default=datetime.datetime.now)
+    mdate = pw.DateTimeField(null=True)
+    
 class Pos(db.Model):
     nama = pw.CharField(unique=True, max_length=50)
     tipe = pw.IntegerField(default=1) # 1 PCH, 2 PDA, 3 Klimat */

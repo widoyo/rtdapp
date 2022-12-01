@@ -106,7 +106,7 @@
         //  </div><br>\
         //<div><b>Model Genangan</b><br><ol class='list-unstyled'><li id='ly_siaga' class='mt-2'><i class='bi bi-eye'></i> Awas</li><li id='ly_awas' class='mt-2'><i class='bi bi-eye'></i> Siaga</li><li id='ly_puncak' class='mt-2'><i class='bi bi-eye-slash'></i> Siap</li></ol></div>";
         p = document.createElement('p');
-        p.innerHTML = `<div class="mb-3"><b>TMA</b><br>+<b>{{ tma_logung.0.tma }}</b>mdpl <span id="sampling_tma">{{ tma_logung.0.sampling.strftime("%d-%m-%Y") }}</span></div><b>Model Genangan</b>`;
+        p.innerHTML = `<div class="mb-3 fs-3"><b>TMA</b><br>+<b>{{ tma_logung.tma }}</b>mdpl <span id="sampling_tma"></span></div><b>Model Genangan</b>`;
         cText.appendChild(p);
         cText.appendChild(ol);
         cUI.appendChild(cText);

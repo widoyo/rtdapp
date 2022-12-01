@@ -76,6 +76,19 @@
         <li><a href="/admin/user">Managemen User</a></li>
         <li><a href="/admin/pos">Managemen Pos Hidrologi</a></li>
         <li><a href="/admin/pengungsian">Managemen Pos Pengungsian</a></li>
+        <li>Update halaman Bagan Alir (menu <b>Rencana Tindak Darurat</b> > <b>Arus Informasi</b>), <a data-bs-toggle="collapse" href="#form_update_bagan_alir" role="button" aria-expanded="false" aria-controls="form_update_bagan_alir">petunjuk update.</a>
+          <form id="form_update_bagan_alir" class="collapse p-3 mt-1 border rounded" method="POST" enctype="multipart/form-data" action="/admin/arusinfo">
+            {{ arusinfo_form.hidden_tag()}}
+            <ul class="mb-4">
+              <li>File gambar: PNG, GIF, JPG dapat diterima,</li>
+              <li>Ukuran file &lt; 1MB, kurang lebih 1390 x 1244 pixel.</li> 
+              <li>Bisa dibuat dengan cara foto layar (screen shoot) dokumen Rencana Tindak Darurat</li>
+              <li>ATAU Download dan Edit template gambar berikut ini, <a href="/static/img/template_arusinformasi.png">template_arusinformasi.png</a></li>
+            </ul>
+            <input type="file" name="img_arus_informasi" accept=".png,.gif,.jpg" id="fileinput">
+            <input type="submit" class="btn btn-primary" value="Simpan">
+          </form>
+        </li>
       </ol>
     </div>
   </div>
