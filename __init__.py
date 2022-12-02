@@ -1,16 +1,19 @@
-import os
 import datetime
-from flask import Flask, g, render_template, flash, request, abort
-from flask import send_from_directory, jsonify, current_app
-from flask_login import LoginManager, current_user
-from wtforms import form, fields, validators
-from playhouse.shortcuts import model_to_dict
-from peewee import fn
-from telegram import Bot
+import os
 
-from .models import Pos, Manual, SIAGA_LOGUNG, StatusLog, KATEGORI_SIAGA, KONDISI_SIAGA
-from .api.error import error_response as api_error_response
+from flask import (Flask, abort, current_app, flash, g, jsonify,
+                   render_template, request, send_from_directory)
+from flask_login import LoginManager, current_user
+from peewee import fn
+from playhouse.shortcuts import model_to_dict
+from telegram import Bot
+from wtforms import fields, form, validators
+
 from config import Config
+
+from .api.error import error_response as api_error_response
+from .models import (KATEGORI_SIAGA, KONDISI_SIAGA, SIAGA_LOGUNG, Manual, Pos,
+                     StatusLog)
 
 
 def send_telegram_ewschannel(msg):
@@ -31,12 +34,8 @@ def create_app(config_class=Config):
     except OSError:
         pass
     
-    from .models import db, User
-    from . import auth
-    from . import admin
-    from . import api
-    from . import map
-    from . import rtd
+    from . import admin, api, auth, map, rtd
+    from .models import User, db
     
     app.register_blueprint(auth.bp)
     app.register_blueprint(admin.bp)
@@ -109,7 +108,10 @@ def create_app(config_class=Config):
     @app.route('/')
     def home():
         pda_logung = Pos.get_by_id(1)
-        tma_manual = pda_logung.manuals.order_by(Manual.sampling.desc()).limit(30)
+        num_days = 30
+        tma_manual = [(r.sampling, r.tma) for r in pda_logung.manuals.order_by(Manual.sampling.desc()).limit(num_days)]
+        awal = datetime.date.today()
+        a = [awal - datetime.timedelta(days=i) for i in range(num_days)]
         status_siaga = StatusLog.select(fn.Max(StatusLog.tanggal).alias('tanggal'),
                                         StatusLog.kategori, StatusLog.kondisi).group_by(StatusLog.kategori).order_by(StatusLog.tanggal.desc())
         status_siaga = [{'tanggal': s.tanggal, 'kategori': dict(KATEGORI_SIAGA)[s.kategori], 'kondisi': dict(KONDISI_SIAGA)[s.kondisi]} for s in status_siaga]

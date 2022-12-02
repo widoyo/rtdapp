@@ -1,12 +1,14 @@
-from flask import (Blueprint, flash, g, redirect, render_template, 
-                   request, session, url_for, abort)
-from werkzeug.security import generate_password_hash, check_password_hash
-from urllib.parse import urlparse, urljoin
+from urllib.parse import urljoin, urlparse
 
-from flask_login import LoginManager, login_required, login_user, logout_user, current_user
+from flask import (Blueprint, abort, flash, g, redirect, render_template,
+                   request, session, url_for)
+from flask_login import (LoginManager, current_user, login_required,
+                         login_user, logout_user)
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from werkzeug.security import check_password_hash, generate_password_hash
+from wtforms import BooleanField, PasswordField, StringField, SubmitField
 from wtforms.validators import DataRequired
+
 from .models import User
 
 bp = Blueprint('auth', __name__)

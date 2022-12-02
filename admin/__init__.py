@@ -1,11 +1,12 @@
-import datetime, os
+import datetime, os, io
 from functools import wraps
 
 from werkzeug.utils import secure_filename
 from flask import (Blueprint, abort, flash, redirect, render_template, request,
-                   url_for, current_app)
+                   url_for, current_app, Response)
 from flask_login import current_user, login_required
 from peewee import fn, DoesNotExist
+from playhouse.dataset import DataSet
 
 from ..forms import ManualForm, PosForm, SiagaForm, ArusInformasiForm
 from ..models import (KATEGORI_SIAGA, KONDISI_SIAGA, Manual, Pengungsian, Pos,
@@ -59,6 +60,7 @@ def edit_pos(id):
 @bp.route('/pos/<int:id>', methods=['GET', 'POST'])
 def show_pos(id):
     month = request.args.get('month', datetime.datetime.today().strftime('%Y/%m'))
+    do_download = request.args.get('download', None)
     if '-' in month:
         month = month.replace('-', '/')
     try:
@@ -72,6 +74,14 @@ def show_pos(id):
     manual_bulan_ini = Manual.select().where((Manual.pos == pos) 
                                              & (Manual.sampling.year==t.year)
                                              & (Manual.sampling.month==t.month)).order_by(Manual.sampling.desc())
+    if do_download == '1':
+        ds = DataSet(current_app.config.get('DATABASE'))
+        print('Want Download')
+        f = io.StringIO()
+        ds.freeze(manual_bulan_ini, file_obj=f)
+        return Response(f.getvalue(), 
+                        headers={"Content-Disposition": 
+                            "attachment; filename={}".format(pos.nama + '_' + str(t.year) + '_' + str(t.month) + '.csv')})        
     if request.method == 'POST':
         form = ManualForm(request.form, obj=manual_obj)
         if form.validate():
@@ -85,10 +95,19 @@ def show_pos(id):
             flash(form.errors)
     else:
         form = ManualForm(obj=manual_obj)
+    req_path = request.full_path
+    download = manual_bulan_ini.count() > 0 and 'download=1' or ''
+    if download:
+        if '?' in req_path:
+            req_path += '&download=1'
+        else:
+            req_path += '?download=1'
+    else:
+        req_path = ''
     return render_template('/admin/pos/show.html', pos=pos, 
                            form=form, month=t, 
                            prev_month=prev_month.strftime('%Y/%m'), next_month=next_month.strftime('%Y/%m'),
-                           manual_bulan_ini=manual_bulan_ini)
+                           manual_bulan_ini=manual_bulan_ini, req_path=req_path)
 
 
 @bp.route('/pos', methods=['GET', 'POST'])
