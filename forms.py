@@ -17,6 +17,8 @@ class ArusInformasiForm(FlaskForm):
         FileRequired(),
         FileAllowed(['jpg', 'png', 'gif'], 'File Gambar')
     ])
+    
+    
 class PengungsianForm(FlaskForm):
     nama = StringField()
     desa = StringField(default='')

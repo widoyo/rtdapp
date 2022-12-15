@@ -110,6 +110,7 @@ def create_app(config_class=Config):
         pda_logung = Pos.get_by_id(1)
         num_days = 30
         tma_manual = [(r.sampling, r.tma) for r in pda_logung.manuals.order_by(Manual.sampling.desc()).limit(num_days)]
+        tma_now = tma_manual[0]
         awal = datetime.date.today()
         a = [awal - datetime.timedelta(days=i) for i in range(num_days)]
         status_siaga = StatusLog.select(fn.Max(StatusLog.tanggal).alias('tanggal'),
@@ -118,7 +119,7 @@ def create_app(config_class=Config):
         status_ = StatusLog.select(fn.Max(StatusLog.tanggal).alias('tanggal'),
                                         StatusLog.kategori, StatusLog.kondisi).group_by(StatusLog.kategori).order_by(StatusLog.kondisi.desc()).limit(1)
         status_ = [{'tanggal': s.tanggal, 'kategori': dict(KATEGORI_SIAGA)[s.kategori], 'kondisi': dict(KONDISI_SIAGA)[s.kondisi]} for s in status_]
-        return render_template('index.html', tma_logung=tma_manual, SIAGA_LOGUNG=SIAGA_LOGUNG, status_siaga=status_siaga, status_=status_[0])
+        return render_template('index.html', tma_logung=tma_manual, tma_logung_now=tma_now, SIAGA_LOGUNG=SIAGA_LOGUNG, status_siaga=status_siaga, status_=status_[0])
 
     def wants_json_response():
         return request.accept_mimetypes['application/json'] >= \

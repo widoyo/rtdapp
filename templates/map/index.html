@@ -44,7 +44,6 @@
 
       const td_util = [
         ['Pos Pengungsian', 'pengungsian'],
-        ['Jembatan', 'jembatan']
       ];
 
       // Tambah genangan break
@@ -58,7 +57,6 @@
         cUI.style.backgroundColor = "#fefefe";
         cUI.style.marginRight = '8px';
         cUI.style.padding = "12px";
-        cUI.title = "Silakan pilih";
         controlDiv.appendChild(cUI);
 
         const cText = document.createElement('div');
@@ -106,7 +104,7 @@
         //  </div><br>\
         //<div><b>Model Genangan</b><br><ol class='list-unstyled'><li id='ly_siaga' class='mt-2'><i class='bi bi-eye'></i> Awas</li><li id='ly_awas' class='mt-2'><i class='bi bi-eye'></i> Siaga</li><li id='ly_puncak' class='mt-2'><i class='bi bi-eye-slash'></i> Siap</li></ol></div>";
         p = document.createElement('p');
-        p.innerHTML = `<div class="mb-3 fs-3"><b>TMA</b><br>+<b>{{ tma_logung.tma }}</b>mdpl <span id="sampling_tma"></span></div><b>Model Genangan</b>`;
+        p.innerHTML = `<div class="mb-3"><b>TMA</b><br>+<b>{{ tma_logung.tma }}</b>mdpl <span id="sampling_tma"></span></div><b>Model Genangan</b>`;
         cText.appendChild(p);
         cText.appendChild(ol);
         cUI.appendChild(cText);
@@ -128,11 +126,11 @@
     //"http://localhost:3003/static/map/break.geojson"
   //);
       wadukLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/logung.kml', {preserveViewport: true,map: map});
-      siagaLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/siaga.kml', {preserveViewport: true,map: null});
+      siagaLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/p.kml', {preserveViewport: true,map: null});
       awasLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/awas.kml', {preserveViewport: true,map: null});
       puncakLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/puncak.kml', {preserveViewport: true,map: null});
       breakLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/break.kml', {preserveViewport: true,map: null});
-      pengungsianLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/pengungsian.kml', {preserveViewport: true,map: map});
+      pengungsianLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/pengungsian.kml', {preserveViewport: true,map: null});
       //jembatanLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/jembatan.kml', {preserveViewport: true,map: map});
 
     //  jembatanLayer.addEventListener('click', (e) => {
@@ -140,7 +138,7 @@
     //  });
 
         const mcdiv = document.createElement('div');
-
+        mcdiv.classList.add('border')
         WarningControl(mcdiv, map);
         let e = document.getElementById('sampling_tma');
         //console.log(e.innerHTML);

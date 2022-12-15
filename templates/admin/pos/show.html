@@ -14,7 +14,11 @@
     </div>
     <div class="col-sm-6">
       &nbsp;<br><br>
-      <span class="text-center display-6"><a href="?month={{ prev_month }}"><i class="bi bi-caret-left-square pe-4"></i></a> {{ month.strftime('%b %Y') }} <a href="?month={{ next_month }}"><i class="bi bi-caret-right-square ps-4"></i></a></span>
+      <span class="text-center display-6">
+        <a href="?month={{ prev_month }}"><i class="bi bi-caret-left-square pe-4"></i></a>
+        <span>{{ month.strftime('%b %Y') }}</span>
+        <a href="?month={{ next_month }}"><i class="bi bi-caret-right-square ps-4"></i></a>
+      </span>
     </div>
   </div>
   <div class="row pt-4">
@@ -66,9 +70,9 @@
         {% endif %}
         {% if pos.tipe == 2 %}
         <div class="mb-3">
-          <label for="tma" class="form-label">TMA (Meter)</label>
+          <label for="tma" class="form-label">TMA (MDPL) <i>Meter Diatas Permukaan Laut</i></label>
           <input type="number" step="0.001" name="tma" id="tma" class="form-control text-end" aria-describedby="tmaHelp">
-          <div id="tmaHelp" class="form-text">Tinggi Muka Air Logung (min 84, max 93.75)</div>
+          <div id="tmaHelp" class="form-text">Tinggi Muka Air</div>
         </div>
         {% endif %}
         {% if pos.id == 1 %}
@@ -136,10 +140,8 @@
       e.focus();
     }
     let vol = volume(e.target.value);
-    console.log('TMA: ', e.target.value);
-    console.log('VOL: ', vol);
     let ev = document.getElementById('vol');
-    ev.value = vol;
+    ev.value = vol.toFixed(3);
   });
   const volume = (tma) => {
     return -1.23784705416647 * Math.pow(tma, 0) + 0.148652766294826 * tma - 0.00340120100025765 * Math.pow(tma, 2) - 0.0000188399794393122 * Math.pow(tma, 3) + 0.000000769023798990446 * Math.pow(tma, 4);

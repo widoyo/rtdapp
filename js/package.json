@@ -4,6 +4,7 @@
   "description": "Javascript bundler, start with highcharts",
   "main": "index.js",
   "scripts": {
+	  "pc": "node picocol.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Widoyo",
