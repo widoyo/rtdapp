@@ -1,9 +1,15 @@
 from flask import Blueprint, request, jsonify
 from peewee import fn
 from rtdapp.models import db, StatusLog, KATEGORI_SIAGA, KONDISI_SIAGA
+from rtdapp.models import Pengungsian
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 
+
+@bp.route('/pengungsian')
+def pengungsian_list():
+    data = [p.to_dict() for p in Pengungsian.select()]
+    return jsonify(data)
 
 @bp.route('status')
 def status():

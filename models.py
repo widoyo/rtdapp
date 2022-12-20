@@ -1,9 +1,11 @@
 import datetime
 
+from flask import url_for
 import peewee as pw
 from flask_login import UserMixin
 from playhouse.flask_utils import FlaskDB
 from werkzeug.security import check_password_hash, generate_password_hash
+import simplekml
 
 db = FlaskDB()
 
@@ -13,6 +15,33 @@ SIAGA_LOGUNG = {
     'siaga': 92.75, # Kuning
     'spillway': 88.5 # Hijau
 }
+
+
+class PaginatedAPIMixin(object):
+    @staticmethod
+    def to_collection_dict(query, page, per_page, endpoint, **kwargs):
+        resources = query.paginate(page, per_page)
+        total_page = int(query.count() / per_page) + ((query.count() % per_page) and 1 or 0)
+        has_next = page < total_page and True or False
+        has_prev = page > 1 and True or False
+        data = {
+            'items': [item.to_dict() for item in resources],
+            '_meta': {
+                'page': page,
+                'per_page': per_page,
+                'total_pages': total_page,
+                'total_items': query.count()
+            },
+            '_links': {
+                'self': url_for(endpoint, page=page, per_page=per_page,
+                                **kwargs),
+                'next': url_for(endpoint, page=page + 1, per_page=per_page,
+                                **kwargs) if has_next else None,
+                'prev': url_for(endpoint, page=page - 1, per_page=per_page,
+                                **kwargs) if has_prev else None
+            }
+        }
+        return data
 
 class KV(db.Model):
     k = pw.CharField(unique=True)
@@ -102,7 +131,7 @@ class Periodik(db.Model):
         return self.sampling
 
 
-class Pengungsian(db.Model):
+class Pengungsian(PaginatedAPIMixin, db.Model):
     nama = pw.CharField(unique=True, max_length=100)
     desa = pw.CharField(null=True)
     kecamatan = pw.CharField(null=True)
@@ -113,6 +142,19 @@ class Pengungsian(db.Model):
     lonlat = pw.CharField(null=True)
     cdate = pw.DateTimeField(default=datetime.datetime.now)
     mdate = pw.DateTimeField(null=True)
+
+    def to_dict(self):
+        aa = 'nama-desa-kecamatan-kabupaten-elevasi-kapasitas_tampung-fasilitas-lonlat'.split('-')
+        data = dict([(l, getattr(self, l)) for l in aa])
+        return data
+
+    @staticmethod
+    def to_kml():
+        kml = simplekml.Kml()
+        for p in Pengungsian.select():
+            (a, b) = p.lonlat.split(', ')
+            newpoint = kml.newpoint(name=p.nama, description='ds. {}, kec. {}, kab. {}, Kapasitas: {}, Fasilitas: {}'.format(p.desa, p.kecamatan, p.kabupaten, p.kapasitas_tampung, p.fasilitas), coords=[(b, a)])
+        kml.save('/tmp/pengungsian.kml')
 
     def __unicode__(self):
         return self.nama

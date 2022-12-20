@@ -126,11 +126,11 @@
     //"http://localhost:3003/static/map/break.geojson"
   //);
       wadukLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/logung.kml', {preserveViewport: true,map: map});
-      siagaLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/p.kml', {preserveViewport: true,map: null});
+      siagaLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/siaga.kml', {preserveViewport: true,map: null});
       awasLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/awas.kml', {preserveViewport: true,map: null});
       puncakLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/puncak.kml', {preserveViewport: true,map: null});
       breakLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/break.kml', {preserveViewport: true,map: null});
-      pengungsianLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/pengungsian.kml', {preserveViewport: true,map: null});
+      pengungsianLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/pengungsian.kml?_=' + new Date('now').getTime('current'), {preserveViewport: true,map: map});
       //jembatanLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/jembatan.kml', {preserveViewport: true,map: map});
 
     //  jembatanLayer.addEventListener('click', (e) => {
