@@ -20,27 +20,27 @@
       <div class="row mb-3">
         <div class="col text-center">
           <div class="row">
-            <div class="col-2">
+            <div class="col-sm-2">
               <svg style="font: normal 12px sans-serif;margin-left:20px;vertical-align:top;width:200px;height:160px;">
                 <rect x="60" y="0" width="10" height="160"  style="fill:rgb(128,128,254);stroke-width:1;stroke:rgb(99,99,99)" />
                 <rect id="tutup_tma" x="60" y="0" width="10" height="135"  style="fill:rgb(254,254,254);stroke-width:1;stroke:rgb(99,99,99)" />
-                <path d="M 80 2 L 80 50" fill="none" stroke="red" stroke-width="10"/>
-                <path d="M 80 50 L 80 90" fill="none" stroke="#ffc107" stroke-width="10"/>
+                <path d="M 80 2 L 80 40" fill="none" stroke="red" stroke-width="10"/>
+                <path d="M 80 40 L 80 90" fill="none" stroke="#ffc107" stroke-width="10"/>
                 <path d="M 80 90 L 80 160" fill="none" stroke="#339907" stroke-width="10"/>
                 <text x="90" y="15">+93.75</text>
-                <text x="90" y="50">+92.75</text>
+                <text x="90" y="40">+92.75</text>
                 <text x="90" y="95">+88.5</text>
                 <text x="120" y="105" transform="rotate(90 110,90)">SPILLWAY</text>
-                <text x="0" y="135">+88.3</text>
+                <text id="skala_now" x="0" y="135">+{{ tma_logung_now.1 }}</text>
                 <text x="0" y="12">TMA</text>
                 <text x="0" y="28">(mdpl)</text>
               </svg>
             </div>
-            <div class="col-10">
+            <div class="col-sm-10">
               <p>Tinggi Muka Air (TMA) Waduk</p>
               <h1 class="display-4 fw-bold" id="tma_logung_wrapper">
           +<span id="tma_logung">{{ tma_logung_now.1 }}</span> MDPL</h1>
-                  <!--<h4 class="text-muted fw-light">TMA Normal: +88.5mdpl, Siaga: +92.75mdpl, Awas: +93.75mdpl</h4>-->
+                  <h4 id="tma_logung_updated" class="text-muted fw-light">{{ tma_logung_now.0 }}</h4>
         
             </div>
           </div>
@@ -145,7 +145,7 @@
       name: 'TMA Bendungan Logung',
       data: [
       {% for t in tma_logung %}
-          [Date.UTC({{ t.0.strftime('%s') }}), {{ t.1 }}]{{ ", " if not loop.last else "" }}
+          [{{ t.0.strftime('%s') }}000, {{ t.1 }}]{{ ", " if not loop.last else "" }}
           {% endfor %}
       ]
     }
@@ -162,6 +162,9 @@
       let s = document.getElementById('sampling_global_status');
       let d = dayjs(s.innerHTML);
       s.innerHTML = d.fromNow();
+      let tn = document.getElementById('tma_logung_updated');
+      d = dayjs(tn.innerHTML);
+      tn.innerHTML = d.fromNow();
 
       let ts = document.getElementsByClassName('tgl-status');
       for (let i = 0; i < ts.length; i++) {
@@ -180,29 +183,38 @@
       kondisi.classList.add(tcolors[kondisi.innerText.substring(0,2).toLowerCase()]);
       var tma_logung = document.getElementById('tma_logung');
       var tma_logung_wrapper = document.getElementById('tma_logung_wrapper');
-      var etutup_tma = document.getElementById('tutup_tma');
-      if (tma_logung.innerText < 88.5) {
-        tma_logung_wrapper.classList.add(tcolors['no']);
-        etutup_tma.setAttribute('height', skala_s(tma_logung.innerText));
-      } else if (tma_logung.innerText < 92.75) {
-        tma_logung_wrapper.classList.add(tcolors['wa']);
-        etutup_tma.setAttribute('height', skala_k(tma_logung.innerText));
-      } else {
-        tma_logung_wrapper.classList.add(tcolors['si']);
-        etutup_tma.setAttribute('height', skala_m(tma_logung.innerText));
-      }
+      draw_skala(tma_logung.innerText);
     });
     
+    const draw_skala = (t) => {
+      var etutup_tma = document.getElementById('tutup_tma');
+      var s_now = document.getElementById('skala_now');
+      var tcolors = {'no': 'text-success', 'ab': 'text-secondary', 'wa': 'text-warning', 'si': 'text-danger', 'aw': 'text-danger'}
+      if (t <= 88.5) {
+        tma_logung_wrapper.classList.add(tcolors['no']);
+        etutup_tma.setAttribute('height', skala_s(t));
+        s_now.setAttribute("y", skala_s(t) + 6);
+      } else if (t <= 92.75) {
+        tma_logung_wrapper.classList.add(tcolors['wa']);
+        etutup_tma.setAttribute('height', skala_k(t));
+        s_now.setAttribute("y", skala_k(t) + 6);
+      } else {
+        tma_logung_wrapper.classList.add(tcolors['si']);
+        etutup_tma.setAttribute('height', skala_m(t));
+        s_now.setAttribute("y", skala_m(t) + 6);
+      }
+    };
+
     const skala_s = (t) => {
-      return 160 - ((t - 60) * 70 / 28.5 + 2);
+      return 160 - ((t - 60) * (70 / 28.5));
     };
 
     const skala_k = (t) => {
-      return 160 - ((t - 88.5) * 40 / 3.25 + 50);
+      return 160 - ((t - 88.5) * (40 / 3.25) + 70);
     };
 
     const skala_m = (t) => {
-      return 160 - ((t - 92.75) * 48 + 90);
+      return 160 - ((t - 92.75) * 48 + 120);
     };
     /**
      * skala tma loggung
