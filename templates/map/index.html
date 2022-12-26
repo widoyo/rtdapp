@@ -33,7 +33,7 @@
     <script src="/static/js/relativeTime.js"></script>
     <script src="/static/js/id.js"></script>
         <script>
-      let map, wadukLayer, siagaLayer, puncakLayer, awasLayer, breakLayer, pengungsianLayer, jalur_pengungsianLayer;
+      let map, wadukLayer, siagaLayer, puncakLayer, awasLayer, breakLayer, pengungsianLayer, jalur_evakuasiLayer;
       let tma_now = {{ tma_logung.tma }};
       const clayer = [
           ['Siap (+88.5mdpl)', 'siaga'],
@@ -44,6 +44,7 @@
 
       const td_util = [
         ['Pos Pengungsian', 'pengungsian'],
+        ['Jalur Evakuasi', 'jalur_evakuasi']
       ];
 
       // Tambah genangan break
@@ -75,7 +76,20 @@
           li.classList.add('mt-2');
           li.style.cursor = 'pointer';
           li.addEventListener('click', (ev) => {
-            console.log(e[1]);
+            if (e[1] == 'pengungsian') {
+              if (pengungsianLayer.getMap() == null) {
+                pengungsianLayer.setMap(map);
+              } else {
+                pengungsianLayer.setMap(null);
+              }
+            }
+            if (e[1] == 'jalur_evakuasi') {
+              if (jalur_evakuasiLayer.getMap() == null) {
+                jalur_evakuasiLayer.setMap(map);
+              } else {
+                jalur_evakuasiLayer.setMap(null);
+              }
+            }
           });
           ol.appendChild(li);
         });
@@ -128,7 +142,7 @@
       puncakLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/puncak.kml', {preserveViewport: true,map: null});
       breakLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/break.kml', {preserveViewport: true,map: null});
       pengungsianLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/pengungsian.kml?_=' + new Date('now').getTime('current'), {preserveViewport: true,map: map});
-      jalur_pengungsianLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/jalur_pengungsian.kml?_=' + new Date('now').getTime('current'), {preserveViewport: true,map: map});
+      jalur_evakuasiLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/jalur_pengungsian.kml?_=' + new Date('now').getTime('current'), {preserveViewport: true,map: map});
 
     //  jembatanLayer.addEventListener('click', (e) => {
 
