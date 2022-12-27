@@ -141,8 +141,8 @@
       awasLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/awas.kml', {preserveViewport: true,map: null});
       puncakLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/puncak.kml', {preserveViewport: true,map: null});
       breakLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/break.kml', {preserveViewport: true,map: null});
-      pengungsianLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/pengungsian.kml?_=' + new Date('now').getTime('current'), {preserveViewport: true,map: map});
-      jalur_evakuasiLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/jalur_pengungsian.kml?_=' + new Date('now').getTime('current'), {preserveViewport: true,map: map});
+      pengungsianLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/pengungsian.kml?_=' + new Date().getTime(), {preserveViewport: true,map: map});
+      jalur_evakuasiLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/jalur_pengungsian.kml?_=' + new Date().getTime(), {preserveViewport: true,map: map});
 
     //  jembatanLayer.addEventListener('click', (e) => {
 

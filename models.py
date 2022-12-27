@@ -151,9 +151,27 @@ class Pengungsian(PaginatedAPIMixin, db.Model):
     @staticmethod
     def to_kml():
         kml = simplekml.Kml()
+        doc = kml.newdocument(name="Pos Pengungsian")
+        bs = simplekml.BalloonStyle()
+        bs.text = "<![CDATA[<div style='font-size: 16px'><p><b>$[name]</b></p>desa: $[desa]<br>kec: $[kecamatan]<br>kab: $[kabupaten]<br><br>kapasitas: $[kapasitas]<br>Fasilitas: $[fasilitas]\
+            <br><br>LatLon: <a href='http://map.google.com/?ie=UTF8&ll=$[lonlat]'>$[lat], $[lon]</a></div>]]>"
+        mystyle = simplekml.Style(balloonstyle=bs)
+        doc.style = mystyle
         for p in Pengungsian.select():
             (a, b) = p.lonlat.split(', ')
-            newpoint = kml.newpoint(name=p.nama, description='ds. {}, kec. {}, kab. {}, Kapasitas: {}, Fasilitas: {}'.format(p.desa, p.kecamatan, p.kabupaten, p.kapasitas_tampung, p.fasilitas), coords=[(b, a)])
+            pnt = doc.newpoint(name=p.nama, description='ds. {}, kec. {}, kab. {}, Kapasitas: {}, Fasilitas: {}'.format(p.desa, p.kecamatan, p.kabupaten, p.kapasitas_tampung, p.fasilitas), coords=[(b, a)])
+            edata = simplekml.ExtendedData()
+            edata.newdata('desa', p.desa)
+            edata.newdata('kecamatan', p.kecamatan)
+            edata.newdata('kabupaten', p.kabupaten)
+            edata.newdata('kapasitas', p.kapasitas_tampung)
+            edata.newdata('fasilitas', p.fasilitas)
+            edata.newdata('lonlat', p.lonlat)
+            lon, lat = p.lonlat.split(',')
+            edata.newdata('lat', lat)
+            edata.newdata('lon', lon)
+            pnt.extendeddata = edata
+            pnt.style = mystyle
         kml.save('/tmp/pengungsian.kml')
 
     def __unicode__(self):
