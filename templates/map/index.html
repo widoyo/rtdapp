@@ -59,6 +59,7 @@
         cUI.style.marginRight = '8px';
         cUI.style.padding = "12px";
         controlDiv.appendChild(cUI);
+        const tma = {{ tma_logung.tma }};
 
         const cText = document.createElement('div');
         cText.style.color = "#666";
@@ -111,6 +112,13 @@
             breakLayer.setMap(null);
             eval(`${e[1]}Layer`).setMap(map);
           });
+          if (tma > 93.75) {
+            puncakLayer.setMap(map);
+          } else if (tma > 92.75) {
+            awasLayer.setMap(map);
+          } else if (tma > 88.5) {
+            siagaLayer.setMap(map);
+          }
           ol.appendChild(li);
         });
 
