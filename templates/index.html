@@ -6,8 +6,8 @@
 <div class="topo-bg">
     <div class="container ">
       <div class="row my-3 flex-sm-row-reverse">
-        <div class="col text-center p-4"><h1 class="display-4 fw-bold mb-4">EWS Bendungan Logung</h1>
-          <h2>Balai Besar Wilayah Sungai Pemali Juana</h2>
+        <div class="col text-center p-4"><h1 class="display-4 fw-lighter mb-4">EWS Bendungan Logung</h1>
+          <h2 class="text-warning" style="text-shadow: 1px 1px 1px #111;">Balai Besar Wilayah Sungai Pemali Juana</h2>
           <p class="lead mb-4">Bendungan Logung di <b>Kabupaten Kudus</b>, Jawa Tengah, <!--<br>berdasarkan dokumen <br><a href="#rtd">Rencana Tindak Darurat Juli 2017</a>--></p>
         </div>
       </div>
@@ -76,12 +76,34 @@
       </div>
     </div>
   </div>
-    <div class="w-100 my-0 bg-image h-100 text-center text-light" style="margin-top:-47px !important;background-image: url(/static/img/logung_view_{{ (2,3)|random }}.jpg);background-size: cover;background-repeat: no-repeat;">
+  <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="5000">
+        <img src="/static/img/logung_view_2.jpg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item" data-bs-interval="2000">
+        <img src="/static/img/logung_view_3.jpg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="/static/img/logung_view_2.jpg" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+<!--      <div class="w-100 my-0 bg-image h-100 text-center text-light" style="margin-top:-47px !important;background-image: url(/static/img/logung_view_{{ (2,3)|random }}.jpg);background-size: cover;background-repeat: no-repeat;">
     <h1 class="py-5 my-5">&nbsp;</h1>
     <h1 class="py-5 my-5">Bendungan Logung</h1>
     <h1 class="py-5 my-5">&nbsp;</h1>
     <h1 class="py-5 my-5">&nbsp;</h1>
     </div>
+    -->
     <div class="container mt-5">
       <div class="row mb-5">
         <div id="rtd" class="col text-center">
@@ -143,6 +165,10 @@
   const chart = Highcharts.stockChart('chart-container', {
     series: [{
       name: 'TMA Bendungan Logung',
+      dataGrouping: {
+//        anchor: 'end',
+//        units: ['week', [1]]
+      },
       data: [
       {% for t in tma_logung %}
           [{{ t.0.strftime('%s') }}000, {{ t.1 }}]{{ ", " if not loop.last else "" }}
@@ -151,9 +177,24 @@
     }
     ],
     rangeSelector: {
-      buttons: []
+      selected: 0,
+      buttonSpacing: 15,
+      buttons: [{
+                type: 'week',
+                text: 'Minggu',
+                dataGrouping: {
+                  units: [['day', [1]]]
+                }
+            }, {
+                type: 'month',
+                text: 'Bulan',
+                dataGrouping: {
+                  units: [['week', [1]]]
+                }
+            }]
     }
-  });
+  }
+  );
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {

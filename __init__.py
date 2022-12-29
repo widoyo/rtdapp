@@ -108,7 +108,7 @@ def create_app(config_class=Config):
     @app.route('/')
     def home():
         pda_logung = Pos.get_by_id(1)
-        num_days = 30
+        num_days = 120
         tma_manual = [(r.sampling, r.tma) for r in pda_logung.manuals.order_by(Manual.sampling.desc()).limit(num_days)]
         tma_now = tma_manual[0]
         awal = datetime.date.today()

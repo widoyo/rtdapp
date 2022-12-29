@@ -40,7 +40,7 @@ class ManualForm(FlaskForm):
     submit = SubmitField('Simpan')
     
 class SiagaForm(FlaskForm):
-    tanggal = DateTimeField('Tanggal Perubahan', default=datetime.datetime.now)
+    tanggal = DateTimeField('Tanggal Perubahan', default=datetime.datetime.utcnow)
     kategori = SelectField('Indikator', choices=KATEGORI_SIAGA)
     kondisi = SelectField('Kondisi Sekarang', choices=KONDISI_SIAGA)
     catatan = StringField('Catatan', widget=TextArea())

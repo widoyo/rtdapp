@@ -97,7 +97,7 @@
         </thead>
         <tbody>
           {% for m in manual_bulan_ini %}
-          <tr>
+          <tr class="manual_row" id="id_{{ m.id }}">
             <td>{{ m.sampling.date() }}</td>
             <td>{{ m.sampling.time() }}</td>
             <td class="text-end row-ch">{{ m.ch }}</td>
@@ -143,6 +143,8 @@
     let ev = document.getElementById('vol');
     ev.value = vol.toFixed(3);
   });
+  let r = document.getElementsByClassName('manual_row');
+  r.addEventListener('mouseover', (e) => { console.log(e); })
   const volume = (tma) => {
     return -1.23784705416647 * Math.pow(tma, 0) + 0.148652766294826 * tma - 0.00340120100025765 * Math.pow(tma, 2) - 0.0000188399794393122 * Math.pow(tma, 3) + 0.000000769023798990446 * Math.pow(tma, 4);
   };

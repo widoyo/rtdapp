@@ -33,7 +33,7 @@
     <script src="/static/js/relativeTime.js"></script>
     <script src="/static/js/id.js"></script>
         <script>
-      let map, wadukLayer, siagaLayer, puncakLayer, awasLayer, breakLayer, pengungsianLayer, jalur_evakuasiLayer;
+      let map, wadukLayer, siagaLayer, puncakLayer, awasLayer, breakLayer, pengungsianLayer, jalur_evakuasiLayer, posLayer;
       let tma_now = {{ tma_logung.tma }};
       const clayer = [
           ['Siap (+88.5mdpl)', 'siaga'],
@@ -44,7 +44,8 @@
 
       const td_util = [
         ['Pos Pengungsian', 'pengungsian'],
-        ['Jalur Evakuasi', 'jalur_evakuasi']
+        ['Jalur Evakuasi', 'jalur_evakuasi'],
+        ['Pos Hidrologi', 'pos_pengamatan']
       ];
 
       // Tambah genangan break
@@ -59,7 +60,6 @@
         cUI.style.marginRight = '8px';
         cUI.style.padding = "12px";
         controlDiv.appendChild(cUI);
-        const tma = {{ tma_logung.tma }};
 
         const cText = document.createElement('div');
         cText.style.color = "#666";
@@ -73,22 +73,33 @@
 
         td_util.forEach((e, i, a) => {
           let li = document.createElement('li');
-          li.innerHTML = `<i class='bi bi-eye me-2'></i> ${e[0]}`;
+          li.innerHTML = `<i id='view_${e[1]}' class='bi bi-eye me-2'></i> ${e[0]}`;
           li.classList.add('mt-2');
           li.style.cursor = 'pointer';
           li.addEventListener('click', (ev) => {
             if (e[1] == 'pengungsian') {
               if (pengungsianLayer.getMap() == null) {
                 pengungsianLayer.setMap(map);
+                kedip(`view_${e[1]}`, false);
               } else {
                 pengungsianLayer.setMap(null);
+                kedip(`view_${e[1]}`);
               }
             }
             if (e[1] == 'jalur_evakuasi') {
               if (jalur_evakuasiLayer.getMap() == null) {
                 jalur_evakuasiLayer.setMap(map);
+                kedip(`view_${e[1]}`, false);
               } else {
                 jalur_evakuasiLayer.setMap(null);
+                kedip(`view_${e[1]}`);
+              }
+            }
+            if (e[1] == 'pos_pengamatan') {
+              if (posLayer.getMap() == null) {
+                posLayer.setMap(map);
+              } else {
+                posLayer.setMap(null);
               }
             }
           });
@@ -100,7 +111,7 @@
         //ol.classList.add('');
         clayer.forEach((e, i, a) => {
           const li = document.createElement('div');
-          li.innerHTML = `<input class="form-check-input" type="radio" name="model-genangan" id="id_${e[0]}" value="${e[0]}">
+          li.innerHTML = `<input class="form-check-input" type="radio" name="model-genangan" id="id_${e[1]}" value="${e[0]}">
           <label class="form-check-label" for="id_${e[0]}">${e[0]}</label>`;
           li.classList.add('form-check');
           //li.style.cursor = 'pointer';
@@ -112,13 +123,6 @@
             breakLayer.setMap(null);
             eval(`${e[1]}Layer`).setMap(map);
           });
-          if (tma > 93.75) {
-            puncakLayer.setMap(map);
-          } else if (tma > 92.75) {
-            awasLayer.setMap(map);
-          } else if (tma > 88.5) {
-            siagaLayer.setMap(map);
-          }
           ol.appendChild(li);
         });
 
@@ -151,6 +155,7 @@
       breakLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/break.kml', {preserveViewport: true,map: null});
       pengungsianLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/pengungsian.kml?_=' + new Date().getTime(), {preserveViewport: true,map: map});
       jalur_evakuasiLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/jalur_pengungsian.kml?_=' + new Date().getTime(), {preserveViewport: true,map: map});
+      posLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/pos.kml?_=' + new Date().getTime(), {preserveViewport: true,map: map});
 
     //  jembatanLayer.addEventListener('click', (e) => {
 
@@ -159,14 +164,36 @@
         const mcdiv = document.createElement('div');
         mcdiv.classList.add('border')
         WarningControl(mcdiv, map);
-        let e = document.getElementById('sampling_tma');
-        //console.log(e.innerHTML);
-        //let d = dayjs(e.innerHTML);
-        //e.innerHTML = d.fromNow();
 
+        let e = document.getElementById('sampling_tma');
         map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(mcdiv);
+        const painted = setTimeout(paintMap, 1000);
       }
-    </script>
+      const kedip = (this_eye, slash=true) => {
+        var el = document.getElementById(this_eye);
+        if (slash) {
+          el.classList.remove('bi-eye');
+          el.classList.add('bi-eye-slash')
+        } else {
+          el.classList.remove('bi-eye-slash');
+          el.classList.add('bi-eye')
+        }
+      }
+
+      const paintMap = () => {
+        if (tma_now > 93.75) {
+          awasLayer.setMap(map);
+          document.getElementById('id_awas').setAttribute('checked', 'checked')
+        } else if (tma_now > 92.75) {
+          puncakLayer.setMap(map);
+          document.getElementById('id_puncak').setAttribute('checked', 'checked')
+        } else if (tma_now > 88.5) {
+          siagaLayer.setMap(map);
+          document.getElementById('id_siaga').setAttribute('checked', 'checked')
+        }
+
+      }
+  </script>
     <script
     src="https://maps.googleapis.com/maps/api/js?key={{GMAP_KEY}}&callback=initMap&v=weekly"
     async
