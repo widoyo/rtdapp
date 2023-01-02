@@ -39,6 +39,12 @@ def update_arusinfo():
     print(form.errors)
     return redirect('/admin')
     
+@bp.route('/pos/manual/del', methods=['GET'])
+def manual_del():
+    admin_only()
+    manual_obj = Manual.get()
+    manual_obj.delete_instance()
+    return redirect('/admin/pos/{}'.format(pos.id))
     
 @bp.route('/pos/<int:id>/edit', methods=['GET', 'POST'])
 def edit_pos(id):
@@ -49,6 +55,7 @@ def edit_pos(id):
         if form.validate():
             form.populate_obj(pos)
             pos.save()
+            Pos.to_kml()
             flash("Sukses edit Pos Hidrologi")
             return redirect('/admin/pos')
         else:
@@ -116,10 +123,11 @@ def pos():
     pos_baru = Pos()
     if request.method == 'POST':
         form = PosForm(request.form, obj=pos_baru)
-        print(form.data)
+        #print(form.data)
         if form.validate():
             form.populate_obj(pos_baru)
             pos_baru.save()
+            Pos.to_kml()
             flash('Sukses menambah %s' % pos_baru.nama, 'success')
             return redirect(url_for('admin.pos'))
     else:

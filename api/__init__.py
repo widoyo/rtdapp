@@ -31,7 +31,9 @@ def update():
                                                                 nama=field, 
                                                                 nilai=val, 
                                                                 oid=oid)
-    db.database.execute_sql(sql)    
+    db.database.execute_sql(sql)
+    if table == 'pengungsian':
+        Pengungsian.to_kml()
     return sql, 200
 
 @bp.route('/tik', methods=['POST'])

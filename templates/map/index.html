@@ -98,8 +98,10 @@
             if (e[1] == 'pos_pengamatan') {
               if (posLayer.getMap() == null) {
                 posLayer.setMap(map);
+                kedip(`view_${e[1]}`, false);
               } else {
                 posLayer.setMap(null);
+                kedip(`view_${e[1]}`);
               }
             }
           });
@@ -157,9 +159,6 @@
       jalur_evakuasiLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/jalur_pengungsian.kml?_=' + new Date().getTime(), {preserveViewport: true,map: map});
       posLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/pos.kml?_=' + new Date().getTime(), {preserveViewport: true,map: map});
 
-    //  jembatanLayer.addEventListener('click', (e) => {
-
-    //  });
 
         const mcdiv = document.createElement('div');
         mcdiv.classList.add('border')

@@ -1,3 +1,4 @@
+import os
 import datetime
 
 from flask import url_for
@@ -68,6 +69,32 @@ class Pos(db.Model):
     def __str__(self):
         return self.nama
     
+    @staticmethod
+    def to_kml():
+        kml = simplekml.Kml()
+        doc = kml.newdocument(name="Pos Hidrologi")
+        bs = simplekml.BalloonStyle()
+        bs.text = """<![CDATA[<div style='font-size: 16px'><p><b>$[name]</b></p>
+        tipe: $[tipe]<br>
+        Elevasi: <b>+$[elevasi]</b><br>
+            <br><br>LatLon: <a href='http://map.google.com/?ie=UTF8&ll=$[lonlat]'>$[lat], $[lon]</a></div>]]>"""
+        mystyle = simplekml.Style(balloonstyle=bs)
+        doc.style = mystyle
+        for p in Pos.select():
+            (a, b) = p.lonlat.split(', ')
+            tipe = ('Pos Curah Hujan', 'Pos Duga Air', 'Pos Klimatologi')[p.tipe - 1]
+            pnt = doc.newpoint(name=p.nama, description='tipe {}'.format(tipe), coords=[(a, b)])
+            edata = simplekml.ExtendedData()
+            edata.newdata('tipe', tipe)
+            edata.newdata('elevasi', p.elevasi)
+            edata.newdata('lonlat', p.lonlat)
+            lon, lat = p.lonlat.split(',')
+            edata.newdata('lat', lat)
+            edata.newdata('lon', lon)
+            pnt.extendeddata = edata
+            pnt.style = mystyle
+        kml.save(os.getcwd() + '/rtdapp/static/map/pos.kml')
+
     def __unicode__(self):
         return self.nama
 
@@ -153,9 +180,13 @@ class Pengungsian(PaginatedAPIMixin, db.Model):
         kml = simplekml.Kml()
         doc = kml.newdocument(name="Pos Pengungsian")
         bs = simplekml.BalloonStyle()
-        bs.text = "<![CDATA[<div style='font-size: 16px'><p><b>$[name]</b></p>desa: $[desa]<br>kec: $[kecamatan]<br>kab: $[kabupaten]<br><br>kapasitas: $[kapasitas]<br>Fasilitas: $[fasilitas]\
-            <br><br>LatLon: <a href='http://map.google.com/?ie=UTF8&ll=$[lonlat]'>$[lat], $[lon]</a></div>]]>"
+        bs.text = """<![CDATA[<div style='font-size: 16px'><p><b>$[name]</b></p>
+        desa: $[desa]<br>kec: $[kecamatan]<br>kab: $[kabupaten]
+        <br><br>kapasitas: $[kapasitas]<br>Fasilitas: $[fasilitas]<br>
+        Elevasi: <b>+$[elevasi]</b><br>
+            <br><br>LatLon: <a href='http://map.google.com/?ie=UTF8&ll=$[lonlat]'>$[lat], $[lon]</a></div>]]>"""
         mystyle = simplekml.Style(balloonstyle=bs)
+        mystyle.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/pal2/icon10.png'
         doc.style = mystyle
         for p in Pengungsian.select():
             (a, b) = p.lonlat.split(', ')
@@ -166,13 +197,14 @@ class Pengungsian(PaginatedAPIMixin, db.Model):
             edata.newdata('kabupaten', p.kabupaten)
             edata.newdata('kapasitas', p.kapasitas_tampung)
             edata.newdata('fasilitas', p.fasilitas)
+            edata.newdata('elevasi', p.elevasi)
             edata.newdata('lonlat', p.lonlat)
             lon, lat = p.lonlat.split(',')
             edata.newdata('lat', lat)
             edata.newdata('lon', lon)
             pnt.extendeddata = edata
             pnt.style = mystyle
-        kml.save('/tmp/pengungsian.kml')
+        kml.save(os.getcwd() + '/rtdapp/static/map/pengungsian.kml')
 
     def __unicode__(self):
         return self.nama

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="1">
+        <Document id="2">
+            <Style id="4">
+                <BalloonStyle>
+                    <text><![CDATA[<div style='font-size: 16px'><p><b>$[name]</b></p>
+        tipe: $[tipe]<br>
+        Elevasi: <b>+$[elevasi]</b><br>
+            <br><br>LatLon: <a href='http://map.google.com/?ie=UTF8&ll=$[lonlat]'>$[lat], $[lon]</a></div>]]></text>
+                    <displayMode>default</displayMode>
+                </BalloonStyle>
+            </Style>
+            <name>Pos Hidrologi</name>
+            <styleUrl>#4</styleUrl>
+            <Placemark id="6">
+                <name>PDA Bd. Logung</name>
+                <description>tipe Pos Duga Air</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="tipe">
+                        <value>Pos Duga Air</value>
+                    </Data>
+                    <Data name="elevasi">
+                        <value>25</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>110.916917, -6.782286</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> -6.782286</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>110.916917</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="5">
+                    <coordinates>110.916917,-6.782286,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="14">
+                <name>PDA Jembatan Tanggul Angin</name>
+                <description>tipe Pos Duga Air</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="tipe">
+                        <value>Pos Duga Air</value>
+                    </Data>
+                    <Data name="elevasi">
+                        <value>8</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>110.814657, -6.844048</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> -6.844048</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>110.814657</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="13">
+                    <coordinates>110.814657,-6.844048,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="22">
+                <name>Juana Tanjang</name>
+                <description>tipe Pos Duga Air</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="tipe">
+                        <value>Pos Duga Air</value>
+                    </Data>
+                    <Data name="elevasi">
+                        <value>3</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>111.034753, -6.790500</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> -6.790500</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>111.034753</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="21">
+                    <coordinates>111.034753,-6.790500,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="30">
+                <name>Bd. Wilalung</name>
+                <description>tipe Pos Duga Air</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="tipe">
+                        <value>Pos Duga Air</value>
+                    </Data>
+                    <Data name="elevasi">
+                        <value>9</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>110.784864, -6.926200</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> -6.926200</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>110.784864</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="29">
+                    <coordinates>110.784864,-6.926200,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="38">
+                <name>Rahwatu</name>
+                <description>tipe Pos Curah Hujan</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="tipe">
+                        <value>Pos Curah Hujan</value>
+                    </Data>
+                    <Data name="elevasi">
+                        <value>690</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>110.866944, -6.662278</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> -6.662278</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>110.866944</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="37">
+                    <coordinates>110.866944,-6.662278,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="46">
+                <name>Tanjung Rejo</name>
+                <description>tipe Pos Curah Hujan</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="tipe">
+                        <value>Pos Curah Hujan</value>
+                    </Data>
+                    <Data name="elevasi">
+                        <value>56</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>110.926944, -6.782778</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> -6.782778</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>110.926944</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="45">
+                    <coordinates>110.926944,-6.782778,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="54">
+                <name>Wd. Gembong</name>
+                <description>tipe Pos Curah Hujan</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="tipe">
+                        <value>Pos Curah Hujan</value>
+                    </Data>
+                    <Data name="elevasi">
+                        <value>188</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>110.96, -6.69611</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> -6.69611</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>110.96</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="53">
+                    <coordinates>110.96,-6.69611,0.0</coordinates>
+                </Point>
+            </Placemark>
+        </Document>
+    </Document>
+</kml>

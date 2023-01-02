@@ -93,6 +93,7 @@
             <th>Curah Hujan<br><span class="text-muted fw-light">mm</span></th>
             <th>TMA<br><span class="text-muted fw-light">mdpl</span></th>
             {% if pos.id == 1 %}<th>Volume<br><span class="text-muted fw-light">Juta Meter<sup>3</sup></span></th>{% endif %}
+            <th>&nbsp;</th>
           </tr>
         </thead>
         <tbody>
@@ -100,9 +101,10 @@
           <tr class="manual_row" id="id_{{ m.id }}">
             <td>{{ m.sampling.date() }}</td>
             <td>{{ m.sampling.time() }}</td>
-            <td class="text-end row-ch">{{ m.ch }}</td>
-            <td class="text-end row-tma">{{ m.tma }}</td>
-            {% if pos.id == 1 %}<td class="text-end row-vol">{{ m.vol }}</td>{% endif %}
+            <td class="text-end row-ch"><span class="editable" data-obj="manual" data-name="ch" data-pk="{{ m.id }}" data-title="Curah Hujan">{{ m.ch }}</span></td>
+            <td class="text-end row-tma"><span class="editable" data-obj="manual" data-name="tma" data-pk="{{ m.id }}" data-title="TMA">{{ m.tma }}</span></td>
+            {% if pos.id == 1 %}<td class="text-end row-vol"><span class="editable" data-obj="manual" data-name="vol" data-pk="{{ m.id }}" data-title="Volume">{{ m.vol }}</span></td>{% endif %}
+            <td><a href="#" class="text-danger"><i class="bi bi-trash" id="row_{{ loop.index }}"></i></a></td>
           </tr>
           {% else %}
           <tr>
@@ -130,9 +132,35 @@
   </div>
 </div>
 {% endblock %}
+{% block extra_head %}
+<style>
+  .editable {
+    cursor: pointer;
+    text-decoration: underline dotted gray;
+  }
+  @media only screen and (min-width: 640px) {
+    tr .bi { visibility: hidden; transition: visibility 0.5s linear;}
+    tr:hover .bi { visibility: visible;}
+  }
+</style>
+{% endblock %}
 {% if current_user.pos.id == 1 %}
 {% block js_foot %}
+<script src="/static/js/dark-editable.js"></script>
 <script>
+const editable = document.querySelectorAll('.editable')
+let i = 0;
+for (i=0; i < editable.length; i++) {
+  new DarkEditable(editable[i], {
+    url: '/api/update',
+    emptytext: '-',
+    success: (resp, newVal) => {
+      if (resp.status == 'error') {
+        return resp.msg
+      }
+    }
+  })
+}
   let e = document.getElementById('tma');
   e.addEventListener('change', (e) => {
     if (isNaN(e.target.value)) {
@@ -143,8 +171,6 @@
     let ev = document.getElementById('vol');
     ev.value = vol.toFixed(3);
   });
-  let r = document.getElementsByClassName('manual_row');
-  r.addEventListener('mouseover', (e) => { console.log(e); })
   const volume = (tma) => {
     return -1.23784705416647 * Math.pow(tma, 0) + 0.148652766294826 * tma - 0.00340120100025765 * Math.pow(tma, 2) - 0.0000188399794393122 * Math.pow(tma, 3) + 0.000000769023798990446 * Math.pow(tma, 4);
   };

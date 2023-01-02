@@ -1,181 +1,858 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
     <Document id="1">
-        <open>1</open>
-        <Placemark id="3">
-            <name>Madrasah Ibtidiyah, SD 4 Ngembal Kulon</name>
-            <description>Ngembal Kulon, Jati, Kudus</description>
-            <Point id="2">
-                <coordinates>110.8805122,-6.808698153,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="5">
-            <name>SDN 5 Jepang, Kantor Kecamatan Mejobo</name>
-            <description>Jepang, Mejobo, Kudus</description>
-            <Point id="4">
-                <coordinates>110.8701759,-6.826092876,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="7">
-            <name>SDN 1 Jepang Pakis, Masjid Sabilul Muttaqin</name>
-            <description>Jepang Pakis , Mejobo , Kudus</description>
-            <Point id="6">
-                <coordinates>110.8612676,-6.826481409,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="9">
-            <name>SDN 1 Payaman, TK Pertiwi, Kantor Desa Payaman</name>
-            <description>Gulang, Mejobo, Kudus</description>
-            <Point id="8">
-                <coordinates>110.8682203,-6.8363865,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="11">
-            <name>SDN 4 Karangrowo, TK Karangrowo, Tanah Kosong</name>
-            <description>Payaman, Mejobo, Kudus</description>
-            <Point id="10">
-                <coordinates>110.8669989,-6.865265745,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="13">
-            <name>Masjid Cengkalsewu, Madrasah Cengkalsewu,Balai desa Cengkalsewu</name>
-            <description>Cengkalsewu, Sukolilo, Pati</description>
-            <Point id="12">
-                <coordinates>110.9621931,-6.908728997,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="15">
-            <name>Lapangan, Masjid Jami, RTQ Madin Miftahul Ulum</name>
-            <description>Gondoharum, Jekulo, Kudus</description>
-            <Point id="14">
-                <coordinates>110.9572051,-6.802040658,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="17">
-            <name>SDN 2 Gondoharum, MTs NU Ihyaul Ulum</name>
-            <description>Gondoharum, Jekulo, Kudus</description>
-            <Point id="16">
-                <coordinates>110.9623488,-6.803465718,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="19">
-            <name>SDN 03 Jambean Kidul, SDN 02 Jambean Kidul, Lapangan, Kantor Desa</name>
-            <description>Jambean Kidul, Margorejo, Pati</description>
-            <Point id="18">
-                <coordinates>110.9829715,-6.80673671,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="21">
-            <name>Lapangan, Kantor Desa Jimbaran</name>
-            <description>Jimbaran, Margorejo, Pati</description>
-            <Point id="20">
-                <coordinates>110.9925729,-6.794954486,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="23">
-            <name>SD 2 Ngemplak, Lapangan, SD 1Jetiskapuan</name>
-            <description>Jetiskapuan, Jati, Kudus</description>
-            <Point id="22">
-                <coordinates>110.83565,-6.852019585,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="25">
-            <name>SDN 1 Honggosoko, TK Honggosoko</name>
-            <description>Honggosoko, Jekulo, Kudus</description>
-            <Point id="24">
-                <coordinates>110.8910641,-6.779298437,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="27">
-            <name>SDN 3 Tanjungrejo</name>
-            <description>Tanjungrejo, Jekulo, Kudus</description>
-            <Point id="26">
-                <coordinates>110.9143863,-6.764390349,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="29">
-            <name>Lapangan</name>
-            <description>Tanjungrejo, Jekulo, Kudus</description>
-            <Point id="28">
-                <coordinates>110.9106331,-6.780513172,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="31">
-            <name>SDN 01 Klaling</name>
-            <description>Klaling, Jekulo , Kudus</description>
-            <Point id="30">
-                <coordinates>110.9224433,-6.786263779,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="33">
-            <name>SDN Mintobasuki 02, Kantor Mintobasuki, Masjid</name>
-            <description>Mintobasuki, Gabus, Pati</description>
-            <Point id="32">
-                <coordinates>111.0629733,-6.772576506,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="35">
-            <name>Tanah Lapang</name>
-            <description>Mustokaharjo, Gabus, Pati</description>
-            <Point id="34">
-                <coordinates>111.0513613,-6.763050483,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="37">
-            <name>Kantor Desan Babalan</name>
-            <description>Babalan, Gabus, Pati</description>
-            <Point id="36">
-                <coordinates>111.0468782,-6.795989457,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="39">
-            <name>Madrasah Misftahul Falah</name>
-            <description>Talun, Kayen, Pati</description>
-            <Point id="38">
-                <coordinates>110.9865296,-6.861887337,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="41">
-            <name>Sekolah Sirotul Huda</name>
-            <description>Wuwur, Gabus, Pati</description>
-            <Point id="40">
-                <coordinates>110.9963663,-6.840161159,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="43">
-            <name>Lapangan Bola, Kantor Desa Langenrejo, SDN 1 dan SDN 2 Langenrejo</name>
-            <description>Langenrejo, Margorejo, Pati</description>
-            <Point id="42">
-                <coordinates>111.0352809,-6.778390396,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="45">
-            <name>SDN 1 Penambuhan, Kantor Desa Penambuhan, Lapangan</name>
-            <description>Penambuhan, Margorejo, Pati</description>
-            <Point id="44">
-                <coordinates>111.0200897,-6.783616059,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="47">
-            <name>SMK Taruna Bangsa, SD Plosom Iang 02</name>
-            <description>Pantirejo, Gabus , Pati</description>
-            <Point id="46">
-                <coordinates>111.0209244,-6.816202048,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="49">
-            <name>Kampus STAIN</name>
-            <description>Ngembalrejo, Bae , Kudus</description>
-            <Point id="48">
-                <coordinates>110.8785597,-6.804867555,0.0</coordinates>
-            </Point>
-        </Placemark>
-        <Placemark id="51">
-            <name>Tanah Lapang, Lapangan Bola, SD 3 Terban</name>
-            <description>Terban, Jekulo, Kudus</description>
-            <Point id="50">
-                <coordinates>110.9395088,-6.79266571,0.0</coordinates>
-            </Point>
-        </Placemark>
+        <Document id="2">
+            <Style id="4">
+                <IconStyle id="5">
+                    <colorMode>normal</colorMode>
+                    <scale>1</scale>
+                    <heading>0</heading>
+                    <Icon id="6">
+                        <href>http://maps.google.com/mapfiles/kml/pal2/icon10.png</href>
+                    </Icon>
+                </IconStyle>
+                <BalloonStyle>
+                    <text><![CDATA[<div style='font-size: 16px'><p><b>$[name]</b></p>
+        desa: $[desa]<br>kec: $[kecamatan]<br>kab: $[kabupaten]
+        <br><br>kapasitas: $[kapasitas]<br>Fasilitas: $[fasilitas]<br>
+        Elevasi: <b>+$[elevasi]</b><br>
+            <br><br>LatLon: <a href='http://map.google.com/?ie=UTF8&ll=$[lonlat]'>$[lat], $[lon]</a></div>]]></text>
+                    <displayMode>default</displayMode>
+                </BalloonStyle>
+            </Style>
+            <name>Pos Pengungsian</name>
+            <styleUrl>#4</styleUrl>
+            <Placemark id="8">
+                <name>Madrasah Ibtidiyah, SD 4 Ngembal Kulon</name>
+                <description>ds. Ngembal Kulon, kec. Jati, kab. Kudus, Kapasitas: 1000 orang, Fasilitas: Toilet</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Ngembal Kulon</value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Jati</value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Kudus</value>
+                    </Data>
+                    <Data name="kapasitas">
+                        <value>1000 orang</value>
+                    </Data>
+                    <Data name="fasilitas">
+                        <value>Toilet</value>
+                    </Data>
+                    <Data name="elevasi">
+                        <value>17</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.808698153, 110.8805121</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 110.8805121</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.808698153</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="7">
+                    <coordinates>110.8805121,-6.808698153,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="20">
+                <name>SDN 5 Jepang, Kantor Kecamatan Mejobo</name>
+                <description>ds. Jepang, kec. Mejobo, kab. Kudus, Kapasitas: None, Fasilitas: toilet juga</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Jepang</value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Mejobo</value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Kudus</value>
+                    </Data>
+                    <Data name="kapasitas"/>
+                    <Data name="fasilitas">
+                        <value>toilet juga</value>
+                    </Data>
+                    <Data name="elevasi">
+                        <value>17</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.826092876, 110.8701759</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 110.8701759</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.826092876</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="19">
+                    <coordinates>110.8701759,-6.826092876,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="32">
+                <name>SDN 1 Jepang Pakis, Masjid Sabilul Muttaqin</name>
+                <description>ds. Jepang Pakis , kec. Mejobo , kab. Kudus, Kapasitas: None, Fasilitas: None</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Jepang Pakis </value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Mejobo </value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Kudus</value>
+                    </Data>
+                    <Data name="kapasitas"/>
+                    <Data name="fasilitas"/>
+                    <Data name="elevasi">
+                        <value>16</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.826481409, 110.8612676</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 110.8612676</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.826481409</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="31">
+                    <coordinates>110.8612676,-6.826481409,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="44">
+                <name>SDN 1 Payaman, TK Pertiwi, Kantor Desa Payaman</name>
+                <description>ds. Gulang, kec. Mejobo, kab. Kudus, Kapasitas: None, Fasilitas: None</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Gulang</value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Mejobo</value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Kudus</value>
+                    </Data>
+                    <Data name="kapasitas"/>
+                    <Data name="fasilitas"/>
+                    <Data name="elevasi">
+                        <value>11</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.8363865, 110.8682203</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 110.8682203</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.8363865</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="43">
+                    <coordinates>110.8682203,-6.8363865,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="56">
+                <name>SDN 4 Karangrowo, TK Karangrowo, Tanah Kosong</name>
+                <description>ds. Payaman, kec. Mejobo, kab. Kudus, Kapasitas: None, Fasilitas: None</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Payaman</value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Mejobo</value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Kudus</value>
+                    </Data>
+                    <Data name="kapasitas"/>
+                    <Data name="fasilitas"/>
+                    <Data name="elevasi">
+                        <value>6</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.865265745, 110.8669989</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 110.8669989</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.865265745</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="55">
+                    <coordinates>110.8669989,-6.865265745,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="68">
+                <name>Masjid Cengkalsewu, Madrasah Cengkalsewu,Balai desa Cengkalsewu</name>
+                <description>ds. Cengkalsewu, kec. Sukolilo, kab. Pati, Kapasitas: None, Fasilitas: None</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Cengkalsewu</value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Sukolilo</value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Pati</value>
+                    </Data>
+                    <Data name="kapasitas"/>
+                    <Data name="fasilitas"/>
+                    <Data name="elevasi">
+                        <value>13</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.908728997, 110.9621931</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 110.9621931</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.908728997</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="67">
+                    <coordinates>110.9621931,-6.908728997,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="80">
+                <name>Lapangan, Masjid Jami, RTQ Madin Miftahul Ulum</name>
+                <description>ds. Gondoharum, kec. Jekulo, kab. Kudus, Kapasitas: None, Fasilitas: None</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Gondoharum</value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Jekulo</value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Kudus</value>
+                    </Data>
+                    <Data name="kapasitas"/>
+                    <Data name="fasilitas"/>
+                    <Data name="elevasi">
+                        <value>18</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.802040658, 110.9572051</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 110.9572051</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.802040658</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="79">
+                    <coordinates>110.9572051,-6.802040658,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="92">
+                <name>SDN 2 Gondoharum, MTs NU Ihyaul Ulum</name>
+                <description>ds. Gondoharum, kec. Jekulo, kab. Kudus, Kapasitas: None, Fasilitas: None</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Gondoharum</value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Jekulo</value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Kudus</value>
+                    </Data>
+                    <Data name="kapasitas"/>
+                    <Data name="fasilitas"/>
+                    <Data name="elevasi">
+                        <value>15</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.803465718, 110.9623488</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 110.9623488</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.803465718</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="91">
+                    <coordinates>110.9623488,-6.803465718,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="104">
+                <name>SDN 03 Jambean Kidul, SDN 02 Jambean Kidul, Lapangan, Kantor Desa</name>
+                <description>ds. Jambean Kidul, kec. Margorejo, kab. Pati, Kapasitas: None, Fasilitas: None</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Jambean Kidul</value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Margorejo</value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Pati</value>
+                    </Data>
+                    <Data name="kapasitas"/>
+                    <Data name="fasilitas"/>
+                    <Data name="elevasi">
+                        <value>11</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.80673671, 110.9829715</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 110.9829715</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.80673671</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="103">
+                    <coordinates>110.9829715,-6.80673671,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="116">
+                <name>Lapangan, Kantor Desa Jimbaran</name>
+                <description>ds. Jimbaran, kec. Margorejo, kab. Pati, Kapasitas: None, Fasilitas: None</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Jimbaran</value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Margorejo</value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Pati</value>
+                    </Data>
+                    <Data name="kapasitas"/>
+                    <Data name="fasilitas"/>
+                    <Data name="elevasi">
+                        <value>10</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.794954486, 110.9925729</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 110.9925729</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.794954486</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="115">
+                    <coordinates>110.9925729,-6.794954486,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="128">
+                <name>SD 2 Ngemplak, Lapangan, SD 1Jetiskapuan</name>
+                <description>ds. Jetiskapuan, kec. Jati, kab. Kudus, Kapasitas: None, Fasilitas: None</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Jetiskapuan</value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Jati</value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Kudus</value>
+                    </Data>
+                    <Data name="kapasitas"/>
+                    <Data name="fasilitas"/>
+                    <Data name="elevasi">
+                        <value>8</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.852019585, 110.83565</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 110.83565</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.852019585</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="127">
+                    <coordinates>110.83565,-6.852019585,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="140">
+                <name>SDN 1 Honggosoko, TK Honggosoko</name>
+                <description>ds. Honggosoko, kec. Jekulo, kab. Kudus, Kapasitas: None, Fasilitas: None</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Honggosoko</value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Jekulo</value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Kudus</value>
+                    </Data>
+                    <Data name="kapasitas"/>
+                    <Data name="fasilitas"/>
+                    <Data name="elevasi">
+                        <value>42</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.779298437, 110.8910641</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 110.8910641</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.779298437</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="139">
+                    <coordinates>110.8910641,-6.779298437,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="152">
+                <name>SDN 3 Tanjungrejo</name>
+                <description>ds. Tanjungrejo, kec. Jekulo, kab. Kudus, Kapasitas: None, Fasilitas: None</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Tanjungrejo</value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Jekulo</value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Kudus</value>
+                    </Data>
+                    <Data name="kapasitas"/>
+                    <Data name="fasilitas"/>
+                    <Data name="elevasi">
+                        <value>93</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.764390349, 110.9143863</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 110.9143863</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.764390349</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="151">
+                    <coordinates>110.9143863,-6.764390349,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="164">
+                <name>Lapangan</name>
+                <description>ds. Tanjungrejo, kec. Jekulo, kab. Kudus, Kapasitas: None, Fasilitas: None</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Tanjungrejo</value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Jekulo</value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Kudus</value>
+                    </Data>
+                    <Data name="kapasitas"/>
+                    <Data name="fasilitas"/>
+                    <Data name="elevasi">
+                        <value>39</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.780513172, 110.9106331</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 110.9106331</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.780513172</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="163">
+                    <coordinates>110.9106331,-6.780513172,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="176">
+                <name>SDN 01 Klaling</name>
+                <description>ds. Klaling, kec. Jekulo , kab. Kudus, Kapasitas: None, Fasilitas: None</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Klaling</value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Jekulo </value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Kudus</value>
+                    </Data>
+                    <Data name="kapasitas"/>
+                    <Data name="fasilitas"/>
+                    <Data name="elevasi">
+                        <value>37</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.786263779, 110.9224433</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 110.9224433</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.786263779</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="175">
+                    <coordinates>110.9224433,-6.786263779,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="188">
+                <name>SDN Mintobasuki 02, Kantor Mintobasuki, Masjid</name>
+                <description>ds. Mintobasuki, kec. Gabus, kab. Pati, Kapasitas: None, Fasilitas: None</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Mintobasuki</value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Gabus</value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Pati</value>
+                    </Data>
+                    <Data name="kapasitas"/>
+                    <Data name="fasilitas"/>
+                    <Data name="elevasi">
+                        <value>7</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.772576506, 111.0629733</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 111.0629733</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.772576506</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="187">
+                    <coordinates>111.0629733,-6.772576506,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="200">
+                <name>Tanah Lapang</name>
+                <description>ds. Mustokaharjo, kec. Gabus, kab. Pati, Kapasitas: None, Fasilitas: None</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Mustokaharjo</value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Gabus</value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Pati</value>
+                    </Data>
+                    <Data name="kapasitas"/>
+                    <Data name="fasilitas"/>
+                    <Data name="elevasi">
+                        <value>8</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.763050483, 111.0513613</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 111.0513613</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.763050483</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="199">
+                    <coordinates>111.0513613,-6.763050483,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="212">
+                <name>Kantor Desan Babalan</name>
+                <description>ds. Babalan, kec. Gabus, kab. Pati, Kapasitas: None, Fasilitas: None</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Babalan</value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Gabus</value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Pati</value>
+                    </Data>
+                    <Data name="kapasitas"/>
+                    <Data name="fasilitas"/>
+                    <Data name="elevasi">
+                        <value>8</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.795989457, 111.0468782</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 111.0468782</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.795989457</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="211">
+                    <coordinates>111.0468782,-6.795989457,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="224">
+                <name>Madrasah Misftahul Falah</name>
+                <description>ds. Talun, kec. Kayen, kab. Pati, Kapasitas: None, Fasilitas: None</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Talun</value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Kayen</value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Pati</value>
+                    </Data>
+                    <Data name="kapasitas"/>
+                    <Data name="fasilitas"/>
+                    <Data name="elevasi">
+                        <value>10</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.861887337, 110.9865296</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 110.9865296</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.861887337</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="223">
+                    <coordinates>110.9865296,-6.861887337,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="236">
+                <name>Sekolah Sirotul Huda</name>
+                <description>ds. Wuwur, kec. Gabus, kab. Pati, Kapasitas: None, Fasilitas: None</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Wuwur</value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Gabus</value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Pati</value>
+                    </Data>
+                    <Data name="kapasitas"/>
+                    <Data name="fasilitas"/>
+                    <Data name="elevasi">
+                        <value>9</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.840161159, 110.9963663</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 110.9963663</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.840161159</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="235">
+                    <coordinates>110.9963663,-6.840161159,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="248">
+                <name>Lapangan Bola, Kantor Desa Langenrejo, SDN 1 dan SDN 2 Langenrejo</name>
+                <description>ds. Langenrejo, kec. Margorejo, kab. Pati, Kapasitas: None, Fasilitas: None</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Langenrejo</value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Margorejo</value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Pati</value>
+                    </Data>
+                    <Data name="kapasitas"/>
+                    <Data name="fasilitas"/>
+                    <Data name="elevasi">
+                        <value>10</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.778390396, 111.0352809</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 111.0352809</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.778390396</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="247">
+                    <coordinates>111.0352809,-6.778390396,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="260">
+                <name>SDN 1 Penambuhan, Kantor Desa Penambuhan, Lapangan</name>
+                <description>ds. Penambuhan, kec. Margorejo, kab. Pati, Kapasitas: None, Fasilitas: None</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Penambuhan</value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Margorejo</value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Pati</value>
+                    </Data>
+                    <Data name="kapasitas"/>
+                    <Data name="fasilitas"/>
+                    <Data name="elevasi">
+                        <value>10</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.783616059, 111.0200897</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 111.0200897</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.783616059</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="259">
+                    <coordinates>111.0200897,-6.783616059,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="272">
+                <name>SMK Taruna Bangsa, SD Plosom Iang 02</name>
+                <description>ds. Pantirejo, kec. Gabus , kab. Pati, Kapasitas: None, Fasilitas: None</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Pantirejo</value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Gabus </value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Pati</value>
+                    </Data>
+                    <Data name="kapasitas"/>
+                    <Data name="fasilitas"/>
+                    <Data name="elevasi">
+                        <value>9</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.816202048, 111.0209244</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 111.0209244</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.816202048</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="271">
+                    <coordinates>111.0209244,-6.816202048,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="284">
+                <name>Kampus STAIN</name>
+                <description>ds. Ngembalrejo, kec. Bae , kab. Kudus, Kapasitas: None, Fasilitas: None</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Ngembalrejo</value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Bae </value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Kudus</value>
+                    </Data>
+                    <Data name="kapasitas"/>
+                    <Data name="fasilitas"/>
+                    <Data name="elevasi">
+                        <value>19</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.804867555, 110.8785597</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 110.8785597</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.804867555</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="283">
+                    <coordinates>110.8785597,-6.804867555,0.0</coordinates>
+                </Point>
+            </Placemark>
+            <Placemark id="296">
+                <name>Tanah Lapang, Lapangan Bola, SD 3 Terban</name>
+                <description>ds. Terban, kec. Jekulo, kab. Kudus, Kapasitas: None, Fasilitas: None</description>
+                <styleUrl>#4</styleUrl>
+                <ExtendedData>
+                    <Data name="desa">
+                        <value>Terban</value>
+                    </Data>
+                    <Data name="kecamatan">
+                        <value>Jekulo</value>
+                    </Data>
+                    <Data name="kabupaten">
+                        <value>Kudus</value>
+                    </Data>
+                    <Data name="kapasitas"/>
+                    <Data name="fasilitas"/>
+                    <Data name="elevasi">
+                        <value>30</value>
+                    </Data>
+                    <Data name="lonlat">
+                        <value>-6.79266571, 110.9395088</value>
+                    </Data>
+                    <Data name="lat">
+                        <value> 110.9395088</value>
+                    </Data>
+                    <Data name="lon">
+                        <value>-6.79266571</value>
+                    </Data>
+                </ExtendedData>
+                <Point id="295">
+                    <coordinates>110.9395088,-6.79266571,0.0</coordinates>
+                </Point>
+            </Placemark>
+        </Document>
     </Document>
 </kml>
