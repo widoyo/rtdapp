@@ -7,6 +7,8 @@ from flask_login import LoginManager, current_user
 from peewee import fn
 from playhouse.shortcuts import model_to_dict
 from telegram import Bot
+from flask_wtf import CSRFProtect
+
 from wtforms import fields, form, validators
 
 from config import Config
@@ -15,6 +17,7 @@ from .api.error import error_response as api_error_response
 from .models import (KATEGORI_SIAGA, KONDISI_SIAGA, SIAGA_LOGUNG, Manual, Pos,
                      StatusLog)
 
+csrf = CSRFProtect()
 
 def send_telegram_ewschannel(msg):
     send_telegram('@ewsbbwspj', msg)
@@ -44,6 +47,7 @@ def create_app(config_class=Config):
     app.register_blueprint(rtd.bp)
 
     db.init_app(app)
+    csrf.init_app(app)
 
     login_manager = LoginManager()
     login_manager.init_app(app)

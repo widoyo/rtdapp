@@ -39,10 +39,10 @@ def update_arusinfo():
     print(form.errors)
     return redirect('/admin')
     
-@bp.route('/pos/manual/del', methods=['GET'])
-def manual_del():
+@bp.route('/pos/manual/del/<int:id>', methods=['POST'])
+def manual_del(id):
     admin_only()
-    manual_obj = Manual.get()
+    manual_obj = Manual.get(id)
     manual_obj.delete_instance()
     return redirect('/admin/pos/{}'.format(pos.id))
     
