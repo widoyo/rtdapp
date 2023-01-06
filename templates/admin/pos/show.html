@@ -183,8 +183,10 @@ for (i=0; i < editable.length; i++) {
     d.addEventListener('click', (e) => {
       console.log(e.target);
       if (confirm(`Mau menghapus ${e.target.id.split('_')[1]}?`)) {
-        const url = `/admin/pos/manual/del/${e.target.id.split('_')[1]}`;
-        fetch(url, {method: 'POST', csrfmiddlewaretoken: '{{ csrf_token() }}' });
+        const f = new FormData();
+        f.append('id', e.target.id.split('_')[1]);
+        const url = `/admin/pos/manual/del`;
+        fetch(url, {method: 'POST', body: f, headers: {'X-CSRFToken': '{{ csrf_token() }}'}}).then(resp => resp.json()).then(data => { if (data.ok) location.reload(); });
         console.log('Ya Hapus');
       } else {
         console.log('Tidak');

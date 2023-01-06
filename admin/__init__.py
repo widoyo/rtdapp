@@ -3,7 +3,7 @@ from functools import wraps
 
 from werkzeug.utils import secure_filename
 from flask import (Blueprint, abort, flash, redirect, render_template, request,
-                   url_for, current_app, Response)
+                   url_for, current_app, Response, jsonify)
 from flask_login import current_user, login_required
 from peewee import fn, DoesNotExist
 from playhouse.dataset import DataSet
@@ -38,13 +38,18 @@ def update_arusinfo():
             ai = None
     print(form.errors)
     return redirect('/admin')
+
+@bp.route('/pos/manual/del', methods=['POST'])
+def manual_del():
+    #admin_only()
     
-@bp.route('/pos/manual/del/<int:id>', methods=['POST'])
-def manual_del(id):
-    admin_only()
-    manual_obj = Manual.get(id)
+    mid = request.form.get('id')
+
+    manual_obj = Manual.get(int(mid))
+    pos_id = manual_obj.pos.id
     manual_obj.delete_instance()
-    return redirect('/admin/pos/{}'.format(pos.id))
+    
+    return jsonify({'ok': True, 'id': mid, 'pos_id': pos_id})
     
 @bp.route('/pos/<int:id>/edit', methods=['GET', 'POST'])
 def edit_pos(id):
