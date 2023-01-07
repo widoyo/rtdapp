@@ -111,19 +111,25 @@ def create_app(config_class=Config):
     
     @app.route('/')
     def home():
+        import random
         pda_logung = Pos.get_by_id(1)
-        num_days = 120
+        num_days = 30
         tma_manual = [(r.sampling, r.tma) for r in pda_logung.manuals.order_by(Manual.sampling.desc()).limit(num_days)]
         tma_now = tma_manual[0]
-        awal = datetime.date.today()
-        a = [awal - datetime.timedelta(days=i) for i in range(num_days)]
+        tma_manual = dict(tma_manual)
+        tma_data = [(tma_now[0] - datetime.timedelta(days=i), None) for i in range(num_days)]
+        tma_data = [(t[0], tma_manual.get(t[0], None)) for t in tma_data]
+        def mycol(e):
+            return e[0]
+        tma_data = sorted(tma_data, key=mycol)
+
         status_siaga = StatusLog.select(fn.Max(StatusLog.tanggal).alias('tanggal'),
                                         StatusLog.kategori, StatusLog.kondisi).group_by(StatusLog.kategori).order_by(StatusLog.tanggal.desc())
         status_siaga = [{'tanggal': s.tanggal, 'kategori': dict(KATEGORI_SIAGA)[s.kategori], 'kondisi': dict(KONDISI_SIAGA)[s.kondisi]} for s in status_siaga]
         status_ = StatusLog.select(fn.Max(StatusLog.tanggal).alias('tanggal'),
                                         StatusLog.kategori, StatusLog.kondisi).group_by(StatusLog.kategori).order_by(StatusLog.kondisi.desc()).limit(1)
         status_ = [{'tanggal': s.tanggal, 'kategori': dict(KATEGORI_SIAGA)[s.kategori], 'kondisi': dict(KONDISI_SIAGA)[s.kondisi]} for s in status_]
-        return render_template('index.html', tma_logung=tma_manual, tma_logung_now=tma_now, SIAGA_LOGUNG=SIAGA_LOGUNG, status_siaga=status_siaga, status_=status_[0])
+        return render_template('index.html', tma_logung=tma_data, tma_logung_now=tma_now, SIAGA_LOGUNG=SIAGA_LOGUNG, status_siaga=status_siaga, status_=status_[0])
 
     def wants_json_response():
         return request.accept_mimetypes['application/json'] >= \
