@@ -33,13 +33,14 @@
     <script src="/static/js/relativeTime.js"></script>
     <script src="/static/js/id.js"></script>
         <script>
-      let map, wadukLayer, siagaLayer, puncakLayer, awasLayer, breakLayer, pengungsianLayer, jalur_evakuasiLayer, posLayer;
+      let map, wadukLayer, siagaLayer, puncakLayer, awasLayer, breakLayer, pengungsianLayer, jalur_evakuasiLayer, posLayer, aliranLayer;
       let tma_now = {{ tma_logung.tma }};
+      let flowPath; // poliline gambar aliran siaga
       const clayer = [
           ['Siap (+88.5mdpl)', 'siaga'],
           ['Siaga (+92.75mdpl)', 'puncak'],
           ['Awas (+93.75mdpl)', 'awas'],
-          ['Dam Break', 'break']
+          ['Dam Break', 'break'],
         ];
 
       const td_util = [
@@ -73,7 +74,7 @@
 
         td_util.forEach((e, i, a) => {
           let li = document.createElement('li');
-          li.innerHTML = `<i id='view_${e[1]}' class='bi bi-eye me-2'></i> ${e[0]}`;
+          li.innerHTML = `<i id='view_${e[1]}' class='bi bi-eye-slash me-2'></i> ${e[0]}`;
           li.classList.add('mt-2');
           li.style.cursor = 'pointer';
           li.addEventListener('click', (ev) => {
@@ -114,7 +115,7 @@
         clayer.forEach((e, i, a) => {
           const li = document.createElement('div');
           li.innerHTML = `<input class="form-check-input" type="radio" name="model-genangan" id="id_${e[1]}" value="${e[0]}">
-          <label class="form-check-label" for="id_${e[0]}">${e[0]}</label>`;
+          <label class="form-check-label" for="id_${e[1]}">${e[0]}</label>`;
           li.classList.add('form-check');
           //li.style.cursor = 'pointer';
           li.addEventListener('click', (ev) => {
@@ -124,6 +125,10 @@
             puncakLayer.setMap(null);
             breakLayer.setMap(null);
             eval(`${e[1]}Layer`).setMap(map);
+            if (!animating && e[1] != 'awas') {
+              createFlowLine();
+              animateDot();
+            }
           });
           ol.appendChild(li);
         });
@@ -150,15 +155,15 @@
           },
         });
 
-      wadukLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/logung.kml', {preserveViewport: true,map: map});
-      siagaLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/siaga.kml', {preserveViewport: true,map: null});
-      awasLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/awas.kml', {preserveViewport: true,map: null});
-      puncakLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/puncak.kml', {preserveViewport: true,map: null});
-      breakLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/break.kml', {preserveViewport: true,map: null});
-      pengungsianLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/pengungsian.kml?_=' + new Date().getTime(), {preserveViewport: true,map: map});
-      jalur_evakuasiLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/jalur_pengungsian.kml?_=' + new Date().getTime(), {preserveViewport: true,map: map});
-      posLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/pos.kml?_=' + new Date().getTime(), {preserveViewport: true,map: map});
-
+        wadukLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/logung.kml', {preserveViewport: true,map: map});
+        siagaLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/siaga.kml', {preserveViewport: true,map: null});
+        awasLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/awas.kml', {preserveViewport: true,map: null});
+        puncakLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/puncak.kml', {preserveViewport: true,map: null});
+        breakLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/break.kml', {preserveViewport: true,map: null});
+        pengungsianLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/pengungsian.kml?_=' + new Date().getTime(), {preserveViewport: true,map: null});
+        jalur_evakuasiLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/jalur_pengungsian.kml?_=' + new Date().getTime(), {preserveViewport: true,map: null});
+        posLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/pos.kml?_=' + new Date().getTime(), {preserveViewport: true,map: null});
+        aliranLayer = new google.maps.KmlLayer('https://ewslogung.prinus.net/static/map/aliran.kml?_=' + new Date().getTime(), {preserveViewport: true,map: null});
 
         const mcdiv = document.createElement('div');
         mcdiv.classList.add('border')
@@ -183,6 +188,10 @@
         if (tma_now > 93.75) {
           awasLayer.setMap(map);
           document.getElementById('id_awas').setAttribute('checked', 'checked')
+          if (animating !== undefined) {
+            flowPath.map = null;
+            clearInterval(animating);
+          }
         } else if (tma_now > 92.75) {
           puncakLayer.setMap(map);
           document.getElementById('id_puncak').setAttribute('checked', 'checked')
@@ -190,7 +199,69 @@
           siagaLayer.setMap(map);
           document.getElementById('id_siaga').setAttribute('checked', 'checked')
         }
+        //flowPath.map = map;
+      }
 
+      let animating = undefined;
+      const createFlowLine = async () => {
+        const res = await fetch('/static/map/sungai.csv');
+        const cnt = await res.text();
+        const lines = cnt.split(/\n/);
+        const alur_sungai = [];
+        let a, b, c;
+        lines.map((x) => {
+          [a, b, c] = x.trim().split(',');
+          if (b) 
+            alur_sungai.push({'lng': parseFloat(a), 'lat': parseFloat(b)});
+        });
+        console.log(alur_sungai);
+        const dot = {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 3,
+          fillColor: '#ff0000',
+          strokeWidth: 1,
+          strokeOpacity: 1
+        };
+
+        flowPath = new google.maps.Polyline({
+          path: alur_sungai,
+          strokeColor: '#f30000',
+          strokeWeight: 1,
+          icons: [
+            {
+              icon: dot,
+              offset: '0',
+              repeat: '20px'
+            },
+          ],
+          map: map
+        });
+      }
+
+      const animateDot = () => {
+        let zoomLevel;
+        let markSpeed;
+        let iconSpeed = 0.4;
+        let lineOffset = 0; // spt count
+
+        animating = setInterval(() => {
+          lineOffset = (lineOffset + iconSpeed) % 200;
+          var lineIcon = flowPath.get('icons');
+          lineIcon[0].offset = lineOffset / 2 + '%';
+          flowPath.set('icons', lineIcon);
+          
+          zoomLevel = flowPath.get('map').getZoom();
+          //console.log(zoomLevel);
+          if (zoomLevel >= 21) {
+            markSpeed = 1 * zoomLevel / 0.2;
+          } else if (zoomLevel >= 19) {
+            markSpeed = 1 * zoomLevel / 0.5;
+          } else if (zoomLevel >= 16) {
+            markSpeed = 1 * zoomLevel / 2;
+          } else {
+            markSpeed = 1 * zoomLevel / 20;
+          }
+        }, 100);
       }
   </script>
     <script
