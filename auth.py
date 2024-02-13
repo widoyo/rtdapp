@@ -1,7 +1,7 @@
 from urllib.parse import urljoin, urlparse
 
 from flask import (Blueprint, abort, flash, g, redirect, render_template,
-                   request, session, url_for)
+                   request, current_app, url_for)
 from flask_login import (LoginManager, current_user, login_required,
                          login_user, logout_user)
 from flask_wtf import FlaskForm
@@ -23,7 +23,10 @@ class LoginForm(FlaskForm):
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.get(User.username==form.username.data)
+        try:
+            user = User.get(User.username==form.username.data)
+        except:
+            user = None
         error = ""
         if user is None or not user.check_password(form.password.data):
             error = "User atau Password keliru"
